@@ -1,0 +1,64 @@
+\babel@toc {french}{}\relax 
+\contentsline {part}{\hspace {1em}Modèles de Diffusion Génératifs}{4}{part.1}%
+\contentsline {section}{\numberline {I}Introduction}{4}{section.1}%
+\contentsline {section}{\numberline {II}Processus de Diffusion Forward}{4}{section.2}%
+\contentsline {subsection}{\numberline {II.1}Le mouvement Brownien}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {II.2}Formulation SDE (Stochastic Differential Equation)}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {II.3}Outils de calcul stochastique}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {III}Résolution de la SDE : trois variantes}{7}{section.3}%
+\contentsline {subsection}{\numberline {III.1}Variance Exploding (VE)}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {III.2}Variance Preserving (VP) --- Ornstein--Uhlenbeck}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {III.3}DDPM (Denoising Diffusion Probabilistic Models)--- formulation discrète}{9}{subsection.3.3}%
+\contentsline {section}{\numberline {IV}Formule de Tweedie}{10}{section.4}%
+\contentsline {subsection}{\numberline {IV.1}Estimateur MMSE}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {IV.2}Cas VE}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {IV.3}Cas VP/DDPM}{11}{subsection.4.3}%
+\contentsline {subsection}{\numberline {IV.4}Équivalence des paramétrisations}{12}{subsection.4.4}%
+\contentsline {section}{\numberline {V}Apprentissage du Score}{12}{section.5}%
+\contentsline {subsection}{\numberline {V.1}Pourquoi le score ?}{12}{subsection.5.1}%
+\contentsline {subsection}{\numberline {V.2}Denoising Score Matching}{12}{subsection.5.2}%
+\contentsline {subsection}{\numberline {V.3}Synthèse du processus forward}{13}{subsection.5.3}%
+\contentsline {section}{\numberline {VI}Génération d'images}{13}{section.6}%
+\contentsline {subsection}{\numberline {VI.1}SDE reverse}{13}{subsection.6.1}%
+\contentsline {subsection}{\numberline {VI.2}DDPM vs DDIM}{14}{subsection.6.2}%
+\contentsline {subsection}{\numberline {VI.3}Probability Flow ODE}{14}{subsection.6.3}%
+\contentsline {section}{\numberline {VII}Problèmes inverses}{15}{section.7}%
+\contentsline {subsection}{\numberline {VII.1}Formulation et exemples}{15}{subsection.7.1}%
+\contentsline {subsection}{\numberline {VII.2}Pourquoi échantillonner via la SDE reverse ?}{15}{subsection.7.2}%
+\contentsline {subsection}{\numberline {VII.3}Décomposition du score conditionnel}{16}{subsection.7.3}%
+\contentsline {subsection}{\numberline {VII.4}Intractabilité du score de mesure}{16}{subsection.7.4}%
+\contentsline {subsection}{\numberline {VII.5}DPS : approximation Dirac}{17}{subsection.7.5}%
+\contentsline {subsection}{\numberline {VII.6}$\Pi $GDM : approximation gaussienne}{17}{subsection.7.6}%
+\contentsline {subsection}{\numberline {VII.7}Synthèse de processus reverse}{18}{subsection.7.7}%
+\contentsline {part}{\hspace {1em}Tentative d'une nouvelle approche}{20}{part.2}%
+\contentsline {section}{\numberline {VIII}Motivation}{20}{section.8}%
+\contentsline {section}{\numberline {IX}Rappels et hypothèses}{20}{section.9}%
+\contentsline {section}{\numberline {X}Score conditionnel en forme fermée}{21}{section.10}%
+\contentsline {subsection}{\numberline {X.1}Étape 1 : Tweedie conditionnel appliqué à $p_t(\cdot | y)$}{21}{subsection.10.1}%
+\contentsline {subsection}{\numberline {X.2}Étape 2 : loi de $X_0 | X_t, Y$ sous les hypothèses $\Pi $GDM}{22}{subsection.10.2}%
+\contentsline {subsection}{\numberline {X.3}Étape 3 : produit de gaussiennes et complétion du carré}{23}{subsection.10.3}%
+\contentsline {subsection}{\numberline {X.4}Résultat principal : score conditionnel explicite}{24}{subsection.10.4}%
+\contentsline {subsection}{\numberline {X.5}Vers l'optimisation variationnelle de $r_t^2$ et $\sigma _b^2$}{24}{subsection.10.5}%
+\contentsline {section}{\numberline {XI}Modèle hiérarchique bayésien}{25}{section.11}%
+\contentsline {subsection}{\numberline {XI.1}Variables et structure}{25}{subsection.11.1}%
+\contentsline {subsection}{\numberline {XI.2}Lois du modèle génératif}{25}{subsection.11.2}%
+\contentsline {subsection}{\numberline {XI.3}Loi jointe}{26}{subsection.11.3}%
+\contentsline {subsection}{\numberline {XI.4}Log-vraisemblance jointe}{26}{subsection.11.4}%
+\contentsline {section}{\numberline {XII}Approximation variationnelle}{27}{section.12}%
+\contentsline {subsection}{\numberline {XII.1}Pourquoi approcher l'a posteriori ?}{27}{subsection.12.1}%
+\contentsline {subsection}{\numberline {XII.2}Choix de la mesure de dissemblance}{27}{subsection.12.2}%
+\contentsline {subsection}{\numberline {XII.3}Hypothèse de champ moyen}{29}{subsection.12.3}%
+\contentsline {section}{\numberline {XIII}Optimisation dans l'espace des mesures}{29}{section.13}%
+\contentsline {subsection}{\numberline {XIII.1}Pourquoi ne pas faire de la descente de gradient classique ?}{30}{subsection.13.1}%
+\contentsline {subsection}{\numberline {XIII.2}Espaces fonctionnels}{30}{subsection.13.2}%
+\contentsline {subsection}{\numberline {XIII.3}Différentielle de Gâteaux de l'énergie libre}{31}{subsection.13.3}%
+\contentsline {subsection}{\numberline {XIII.4}Mise à jour multiplicative par Radon-Nikodym}{33}{subsection.13.4}%
+\contentsline {subsection}{\numberline {XIII.5}Sous-espace de directions : gradient à mémoire}{34}{subsection.13.5}%
+\contentsline {subsection}{\numberline {XIII.6}Choix du pas}{35}{subsection.13.6}%
+\contentsline {subsection}{\numberline {XIII.7}Synthèse de l'algorithme}{35}{subsection.13.7}%
+\contentsline {subsection}{\numberline {XIII.8}Application à notre cas d'étude}{36}{subsection.13.8}%
+\contentsline {subsubsection}{\numberline {XIII.8.1}Rappel de la log-jointe}{36}{subsubsection.13.8.1}%
+\contentsline {subsubsection}{\numberline {XIII.8.2}Distribution de référence pour $\tau _b$}{36}{subsubsection.13.8.2}%
+\contentsline {subsubsection}{\numberline {XIII.8.3}Distribution de référence pour $\tau _r$}{37}{subsubsection.13.8.3}%
+\contentsline {subsubsection}{\numberline {XIII.8.4}Distribution de référence pour $x_{0,i}$}{38}{subsubsection.13.8.4}%
+\contentsline {subsubsection}{\numberline {XIII.8.5}Mise à jour EMG-VBA }{43}{subsubsection.13.8.5}%
