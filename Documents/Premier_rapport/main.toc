@@ -3,12 +3,12 @@
 \contentsline {section}{\numberline {I}Introduction}{4}{section.1}%
 \contentsline {section}{\numberline {II}Processus de Diffusion Forward}{4}{section.2}%
 \contentsline {subsection}{\numberline {II.1}Le mouvement Brownien}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {II.2}Formulation SDE}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {II.2}Formulation SDE (Stochastic Differential Equation)}{5}{subsection.2.2}%
 \contentsline {subsection}{\numberline {II.3}Outils de calcul stochastique}{5}{subsection.2.3}%
 \contentsline {section}{\numberline {III}Résolution de la SDE : trois variantes}{7}{section.3}%
 \contentsline {subsection}{\numberline {III.1}Variance Exploding (VE)}{7}{subsection.3.1}%
 \contentsline {subsection}{\numberline {III.2}Variance Preserving (VP) --- Ornstein--Uhlenbeck}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {III.3}DDPM --- formulation discrète}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {III.3}DDPM (Denoising Diffusion Probabilistic Models)--- formulation discrète}{9}{subsection.3.3}%
 \contentsline {section}{\numberline {IV}Formule de Tweedie}{10}{section.4}%
 \contentsline {subsection}{\numberline {IV.1}Estimateur MMSE}{10}{subsection.4.1}%
 \contentsline {subsection}{\numberline {IV.2}Cas VE}{10}{subsection.4.2}%

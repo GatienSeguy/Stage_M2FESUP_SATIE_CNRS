@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.25)  13 FEB 2026 11:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.25)  1 APR 2026 14:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/gatienseguy/Documents/VSCode/Diffusion_models_project/Latex1/main.tex
-(/Users/gatienseguy/Documents/VSCode/Diffusion_models_project/Latex1/main.tex
+**main.tex
+(./main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -669,7 +669,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \c@cthm=\count344
 \c@chyp=\count345
 \c@cres=\count346
-Package hyperref Info: Option `colorlinks' set `true' on input line 166.
+Package hyperref Info: Option `colorlinks' set `true' on input line 168.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count347
@@ -677,32 +677,32 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 185.
-LaTeX Font Info:    ... okay on input line 185.
-LaTeX Info: Redefining \degres on input line 185.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 187.
+LaTeX Font Info:    ... okay on input line 187.
+LaTeX Info: Redefining \degres on input line 187.
 Package french.ldf Info: Setting StandardItemizeEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 185.
+(french.ldf)             reported on input line 187.
 Package french.ldf Info: Setting StandardEnumerateEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 185.
-LaTeX Info: Redefining \up on input line 185.
+(french.ldf)             reported on input line 187.
+LaTeX Info: Redefining \up on input line 187.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count348
@@ -756,7 +756,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 185.
+Package hyperref Info: Link coloring ON on input line 187.
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -764,43 +764,53 @@ Package hyperref Info: Link coloring ON on input line 185.
 <Logo_ENS_leger(1).jpg, id=260, 862.22125pt x 484.81125pt>
 File: Logo_ENS_leger(1).jpg Graphic file (type jpg)
 <use Logo_ENS_leger(1).jpg>
-Package pdftex.def Info: Logo_ENS_leger(1).jpg  used on input line 195.
-(pdftex.def)             Requested size: 190.38309pt x 107.04347pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 196.
+Package pdftex.def Info: Logo_ENS_leger(1).jpg  used on input line 197.
+(pdftex.def)             Requested size: 116.0899pt x 65.26915pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 198.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 196.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 198.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 <logo_univPS.png, id=261, 382.42876pt x 132.495pt>
 File: logo_univPS.png Graphic file (type png)
 <use logo_univPS.png>
-Package pdftex.def Info: logo_univPS.png  used on input line 198.
-(pdftex.def)             Requested size: 127.69554pt x 44.24103pt.
+Package pdftex.def Info: logo_univPS.png  used on input line 200.
+(pdftex.def)             Requested size: 116.0899pt x 40.21985pt.
+<logo_satie.png, id=262, 28.54665pt x 18.7902pt>
+File: logo_satie.png Graphic file (type png)
+<use logo_satie.png>
+Package pdftex.def Info: logo_satie.png  used on input line 203.
+(pdftex.def)             Requested size: 81.26257pt x 53.50328pt.
+<logo_cnrs.png, id=264, 963.6pt x 963.6pt>
+File: logo_cnrs.png Graphic file (type png)
+<use logo_cnrs.png>
+Package pdftex.def Info: logo_cnrs.png  used on input line 206.
+(pdftex.def)             Requested size: 81.26257pt x 81.25061pt.
 
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./Logo_ENS_leger(1).jpg> <./logo_univPS.png>] (./main.toc
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./Logo_ENS_leger(1).jpg> <./logo_univPS.png> <./logo_satie.png> <./logo_cnrs.png>] (./main.toc
 Overfull \hbox (29.95522pt too wide) in paragraph at lines 2--2
 [][] [][]  
  []
 
 
+
+<images.png, id=342, 692.5875pt x 309.155pt>
+File: images.png Graphic file (type png)
+<use images.png>
+Package pdftex.def Info: images.png  used on input line 33.
+(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+[2 <./images.png>]
 Overfull \hbox (29.95522pt too wide) in paragraph at lines 33--33
 [][] [][]  
  []
 
-
-
-<images.png, id=340, 692.5875pt x 309.155pt>
-File: images.png Graphic file (type png)
-<use images.png>
-Package pdftex.def Info: images.png  used on input line 35.
-(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[2 <./images.png>])
+)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -808,40 +818,40 @@ Package pdftex.def Info: images.png  used on input line 35.
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 254.
+Package pdftex.def Info: images.png  used on input line 269.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [3]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 293.
+Package pdftex.def Info: images.png  used on input line 308.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [4]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 335.
+Package pdftex.def Info: images.png  used on input line 344.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [5]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 383.
+Package pdftex.def Info: images.png  used on input line 398.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [6]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 437.
+Package pdftex.def Info: images.png  used on input line 452.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [7]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 487.
+Package pdftex.def Info: images.png  used on input line 502.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [8]
-Overfull \hbox (12.63579pt too wide) in paragraph at lines 489--490
+Overfull \hbox (12.63579pt too wide) in paragraph at lines 504--505
 []\T1/cmr/bx/n/12 Étape 5 : iden-ti-fi-ca-tion et vé-ri-fi-ca-tion. \T1/cmr/m/n/12 Par la Pro-po-si-tion [][]II.3.2[][] : $\OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 j \OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 ^^X N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e[]X[];  \OT1/cmr/m/n/12 (1 \OMS/cmsy/m/n/12 ^^@
  []
 
@@ -849,31 +859,35 @@ Overfull \hbox (12.63579pt too wide) in paragraph at lines 489--490
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 544.
+Package pdftex.def Info: images.png  used on input line 559.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [9]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 591.
+Package pdftex.def Info: images.png  used on input line 606.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [10]
 
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 606.
+
+
+
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 645.
+Package pdftex.def Info: images.png  used on input line 657.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [11]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 701.
+Package pdftex.def Info: images.png  used on input line 706.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [12]
-<figure/Schema_Forward_MD.png, id=525, 804.00375pt x 600.2425pt>
+<figure/Schema_Forward_MD.png, id=530, 804.00375pt x 600.2425pt>
 File: figure/Schema_Forward_MD.png Graphic file (type png)
 <use figure/Schema_Forward_MD.png>
-Package pdftex.def Info: figure/Schema_Forward_MD.png  used on input line 728.
+Package pdftex.def Info: figure/Schema_Forward_MD.png  used on input line 743.
 (pdftex.def)             Requested size: 483.69687pt x 361.10997pt.
 
 
@@ -883,50 +897,50 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 754.
+Package pdftex.def Info: images.png  used on input line 764.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [13]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 765.
+Package pdftex.def Info: images.png  used on input line 780.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [14 <./figure/Schema_Forward_MD.png>]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 801.
+Package pdftex.def Info: images.png  used on input line 816.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [15]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 850.
+Package pdftex.def Info: images.png  used on input line 865.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [16]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 889.
+(hyperref)                removing `math shift' on input line 904.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Pi' on input line 889.
+(hyperref)                removing `\Pi' on input line 904.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 889.
+(hyperref)                removing `math shift' on input line 904.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 908.
+Package pdftex.def Info: images.png  used on input line 923.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [17]
-<figure/Schema_Reverse_MD.png, id=582, 731.73375pt x 749.80125pt>
+<figure/Schema_Reverse_MD.png, id=587, 731.73375pt x 749.80125pt>
 File: figure/Schema_Reverse_MD.png Graphic file (type png)
 <use figure/Schema_Reverse_MD.png>
-Package pdftex.def Info: figure/Schema_Reverse_MD.png  used on input line 947.
+Package pdftex.def Info: figure/Schema_Reverse_MD.png  used on input line 962.
 (pdftex.def)             Requested size: 469.18654pt x 480.77501pt.
 
 
@@ -936,39 +950,39 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 953.
+Package pdftex.def Info: images.png  used on input line 968.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [18]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 957.
+Package pdftex.def Info: images.png  used on input line 972.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [19 <./figure/Schema_Reverse_MD.png>]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 992.
+Package pdftex.def Info: images.png  used on input line 1007.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [20]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1018.
+(hyperref)                removing `math shift' on input line 1033.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1018.
+(hyperref)                removing `subscript' on input line 1033.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cdot' on input line 1018.
+(hyperref)                removing `\cdot' on input line 1033.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1018.
+(hyperref)                removing `math shift' on input line 1033.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1040--1042
+Underfull \hbox (badness 10000) in paragraph at lines 1055--1057
 
  []
 
@@ -976,139 +990,139 @@ Underfull \hbox (badness 10000) in paragraph at lines 1040--1042
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1047.
+Package pdftex.def Info: images.png  used on input line 1062.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [21
 pdfTeX warning (ext4): destination with the same identifier (name{equation.27}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1047 \]
+l.1062 \]
          
 pdfTeX warning (ext4): destination with the same identifier (name{equation.27}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1047 \]
+l.1062 \]
          ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1071.
+(hyperref)                removing `math shift' on input line 1086.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1071.
+(hyperref)                removing `subscript' on input line 1086.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1071.
+(hyperref)                removing `subscript' on input line 1086.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1071.
+(hyperref)                removing `math shift' on input line 1086.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1071.
+(hyperref)                removing `math shift' on input line 1086.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Pi' on input line 1071.
+(hyperref)                removing `\Pi' on input line 1086.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1071.
+(hyperref)                removing `math shift' on input line 1086.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1109.
+Package pdftex.def Info: images.png  used on input line 1124.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [22]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1157.
+Package pdftex.def Info: images.png  used on input line 1172.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [23]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1186.
+(hyperref)                removing `math shift' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1186.
+(hyperref)                removing `subscript' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1186.
+(hyperref)                removing `superscript' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1186.
+(hyperref)                removing `math shift' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1186.
+(hyperref)                removing `math shift' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sigma' on input line 1186.
+(hyperref)                removing `\sigma' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1186.
+(hyperref)                removing `subscript' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1186.
+(hyperref)                removing `superscript' on input line 1201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1186.
+(hyperref)                removing `math shift' on input line 1201.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1192.
+Package pdftex.def Info: images.png  used on input line 1207.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [24]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1251.
+Package pdftex.def Info: images.png  used on input line 1266.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [25]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1326.
+Package pdftex.def Info: images.png  used on input line 1341.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [26]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1379.
+Package pdftex.def Info: images.png  used on input line 1394.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [27]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1430.
+Package pdftex.def Info: images.png  used on input line 1445.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [28]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1468.
+Package pdftex.def Info: images.png  used on input line 1483.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [29
 pdfTeX warning (ext4): destination with the same identifier (name{equation.51}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1468 \]
+l.1483 \]
          ]
-Overfull \hbox (6.92992pt too wide) detected at line 1491
+Overfull \hbox (6.92992pt too wide) detected at line 1506
 [][][]\OT1/cmr/m/n/12 
  = []
  []
@@ -1117,159 +1131,153 @@ Overfull \hbox (6.92992pt too wide) detected at line 1491
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1522.
+Package pdftex.def Info: images.png  used on input line 1537.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [30]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1574.
+Package pdftex.def Info: images.png  used on input line 1589.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [31]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1615.
+Package pdftex.def Info: images.png  used on input line 1630.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [32]
 
-LaTeX Warning: Citation `' on page 33 undefined on input line 1622.
+LaTeX Warning: Citation `' on page 33 undefined on input line 1637.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1664.
+Package pdftex.def Info: images.png  used on input line 1679.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [33]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1733.
+Package pdftex.def Info: images.png  used on input line 1748.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [34]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1825.
+Package pdftex.def Info: images.png  used on input line 1840.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [35]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1863.
+(hyperref)                removing `math shift' on input line 1878.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\tau' on input line 1863.
+(hyperref)                removing `\tau' on input line 1878.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1863.
+(hyperref)                removing `subscript' on input line 1878.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1863.
+(hyperref)                removing `math shift' on input line 1878.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1887.
+Package pdftex.def Info: images.png  used on input line 1902.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [36]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1933.
+(hyperref)                removing `math shift' on input line 1948.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\tau' on input line 1933.
+(hyperref)                removing `\tau' on input line 1948.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1933.
+(hyperref)                removing `subscript' on input line 1948.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1933.
+(hyperref)                removing `math shift' on input line 1948.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1946.
+Package pdftex.def Info: images.png  used on input line 1961.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [37]
 
-Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 1946.
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 1961.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1980.
+(hyperref)                removing `math shift' on input line 1995.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1980.
+(hyperref)                removing `subscript' on input line 1995.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1980.
+(hyperref)                removing `math shift' on input line 1995.
 
 
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1992.
+Package pdftex.def Info: images.png  used on input line 2007.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [38]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2033.
+Package pdftex.def Info: images.png  used on input line 2048.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [39]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2080.
+Package pdftex.def Info: images.png  used on input line 2095.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [40]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2135.
+Package pdftex.def Info: images.png  used on input line 2150.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [41]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2190.
+Package pdftex.def Info: images.png  used on input line 2204.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [42]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2227.
+Package pdftex.def Info: images.png  used on input line 2228.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [43]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2282.
+Package pdftex.def Info: images.png  used on input line 2356.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 [44]
 
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2416.
+Package pdftex.def Info: images.png  used on input line 2429.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[45]
-
-File: images.png Graphic file (type png)
-<use images.png>
-Package pdftex.def Info: images.png  used on input line 2489.
-(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[46] (./main.aux)
+[45] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1279,21 +1287,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 50F6DCB8E7966D76C395AE2C2A2D08D4;13338.
+(rerunfilecheck)             Checksum: F360FB886782337CDA656BC9E000602C;13753.
  ) 
 Here is how much of TeX's memory you used:
- 29402 strings out of 473190
- 570374 string characters out of 5715800
- 1009124 words of memory out of 5000000
- 51863 multiletter control sequences out of 15000+600000
- 584366 words of font info for 100 fonts, out of 8000000 for 9000
+ 29396 strings out of 473190
+ 570220 string characters out of 5715800
+ 1009123 words of memory out of 5000000
+ 51873 multiletter control sequences out of 15000+600000
+ 582816 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,18n,101p,800b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on main.pdf (46 pages, 1233636 bytes).
+ 98i,18n,101p,732b,1031s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
+Output written on main.pdf (45 pages, 1276572 bytes).
 PDF statistics:
- 1191 PDF objects out of 1200 (max. 8388607)
- 1047 compressed objects within 11 object streams
- 332 named destinations out of 1000 (max. 500000)
- 542 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1169 PDF objects out of 1200 (max. 8388607)
+ 1022 compressed objects within 11 object streams
+ 319 named destinations out of 1000 (max. 500000)
+ 552 words of extra memory for PDF output out of 10000 (max. 10000000)
 

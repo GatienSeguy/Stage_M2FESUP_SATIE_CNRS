@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\graphicspath{{./}}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -192,20 +193,29 @@
 
 \begin{center}
     % ── Logos côte à côte ──
-    \begin{minipage}{0.48\textwidth}\centering
-        \includegraphics[width=0.82\linewidth]{Logo_ENS_leger(1).jpg}
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=1\linewidth]{Logo_ENS_leger(1).jpg}
     \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}\centering
-        \includegraphics[width=0.55\linewidth]{logo_univPS.png}
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=1\linewidth]{logo_univPS.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=0.7\linewidth]{logo_satie.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=0.7\linewidth]{logo_cnrs.png}
     \end{minipage}
 
     \vspace{1.6cm}
 
     % ── Nom de l'école ──
     {\Large \textbf{ÉCOLE NORMALE SUPÉRIEURE PARIS-SACLAY}}\\[0.15cm]
-    {\normalsize Université Paris-Saclay}
-
-    \vspace{1.5cm}
+    {\normalsize Université Paris-Saclay}\\
+    \vspace{0.5cm}
+    
+    {\Large \textbf{SATIE}}\\[0.15cm]
+    {\normalsize Laboratoire des systèmes et applications des technologies de l'information et de l'énergie}
+    \vspace{0.5cm}
 
     % ── Bloc titre encadré ──
     {\color{black}\rule{1\textwidth}{1.2pt}}
@@ -213,13 +223,14 @@
 
     \vspace{0.45cm}
 
-    {\Huge \color{sectioncolor} \textbf{Compte rendu}}
+    {\Huge \color{black} \textbf{Modèles de diffusion appliqués aux problèmes inverses : estimation variationnelle bayésienne des hyperparamètres}}
+
+    \vspace{0.35cm}
+    
+    {\Huge Gatien Séguy}
 
     \vspace{0.35cm}
 
-    {\LARGE \textbf{Modèles de diffusion et inférence\\[0.25cm] variationnelle pour les problèmes inverses}}
-
-    \vspace{0.45cm}
     {\color{black}\rule{0.9\textwidth}{0.8pt}}
     {\color{black}\rule{1\textwidth}{1.2pt}}
 
@@ -228,14 +239,14 @@
     % ── Informations ──
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{r@{\hspace{0.8em}:\hspace{0.8em}}l}
-    \textbf{Établissement}  & ENS Paris-Saclay (Département SIEN ex : Nikola Tesla) \\
-    \textbf{Encadrant}      & Thomas Rodet (SATIE --- CNRS)\\
+    \textbf{Laboratoire }  & SATIE -- ENS Paris-Saclay\\
+    \textbf{Superviseur}    & Thomas Rodet (SATIE -- CNRS)\\
     \textbf{Date}           & \today \\
     \end{tabular}
     \renewcommand{\arraystretch}{1}
 
     \begin{center}
-    \Huge Gatien Séguy
+
     \end{center}
     \vfill
 
@@ -247,7 +258,7 @@
 
 \begin{center}
     {\color{sectioncolor}\rule{0.3\textwidth}{0.4pt}}\\[0.35cm]
-    {\small\color{proofgray} Projet de recherche --- Master 2 M2FESup Intranet}
+    {\small\color{proofgray} Stage de recherche -- Master 2 M2FESup Intranet}
 \end{center}
 
 
