@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.25)  1 APR 2026 14:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.25)  1 APR 2026 14:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -677,32 +677,32 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 187.
-LaTeX Font Info:    ... okay on input line 187.
-LaTeX Info: Redefining \degres on input line 187.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Info: Redefining \degres on input line 188.
 Package french.ldf Info: Setting StandardItemizeEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 187.
+(french.ldf)             reported on input line 188.
 Package french.ldf Info: Setting StandardEnumerateEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 187.
-LaTeX Info: Redefining \up on input line 187.
+(french.ldf)             reported on input line 188.
+LaTeX Info: Redefining \up on input line 188.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count348
@@ -731,14 +731,14 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: includehead includefoot 
 * h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
-* v-part:(T,H,B)=(71.13188pt, 717.00946pt, 56.9055pt)
+* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=483.69687pt
-* \textheight=625.91187pt
+* \textheight=640.13824pt
 * \oddsidemargin=-15.36449pt
 * \evensidemargin=-15.36449pt
-* \topmargin=-1.1381pt
+* \topmargin=-15.36449pt
 * \headheight=36.0976pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -756,7 +756,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 187.
+Package hyperref Info: Link coloring ON on input line 188.
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -764,30 +764,30 @@ Package hyperref Info: Link coloring ON on input line 187.
 <Logo_ENS_leger(1).jpg, id=260, 862.22125pt x 484.81125pt>
 File: Logo_ENS_leger(1).jpg Graphic file (type jpg)
 <use Logo_ENS_leger(1).jpg>
-Package pdftex.def Info: Logo_ENS_leger(1).jpg  used on input line 197.
+Package pdftex.def Info: Logo_ENS_leger(1).jpg  used on input line 198.
 (pdftex.def)             Requested size: 116.0899pt x 65.26915pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 198.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 199.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 198.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 199.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 <logo_univPS.png, id=261, 382.42876pt x 132.495pt>
 File: logo_univPS.png Graphic file (type png)
 <use logo_univPS.png>
-Package pdftex.def Info: logo_univPS.png  used on input line 200.
+Package pdftex.def Info: logo_univPS.png  used on input line 201.
 (pdftex.def)             Requested size: 116.0899pt x 40.21985pt.
 <logo_satie.png, id=262, 28.54665pt x 18.7902pt>
 File: logo_satie.png Graphic file (type png)
 <use logo_satie.png>
-Package pdftex.def Info: logo_satie.png  used on input line 203.
+Package pdftex.def Info: logo_satie.png  used on input line 204.
 (pdftex.def)             Requested size: 81.26257pt x 53.50328pt.
 <logo_cnrs.png, id=264, 963.6pt x 963.6pt>
 File: logo_cnrs.png Graphic file (type png)
 <use logo_cnrs.png>
-Package pdftex.def Info: logo_cnrs.png  used on input line 206.
+Package pdftex.def Info: logo_cnrs.png  used on input line 207.
 (pdftex.def)             Requested size: 81.26257pt x 81.25061pt.
 
 
@@ -799,95 +799,221 @@ Overfull \hbox (29.95522pt too wide) in paragraph at lines 2--2
  []
 
 
-
-<images.png, id=342, 692.5875pt x 309.155pt>
-File: images.png Graphic file (type png)
-<use images.png>
-Package pdftex.def Info: images.png  used on input line 33.
-(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[2 <./images.png>]
 Overfull \hbox (29.95522pt too wide) in paragraph at lines 33--33
 [][] [][]  
  []
 
-)
+
+
+<satie-cnrs.png, id=349, 592.2125pt x 239.89626pt>
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 35.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
+<images.png, id=350, 692.5875pt x 309.155pt>
+File: images.png Graphic file (type png)
+<use images.png>
+Package pdftex.def Info: images.png  used on input line 35.
+(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
+[2 <./satie-cnrs.png> <./images.png>])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 270.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 269.
+Package pdftex.def Info: images.png  used on input line 270.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [3]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 309.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 308.
+Package pdftex.def Info: images.png  used on input line 309.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [4]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 345.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 344.
+Package pdftex.def Info: images.png  used on input line 345.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [5]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 399.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 398.
+Package pdftex.def Info: images.png  used on input line 399.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [6]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 453.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 452.
+Package pdftex.def Info: images.png  used on input line 453.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [7]
 
-File: images.png Graphic file (type png)
-<use images.png>
-Package pdftex.def Info: images.png  used on input line 502.
-(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[8]
-Overfull \hbox (12.63579pt too wide) in paragraph at lines 504--505
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 453.
+
+
+Overfull \hbox (12.63579pt too wide) in paragraph at lines 505--506
 []\T1/cmr/bx/n/12 Étape 5 : iden-ti-fi-ca-tion et vé-ri-fi-ca-tion. \T1/cmr/m/n/12 Par la Pro-po-si-tion [][]II.3.2[][] : $\OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 j \OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 ^^X N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e[]X[];  \OT1/cmr/m/n/12 (1 \OMS/cmsy/m/n/12 ^^@
  []
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 507.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 559.
+Package pdftex.def Info: images.png  used on input line 507.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
+[8]
+
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 570.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
+File: images.png Graphic file (type png)
+<use images.png>
+Package pdftex.def Info: images.png  used on input line 570.
+(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [9]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 622.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 606.
+Package pdftex.def Info: images.png  used on input line 622.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [10]
 
-Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 606.
-
-
-
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 677.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 657.
+Package pdftex.def Info: images.png  used on input line 677.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [11]
 
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 677.
+
+
+
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 728.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 706.
+Package pdftex.def Info: images.png  used on input line 728.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [12]
-<figure/Schema_Forward_MD.png, id=530, 804.00375pt x 600.2425pt>
+<figure/Schema_Forward_MD.png, id=536, 804.00375pt x 600.2425pt>
 File: figure/Schema_Forward_MD.png Graphic file (type png)
 <use figure/Schema_Forward_MD.png>
-Package pdftex.def Info: figure/Schema_Forward_MD.png  used on input line 743.
+Package pdftex.def Info: figure/Schema_Forward_MD.png  used on input line 744.
 (pdftex.def)             Requested size: 483.69687pt x 361.10997pt.
 
 
@@ -895,52 +1021,107 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 778.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 764.
+Package pdftex.def Info: images.png  used on input line 778.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [13]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 787.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 780.
+Package pdftex.def Info: images.png  used on input line 787.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [14 <./figure/Schema_Forward_MD.png>]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 828.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 816.
+Package pdftex.def Info: images.png  used on input line 828.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [15]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 888.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 865.
+Package pdftex.def Info: images.png  used on input line 888.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [16]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 904.
+(hyperref)                removing `math shift' on input line 905.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Pi' on input line 904.
+(hyperref)                removing `\Pi' on input line 905.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 904.
+(hyperref)                removing `math shift' on input line 905.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 948.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 923.
+Package pdftex.def Info: images.png  used on input line 948.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [17]
-<figure/Schema_Reverse_MD.png, id=587, 731.73375pt x 749.80125pt>
+<figure/Schema_Reverse_MD.png, id=592, 731.73375pt x 749.80125pt>
 File: figure/Schema_Reverse_MD.png Graphic file (type png)
 <use figure/Schema_Reverse_MD.png>
-Package pdftex.def Info: figure/Schema_Reverse_MD.png  used on input line 962.
+Package pdftex.def Info: figure/Schema_Reverse_MD.png  used on input line 963.
 (pdftex.def)             Requested size: 469.18654pt x 480.77501pt.
 
 
@@ -948,336 +1129,624 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 969.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 968.
+Package pdftex.def Info: images.png  used on input line 969.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [18]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 973.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 972.
+Package pdftex.def Info: images.png  used on input line 973.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [19 <./figure/Schema_Reverse_MD.png>]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1008.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1007.
+Package pdftex.def Info: images.png  used on input line 1008.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [20]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1033.
+(hyperref)                removing `math shift' on input line 1034.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1033.
+(hyperref)                removing `subscript' on input line 1034.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cdot' on input line 1033.
+(hyperref)                removing `\cdot' on input line 1034.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1033.
+(hyperref)                removing `math shift' on input line 1034.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1055--1057
+Underfull \hbox (badness 10000) in paragraph at lines 1056--1058
 
  []
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1064.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1062.
+Package pdftex.def Info: images.png  used on input line 1064.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [21
 pdfTeX warning (ext4): destination with the same identifier (name{equation.27}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1062 \]
-         
+l.1064 ...{x_t} p_t(x_t | x_0)}{ p_t(x_t | x_0)}\]
+                                                  
 pdfTeX warning (ext4): destination with the same identifier (name{equation.27}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1062 \]
-         ]
+l.1064 ...{x_t} p_t(x_t | x_0)}{ p_t(x_t | x_0)}\]
+                                                  ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1086.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1086.
+(hyperref)                removing `math shift' on input line 1087.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1086.
+(hyperref)                removing `subscript' on input line 1087.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1086.
+(hyperref)                removing `subscript' on input line 1087.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1086.
+(hyperref)                removing `math shift' on input line 1087.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Pi' on input line 1086.
+(hyperref)                removing `math shift' on input line 1087.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1086.
+(hyperref)                removing `\Pi' on input line 1087.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1087.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1142.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1124.
+Package pdftex.def Info: images.png  used on input line 1142.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [22]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1192.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1172.
+Package pdftex.def Info: images.png  used on input line 1192.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [23]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1201.
+(hyperref)                removing `math shift' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1201.
+(hyperref)                removing `subscript' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1201.
+(hyperref)                removing `superscript' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1201.
+(hyperref)                removing `math shift' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1201.
+(hyperref)                removing `math shift' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sigma' on input line 1201.
+(hyperref)                removing `\sigma' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1201.
+(hyperref)                removing `subscript' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1201.
+(hyperref)                removing `superscript' on input line 1202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1201.
+(hyperref)                removing `math shift' on input line 1202.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1208.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1207.
+Package pdftex.def Info: images.png  used on input line 1208.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [24]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1267.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1266.
+Package pdftex.def Info: images.png  used on input line 1267.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [25]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1343.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1341.
+Package pdftex.def Info: images.png  used on input line 1343.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [26]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1397.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1394.
+Package pdftex.def Info: images.png  used on input line 1397.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [27]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1446.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1445.
+Package pdftex.def Info: images.png  used on input line 1446.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [28]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1488.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1483.
+Package pdftex.def Info: images.png  used on input line 1488.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [29
 pdfTeX warning (ext4): destination with the same identifier (name{equation.51}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1483 \]
-         ]
-Overfull \hbox (6.92992pt too wide) detected at line 1506
+l.1488     \item \textbf
+                        {positivitÃ©}]
+Overfull \hbox (6.92992pt too wide) detected at line 1507
 [][][]\OT1/cmr/m/n/12 
  = []
  []
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1544.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1537.
+Package pdftex.def Info: images.png  used on input line 1544.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [30]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1599.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1589.
+Package pdftex.def Info: images.png  used on input line 1599.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [31]
 
+LaTeX Warning: Citation `' on page 32 undefined on input line 1638.
+
+
+
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1651.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1630.
+Package pdftex.def Info: images.png  used on input line 1651.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [32]
 
-LaTeX Warning: Citation `' on page 33 undefined on input line 1637.
-
-
-
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1702.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1679.
+Package pdftex.def Info: images.png  used on input line 1702.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [33]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1758.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1748.
+Package pdftex.def Info: images.png  used on input line 1758.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [34]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1877.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1840.
+Package pdftex.def Info: images.png  used on input line 1877.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [35]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1878.
+(hyperref)                removing `math shift' on input line 1879.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\tau' on input line 1878.
+(hyperref)                removing `\tau' on input line 1879.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1878.
+(hyperref)                removing `subscript' on input line 1879.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1878.
+(hyperref)                removing `math shift' on input line 1879.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1916.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1902.
+Package pdftex.def Info: images.png  used on input line 1916.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [36]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1948.
+(hyperref)                removing `math shift' on input line 1949.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\tau' on input line 1948.
+(hyperref)                removing `\tau' on input line 1949.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1948.
+(hyperref)                removing `subscript' on input line 1949.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1948.
+(hyperref)                removing `math shift' on input line 1949.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 1969.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1961.
+Package pdftex.def Info: images.png  used on input line 1969.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [37]
 
-Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 1961.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1996.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1995.
+(hyperref)                removing `subscript' on input line 1996.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1995.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1995.
+(hyperref)                removing `math shift' on input line 1996.
 
 
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2019.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2007.
+Package pdftex.def Info: images.png  used on input line 2019.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [38]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2061.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2048.
+Package pdftex.def Info: images.png  used on input line 2061.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [39]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2109.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2095.
+Package pdftex.def Info: images.png  used on input line 2109.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [40]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2164.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2150.
+Package pdftex.def Info: images.png  used on input line 2164.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [41]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2205.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2204.
+Package pdftex.def Info: images.png  used on input line 2205.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [42]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2357.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2228.
+Package pdftex.def Info: images.png  used on input line 2357.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
 [43]
 
+File: satie-cnrs.png Graphic file (type png)
+<use satie-cnrs.png>
+Package pdftex.def Info: satie-cnrs.png  used on input line 2430.
+(pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2356.
+Package pdftex.def Info: images.png  used on input line 2430.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[44]
 
-File: images.png Graphic file (type png)
-<use images.png>
-Package pdftex.def Info: images.png  used on input line 2429.
-(pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
-[45] (./main.aux)
+Package fancyhdr Warning: \headheight is too small (36.0976pt): 
+(fancyhdr)                Make it at least 42.3828pt, for example:
+(fancyhdr)                \setlength{\headheight}{42.3828pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
+
+[44] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1290,18 +1759,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: F360FB886782337CDA656BC9E000602C;13753.
  ) 
 Here is how much of TeX's memory you used:
- 29396 strings out of 473190
- 570220 string characters out of 5715800
- 1009123 words of memory out of 5000000
- 51873 multiletter control sequences out of 15000+600000
- 582816 words of font info for 98 fonts, out of 8000000 for 9000
+ 29408 strings out of 473190
+ 570466 string characters out of 5715800
+ 1009190 words of memory out of 5000000
+ 51886 multiletter control sequences out of 15000+600000
+ 585285 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,18n,101p,732b,1031s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,18n,101p,997b,1031s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on main.pdf (45 pages, 1276572 bytes).
+Output written on main.pdf (44 pages, 1380707 bytes).
 PDF statistics:
- 1169 PDF objects out of 1200 (max. 8388607)
- 1022 compressed objects within 11 object streams
- 319 named destinations out of 1000 (max. 500000)
- 552 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1166 PDF objects out of 1200 (max. 8388607)
+ 1018 compressed objects within 11 object streams
+ 318 named destinations out of 1000 (max. 500000)
+ 557 words of extra memory for PDF output out of 10000 (max. 10000000)
 

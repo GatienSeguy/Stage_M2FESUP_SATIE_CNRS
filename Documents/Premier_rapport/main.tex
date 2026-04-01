@@ -167,11 +167,12 @@
 \hypersetup{linktoc=all, colorlinks=true,
   linkcolor=sectioncolor, citecolor=subsectioncolor, urlcolor=subsectioncolor, pdfborder={0 0 0}}
 
-\geometry{a4paper, top=2.5cm, bottom=2cm, left=2cm, right=2cm,
+\geometry{a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm,
   headheight=36.0976pt, includeheadfoot}
 
 \pagestyle{fancy}\fancyhf{}
 \fancyhead[R]{\includegraphics[width=2.5cm]{images.png}}
+\fancyhead[L]{\includegraphics[width=3.3cm]{satie-cnrs.png}}
 \fancyfoot[L]{Gatien Séguy}\fancyfoot[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0.4pt}
 
@@ -189,7 +190,7 @@
 \begin{titlepage}
 \thispagestyle{empty}
 
-\vspace*{-2.5cm}
+\vspace*{-3.2cm}
 
 \begin{center}
     % ── Logos côte à côte ──
@@ -206,7 +207,7 @@
         \includegraphics[width=0.7\linewidth]{logo_cnrs.png}
     \end{minipage}
 
-    \vspace{1.6cm}
+    \vspace{0.6cm}
 
     % ── Nom de l'école ──
     {\Large \textbf{ÉCOLE NORMALE SUPÉRIEURE PARIS-SACLAY}}\\[0.15cm]
@@ -241,21 +242,21 @@
     \begin{tabular}{r@{\hspace{0.8em}:\hspace{0.8em}}l}
     \textbf{Laboratoire }  & SATIE -- ENS Paris-Saclay\\
     \textbf{Superviseur}    & Thomas Rodet (SATIE -- CNRS)\\
-    \textbf{Date}           & \today \\
+    \textbf{Date de début}           & 1\ier avril 2026 \\
+    \textbf{Date de fin}           & 15 juillet 2026 \\
     \end{tabular}
     \renewcommand{\arraystretch}{1}
 
+    \vspace{0.3cm}
     \begin{center}
-
+    \textbf{RÉSUMÉ}
     \end{center}
+    \begin{minipage}{0.88\textwidth}\small
+     Ce stage porte sur la résolution de problèmes inverses en imagerie à l'aide de modèles de diffusion génératifs. Nous formalisons d'abord le processus de diffusion forward comme une équation différentielle stochastique, établissons la formule de Tweedie reliant le score à l'estimateur optimal, et présentons les méthodes existantes de reconstruction conditionnelle (DPS, $\Pi$GDM). Nous proposons ensuite une approche combinant le cadre $\Pi$GDM avec l'inférence variationnelle bayésienne (algorithme EMG-VBA) pour estimer automatiquement les hyperparamètres du modèle ($\tau_r$, $\tau_b$) plutôt que de les fixer manuellement. Contrairement aux méthodes classiques qui décomposent le score conditionnel en score a priori et score de vraisemblance, notre formulation fournit le score conditionnel total en forme fermée. L'optimisation est menée dans l'espace des mesures de probabilité via des mises à jour multiplicatives (Radon-Nikodym).
+    \end{minipage}
     \vfill
-
-
 \end{center}
-
-
 \vfill
-
 \begin{center}
     {\color{sectioncolor}\rule{0.3\textwidth}{0.4pt}}\\[0.35cm]
     {\small\color{proofgray} Stage de recherche -- Master 2 M2FESup Intranet}

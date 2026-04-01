@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1775046352.98703 "main.tex" "main.pdf" "main" 1775046354.73318 0
+["pdflatex"] 1775047438.73641 "main.tex" "main.pdf" "main" 1775047440.53633 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
@@ -36,10 +36,12 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm" 1136768653 1336 3125ccb448c1a09074e3aa4a9832f130 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm" 1136768653 1332 1fde11373e221473104d6cc5993f046e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1136768653 1528 abec98dbc43e172678c11b3b9031252a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm" 1136768653 1524 554068197b70979a55370e6c6495f441 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr6.tfm" 1136768653 1300 b62933e007d01cfd073f79b963c01526 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
@@ -236,10 +238,11 @@
   "logo_cnrs.png" 1775044504.96434 47943 708836d791c7fd696513be8786033b9c ""
   "logo_satie.png" 1775044508.10634 8910 f68f2cc984480d4a2e5e0a5b29514e5a ""
   "logo_univPS.png" 1775044242.21592 6461 65f149b44b41c4acba92cca591b34223 ""
-  "main.aux" 1775046354.61601 20831 7f3487f5bb1a36d8577065e8686af1aa "pdflatex"
-  "main.out" 1775046354.61786 13753 f360fb886782337cda656bc9e000602c "pdflatex"
-  "main.tex" 1775046352.8012 113143 c1d517e5a52884b05d15b4f059b0217e ""
-  "main.toc" 1775046354.61806 6226 ad9b0b465d38bd2a864cf7c858e6e8b3 "pdflatex"
+  "main.aux" 1775047440.40021 20831 3a41594f4a68353b29800520d86e883f "pdflatex"
+  "main.out" 1775047440.40222 13753 f360fb886782337cda656bc9e000602c "pdflatex"
+  "main.tex" 1775047438.53738 114343 dde4e458f33de4db688c9267396daa92 ""
+  "main.toc" 1775047440.4025 6226 c3265c405035e534c4cb42bfe393de8d "pdflatex"
+  "satie-cnrs.png" 1775047335.03281 129564 8cdb7ee5a9186fe42aa47a81228a6f59 ""
   (generated)
   "main.aux"
   "main.log"
