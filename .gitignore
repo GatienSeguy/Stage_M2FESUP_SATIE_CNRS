@@ -1,0 +1,4 @@
+.claude
+Codes/Data/
+# Checkpoints PyTorch (trop gros pour GitHub)
+*.pt
