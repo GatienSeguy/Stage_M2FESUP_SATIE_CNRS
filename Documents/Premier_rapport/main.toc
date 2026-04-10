@@ -62,3 +62,4 @@
 \contentsline {subsubsection}{\numberline {XIII.8.3}Distribution de référence pour $\tau _r$}{37}{subsubsection.13.8.3}%
 \contentsline {subsubsection}{\numberline {XIII.8.4}Distribution de référence pour $x_{0,i}$}{38}{subsubsection.13.8.4}%
 \contentsline {subsubsection}{\numberline {XIII.8.5}Mise à jour EMG-VBA }{42}{subsubsection.13.8.5}%
+\contentsline {subsection}{\numberline {XIII.9}Calcul du pas sous-optimal}{44}{subsection.13.9}%

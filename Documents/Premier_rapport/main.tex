@@ -259,7 +259,7 @@
 \vfill
 \begin{center}
     {\color{sectioncolor}\rule{0.3\textwidth}{0.4pt}}\\[0.35cm]
-    {\small\color{proofgray} Stage de recherche -- Master 2 M2FESup Intranet}
+    {\small\color{proofgray} Stage de recherche -- Master 2 FESup Intranet}
 \end{center}
 
 
@@ -1635,7 +1635,7 @@ C'est exactement la solution de CAVI (\textit{Coordinate Ascent Variational Infe
 
 On veut faire mieux que CAVI en mettant à jour toutes les composantes simultanément, par une descente de gradient. Mais comme souligné plus haut, l'addition $q^{k+1} = q^k + \alpha\, \delta q$ ne respecte ni la positivité ni la normalisation. On passe donc dans l'espace des mesures $\mathcal{A}$.
 
-\begin{theorembox}[Radon-Nikodym --- mise à jour dans $\mathcal{A}$ (admis \cite{})]
+\begin{theorembox}[Radon-Nikodym --- mise à jour dans $\mathcal{A}$ (admis \cite{rodet})]
 \label{thm:radon_nikodym}
 Soit $\mu^k \in \mathcal{A}$ une mesure de probabilité de Radon de densité $q^k$. Toute mesure $\mu^{k+1}$ absolument continue par rapport à $\mu^k$ s'écrit 
 :
@@ -1787,43 +1787,6 @@ Le maximum de cette approximation quadratique donne
     \label{eq:subopt_step}
 \end{equation}
 \end{resultbox}
-
-
-
-% \begin{propositionbox}[Convergence de  EMG-VBA
-% ]
-% \label{prop:convergence}
-% Soit $\{q^k\}_{k \geq 0}$ la suite construite par le Résultat 
-% \ref{res:update_emgvba} avec le sous-espace MG (Définition 
-% \ref{def:mg_subspace}). Si le pas $s^k$ est le pas optimal (ou sous-optimal), alors 
-% :
-% \begin{equation}
-%     \mathcal{F}(q^{k+1}) \geq \mathcal{F}(q^k) \qquad \forall\, k \geq 0
-% \end{equation}
-% et la suite $\{\mathcal{F}(q^k)\}_{k \geq 0}$ converge vers un maximum de $\mathcal{F}$.
-% \end{propositionbox}
-
-% \begin{proof}
-
-
-% \textbf{Étape 1 : VBA- EGrad est un cas particulier.} L'algorithme BV-EGrad (gradient exponentié, sans mémoire) correspond à $s_2 = 0$ dans le Résultat 
-% \ref{res:update_emgvba}. Il a été prouvé par Zheng, Fraysse et Rodet 
-% \cite{rodet} que, avec un pas optimal 
-% :
-% \[
-% \mathcal{F}(q^{k+1}_{\mathrm{grad}}) \geq \mathcal{F}(q^k)
-% \]
-
-% \textbf{Étape 2 :  EMG-VBA
-%  fait au moins aussi bien.} Le pas optimal  EMG-VBA
-%  maximise $g^k(s)$ sur $\mathbb{R}^2$, tandis que VBA-EGrad maximise sur $\{s \in \mathbb{R}^2 : s_2 = 0\}$. Donc 
-% :
-% \[
-% \mathcal{F}(q^{k+1}) = \max_{s \in \mathbb{R}^2} g^k(s) \geq \max_{s_1 \in \mathbb{R},\, s_2 = 0} g^k(s) = \mathcal{F}(q^{k+1}_{\mathrm{grad}}) \geq \mathcal{F}(q^k)
-% \]
-
-% \textbf{Étape 3 : convergence.} $\mathcal{F}$ est une fonctionnelle concave sur l'espace convexe $\Omega$. La suite $\{\mathcal{F}(q^k)\}$ est croissante et majorée (par $\log p_t(\y)$). Toute suite réelle croissante majorée converge (cette phrase sonne comme un écho à la nostalgie de nos années de prépa).
-% \end{proof}
 
 
 \subsection{Synthèse de l'algorithme}
@@ -2077,7 +2040,7 @@ Sous l'hypothèse de champ moyen \eqref{eq:MF}, la distribution de référence p
 avec :
 \begin{align}
     (\Sigma_i^r)^{-1} &= \frac{\alt}{1-\alt} + \langle\tau_b\rangle (A^T A)_{ii} + \langle\tau_r\rangle \label{eq:sigma_r_i}\\[6pt]
-    \mu_i^r &= \Sigma_i^r \left(\frac{\sqrt{\alt}}{1-\alt}(x_t)_i + \langle\tau_b\rangle \left[(A^T y)_i - (A^T A)_{ii}\mu_i^k + (A^T A \boldsymbol{\mu}^k)_i\right] + \langle\tau_r\rangle (\hat{x}_0)_i\right) \label{eq:m_r_i}
+    \mu_i^r &= \Sigma_i^r \left(\frac{\sqrt{\alt}}{1-\alt}(x_t)_i + \langle\tau_b\rangle \left[(A^T y)_i + (A^T A)_{ii}\mu_i^k  (A^T A \boldsymbol{\mu}^k)_i\right] + \langle\tau_r\rangle (\hat{x}_0)_i\right) \label{eq:m_r_i}
 \end{align}
 ou, de manière équivalente :
 \begin{equation}
@@ -2238,119 +2201,872 @@ En prenant le log :
 
 
 
+\subsection{Calcul du pas sous-optimal}
+
+L'objectif de cette section est de calculer explicitement le pas sous-optimal $\hat{s}_{\mathrm{subopt}}$ défini par le développement de Taylor à l'ordre~2 de l'énergie libre le long du sous-espace EMG.
+
+\begin{rappelbox}[Pas sous-optimal]
+\label{res:subopt_step}
+\begin{equation}
+    \boxed{\hat{s}_{\mathrm{subopt}} = -\left(\frac{\partial^2 g^{k+1}}{\partial s \partial s^T}\bigg|_{s=0}\right)^{-1} \frac{\partial g^{k+1}}{\partial s}\bigg|_{s=0}}
+    \label{eq:subopt_step}
+\end{equation}
+\end{rappelbox}
+
+Pour évaluer ce pas, il faut exprimer les dérivées première et seconde de la fonction
+\begin{rappelbox}
+\begin{equation}
+g^{k+1}(s) = \mathbb{E}_{q^{k+1}}\Bigl[ \log p_t(\w,\y) \Bigr] - \mathbb{E}_{q^{k+1}}\Bigl[ \log q^{k+1}\Bigr]
+\end{equation}
+\end{rappelbox}
+par rapport au vecteur de pas $s = (s_1, s_2)^T$. Nous calculons successivement les deux termes de cette énergie libre.
+
+%% ============================================================
+%% PREMIER TERME : entropie
+%% ============================================================
+
+\subsubsection*{Terme entropique}
+
+\begin{propositionbox}
+\begin{equation}
+\mathbb{E}_{q^{k+1}}\Bigl[ \log q^{k+1}\Bigr] = - \frac12 \sum_{i=1}^n \log\bigl( \Sigma_i^{k+1}(s)\bigr) + \text{cte}
+\end{equation}
+\end{propositionbox}
+
+\begin{proof}\\
+Sous l'hypothèse de champ moyen, $q^{k+1}(\w) = \prod_{i=1}^n q_i^{k+1}(x_{0,i}) \cdot q^{k+1}(\tau_r) \cdot q^{k+1}(\tau_b)$, de sorte que $\log q^{k+1}(\w) = \sum_{i=1}^n \log q_i^{k+1}(x_{0,i}) + \log q^{k+1}(\tau_r) + \log q^{k+1}(\tau_b)$.
+
+Les termes relatifs à $\tau_r$ et $\tau_b$ ne dépendent pas de $s$ (les lois Gamma ne sont pas paramétrées par $s$), et sont donc comme des constantes aux dérivées par rapport à $s$. Il suffit de traiter les composantes gaussiennes.
+
+Pour chaque composante $q_i^{k+1}(x_{0,i}) = \mathcal{N}(x_{0,i} \mid \mu_i^{k+1}(s), \Sigma_i^{k+1}(s))$, l'entropie différentielle d'une gaussienne univariée vaut :
+\begin{equation*}
+\begin{aligned}
+\int q_i(x) \log q_i(x)\, \mathrm{d}x &= \int_{\mathbb{R}} q_i(x)\frac12\Bigl(-\log(2 \pi ) -\log(\Sigma_i^{k+1}) - \frac{(x - \mu_i^{k+1})^2}{\Sigma_i^{k+1}}\Bigr) dx\\
+&=-\frac{1}{2}\Biggl(\log(2\pi) + \log(\Sigma_i^{k+1}(s)) + \frac{1}{\cancel{\Sigma_i^{k+1}}}.\underbrace{\cancel{\int_{\mathbb{R}} q_i(x)(x-\mu_i^{k+1})^2 dx}}_{= \Sigma_i^{k+1}}\Biggr)\\
+&= -\frac12 \Biggl( 1 + \log(2 \pi) + \log(\Sigma_i^{k+1}(s)) \Biggr)\\
+&=- \frac12 \sum_{i=1}^n \log\bigl( \Sigma_i^{k+1}(s)\bigr) + \text{cte}
+\end{aligned}
+\end{equation*}
+En sommant sur $i = 1, \ldots, n$, il vient:
+\[
+\mathbb{E}_{q^{k+1}}\bigl[\log q^{k+1}\bigr] = - \frac{1}{2}\sum_{i=1}^n \log \Sigma_i^{k+1}(s) + \text{cte'}
+\]
+
+\end{proof}
+
+\noindent\textbf{Remarque.} Aux fins du calcul du pas sous-optimal, seule la dépendance en $s$ importe. Le terme entropique contribue donc à $g^{k+1}(s)$ par $+\frac{1}{2}\sum_{i=1}^n \log \Sigma_i^{k+1}(s)$, puisqu'il apparaît avec un signe moins dans la définition de $g^{k+1}$.
 
 
-% \subsubsection{Calcul du pas sous-optimal}
+%% ============================================================
+%% SECOND TERME : espérance de la log-jointe
+%% ============================================================
 
-% Le pas sous-optimal \eqref{eq:subopt_step} nécessite le gradient et la hessienne de $g^k(s) = \mathcal{F}(q^{k+1}(s))$ en $s = 0$.
+\subsubsection*{Espérance de la log-vraisemblance jointe}
 
-% \begin{propositionbox}[Gradient de $g^k$ en $s = 0$]
-% \label{prop:gradient_gk}
-% \begin{equation}
-%     \frac{\partial g^k}{\partial s}\bigg|_{s=0} = \begin{pmatrix} \displaystyle\sum_j \left\langle \mathrm{d}_j f(q^k, w_j) \right\rangle_{q_j^k} \\[8pt] \displaystyle\sum_j \left\langle \log\frac{q_j^k(w_j)}{q_j^{k-1}(w_j)} \right\rangle_{q_j^k} \end{pmatrix}
-% \end{equation}
-% \end{propositionbox}
+\begin{propositionbox}
+\begin{equation}
+\begin{aligned}
+\mathbb{E}_{q^{k+1}}\Bigl[ \log p_t(\w,\y) \Bigr]
+&= -\frac{1}{2(1 - \alt)} \Bigl(
+\left\| x_t - \sqrt{\alt}\, \mu^{k+1}(s) \right\|^2 + \alt\, \mathrm{tr}(\Sigma^{k+1})(s)
+  \Bigr)\\
+  &\quad+ \Bigl(\frac{m}{2} + c_0 -1\Bigr) \cdot \langle\log(\tau_b)\rangle \\
+  &\qquad- \Bigl( d_0 + \frac12\Bigl[ \left\| y - A\, \mu^{k+1}(s) \right\|^2 + \mathrm{tr}\bigl(\mathrm{diag}(A^TA)\cdot \Sigma^{k+1}(s) \bigr) \Bigr] \Bigr)\cdot \langle\tau_b\rangle\\
+  &\quad+ \Bigl(\frac{n}{2} + a_0 -1\Bigr)\cdot  \langle\log(\tau_r)\rangle \\
+  &\qquad- \Bigl( b_0 + \frac12\Bigl[ \left\| \mu^{k+1}(s) - \hat{x}_0 \right\|^2 + \mathrm{tr}(\Sigma^{k+1}(s)) \Bigr] \Bigr)\cdot \langle\tau_r\rangle
+\end{aligned}
+\end{equation}
+\end{propositionbox}
 
-% \begin{proof}
+\begin{proof}
+\textbf{Étape 1 : rappel de la log-jointe.}
+Par le Résultat~\ref{res:logjoint}, on a :
+\begin{equation*}
+    \begin{aligned}
+        \log p_t(\boldsymbol{w}, \boldsymbol{y}) \;=\;
+        &\underbrace{-\frac{1}{2(1-\bar\alpha_t)}\|x_t - \sqrt{\bar\alpha_t}\, x_0\|^2}_{T_1} \\[4pt]
+        &+ \underbrace{\left(\frac{m}{2} + c_0 - 1\right)\log\tau_b - \left(d_0 + \tfrac{1}{2}\|y - Ax_0\|^2\right)\tau_b}_{T_2} \\[4pt]
+        &+ \underbrace{\left(\frac{n}{2} + a_0 - 1\right)\log\tau_r - \left(b_0 + \tfrac{1}{2}\|x_0 - \hat{x}_0\|^2\right)\tau_r}_{T_3} \\[4pt]
+        &+ \;\mathrm{cte}
+    \end{aligned}
+\end{equation*}
 
-% Par définition de $g^k(s)$ et la règle de la chaîne fonctionnelle, la dérivée par rapport à $s_1$ en $s = 0$ est :
-% \[
-% \frac{\partial g^k}{\partial s_1}\bigg|_{s=0} = \left\langle \mathrm{d}f(q^k, \w) \right\rangle_{q^k} = \sum_j \left\langle \mathrm{d}_j f(q^k, w_j) \right\rangle_{q_j^k}
-% \]
-% De même pour $s_2$ avec la direction $d^{k-1}(\w) = \sum_j \log(q_j^k/q_j^{k-1})$.
-% \end{proof}
+\medskip
+\textbf{Étape 2 : espérance du terme $T_1$ (forward).}\\
+Développons la norme :
+\begin{equation*}
+\|x_t - \sqrt{\alt}\, x_0\|^2 = x_t^T x_t - 2\sqrt{\alt}\, x_t^T x_0 + \alt\, x_0^T x_0.
+\end{equation*}
+Sous $q^{k+1}$, on a $\mathbb{E}_{q^{k+1}}[x_0] = \mu^{k+1}(s)$ et $\mathbb{E}_{q^{k+1}}[x_0^T x_0] = \|\mu^{k+1}(s)\|^2 + \mathrm{tr}(\Sigma^{k+1}(s))$ (car $\mathrm{Cov}_{q^{k+1}}(x_0) = \mathrm{diag}(\Sigma_1^{k+1}, \ldots, \Sigma_n^{k+1})$). De plus, $x_t$ est fixe à $t$ fixé, il vient :
+\begin{equation*}
+\mathbb{E}_{q^{k+1}}[T_1] = -\frac{1}{2(1-\bar\alpha_t)} \Biggl(
+\left\| x_t - \sqrt{\alt}\,\mu^{k+1}(s)\right\|^2 + \alt\, \mathrm{tr}(\Sigma^{k+1}(s))
+\Biggr)
+\end{equation*}
 
-% \begin{propositionbox}[Expressions explicites du gradient]
-% \label{prop:gradient_explicit}
-% Les composantes du gradient sont :
-% \begin{align}
-%     \frac{\partial g^k}{\partial s_1}\bigg|_{s=0} &= \sum_{j \in \{x_{0,i}, \tau_r, \tau_b\}} \left[\left\langle \log q_j^r \right\rangle_{q_j^k} - \left\langle \log q_j^k \right\rangle_{q_j^k} - 1\right] \label{eq:grad_s1}\\[8pt]
-%     \frac{\partial g^k}{\partial s_2}\bigg|_{s=0} &= \sum_{j} \left[\left\langle \log q_j^k \right\rangle_{q_j^k} - \left\langle \log q_j^{k-1} \right\rangle_{q_j^k}\right] \label{eq:grad_s2}
-% \end{align}
-% \end{propositionbox}
+\medskip
 
-% Pour les gaussiennes et les Gamma, ces espérances se calculent explicitement :
-% \begin{itemize}
-%     \item Gaussienne $q = \mathcal{N}(\mu, \Sigma)$ : $\langle \log q \rangle_q = -\frac{1}{2}\log(2\pi\Sigma) - \frac{1}{2}$
-%     \item Gamma $q = \mathrm{Gamma}(a, b)$ : $\langle \log q \rangle_q = a\log b - \log\Gamma(a) + (a-1)\psi(a) - a$, où $\psi$ est la fonction digamma.
-% \end{itemize}
+\textbf{Étape 3 : espérance du terme $T_2$ (mesure).}\\
+Sous l'hypothèse de champ moyen, $\tau_b$ et $x_0$ sont indépendants sous $q^{k+1}$. L'espérance se factorise donc :
+\begin{equation*}
+\mathbb{E}_{q^{k+1}}[T_2] = \Bigl(\frac{m}{2} + c_0 - 1\Bigr)\, \langle\log\tau_b\rangle
+\;-\; \mathbb{E}_{q(x_0)}\Bigl[d_0 + \tfrac{1}{2}\|y - Ax_0\|^2\Bigr]\cdot \langle\tau_b\rangle
+\end{equation*}
+Or, en développant $\|y - Ax_0\|^2 = y^Ty - 2y^TAx_0 + x_0^TA^TAx_0$ et en prenant l'espérance sous $q(x_0)$ :
+\begin{equation*}
+\mathbb{E}_{q(x_0)}\bigl[\|y - Ax_0\|^2\bigr]
+= \|y - A\mu^{k+1}(s)\|^2 + \mathrm{tr}\bigl(\mathrm{diag}(A^TA)\cdot \Sigma^{k+1}(s)\bigr)
+\end{equation*}
+où l'on a utilisé la séparabilité de $q(x_0)$ et le fait que $\mathbb{E}[x_{0,i}x_{0,j}] = \mu_i\mu_j$ pour $i \neq j$ et $\mathbb{E}[x_{0,i}^2] = \mu_i^2 + \Sigma_i$ (cf.~démonstration de la Proposition~\ref{prop:qr_taub}).\\
 
-% La hessienne $\partial^2 g^k / \partial s \partial s^T$ se calcule de manière analogue (voir Zheng et al.\ \cite{rodet}, Annexe B).
+D'où :
+\begin{equation*}
+\mathbb{E}_{q^{k+1}}[T_2] = \Bigl(\frac{m}{2} + c_0 -1\Bigr) \langle\log\tau_b\rangle - \Bigl( d_0 + \frac{1}{2}\bigl[ \| y - A \mu^{k+1}(s) \|^2 + \mathrm{tr}(\mathrm{diag}(A^TA)\cdot \Sigma^{k+1}(s) ) \bigr] \Bigr)\cdot \langle\tau_b\rangle
+\end{equation*}
+
+\medskip
+\textbf{Étape 4 : espérance du terme $T_3$ (a priori).}\\
+Par le même raisonnement que pour $T_2$, en utilisant l'indépendance de $\tau_r$ et $x_0$ sous $q^{k+1}$ :
+\begin{equation*}
+\mathbb{E}_{q^{k+1}}[T_3] = \Bigl(\frac{n}{2} + a_0 - 1\Bigr)\, \langle\log\tau_r\rangle
+\;-\; \mathbb{E}_{q(x_0)}\Bigl[b_0 + \tfrac{1}{2}\|x_0 - \hat{x}_0\|^2\Bigr]\cdot \langle\tau_r\rangle
+\end{equation*}
+En développant $\|x_0 - \hat{x}_0\|^2 = \|x_0\|^2 - 2\hat{x}_0^T x_0 + \|\hat{x}_0\|^2$ et en prenant l'espérance :
+\begin{equation*}
+\mathbb{E}_{q(x_0)}\bigl[\|x_0 - \hat{x}_0\|^2\bigr]
+= \|\mu^{k+1}(s) - \hat{x}_0\|^2 + \mathrm{tr}(\Sigma^{k+1}(s))
+\end{equation*}
+D'où :
+\begin{equation*}
+\mathbb{E}_{q^{k+1}}[T_3] = \Bigl(\frac{n}{2} + a_0 -1\Bigr) \langle\log\tau_r\rangle - \Bigl( b_0 + \frac{1}{2} \bigl[ \| \mu^{k+1}(s) - \hat{x}_0 \|^2 + \mathrm{tr}( \Sigma^{k+1}(s)) \bigr] \Bigr) \cdot \langle\tau_r\rangle
+\end{equation*}
+Le résultat s'obtient en sommant les trois contributions.
+\end{proof}
+
+%% ============================================================
+%% GRADIENT DE g
+%% ============================================================
+\subsubsection*{Dérivées de $\mu^{k+1}$ et $\Sigma^{k+1}$ par rapport à $s$}
+
+Avant de dériver $g^{k+1}$ directement, il est important d'exprimer les dérivées des paramètres variationnels $\mu_i^{k+1}(s)$ et $\Sigma_i^{k+1}(s)$ par rapport à $s$, puisque $g^{k+1}$ ne dépend de $s$ qu'à travers ces grandeurs.
+
+\begin{propositionbox}[Dérivées de degré 1]
+\label{prop:deriv1}
+\begin{equation}
+\begin{aligned}
+&\partial_1 \Sigma_i^{k+1} = \Sigma_i^k - \frac{(\Sigma_i^k)^2}{\Sigma_i^{r,k}} \qquad
+&&\partial_2 \Sigma_i^{k+1} = \frac{(\Sigma_i^k)^2}{\Sigma_i^{k-1}} - \Sigma_i^k\\[6pt]
+&\partial_1 \mu_i^{k+1} = \frac{\Sigma_i^k}{\Sigma_i^{r,k}} \bigl( \mu_i^{r,k} - \mu_i^k \bigr) \qquad
+&&\partial_2 \mu_i^{k+1} = \frac{\Sigma_i^k}{\Sigma_i^{k-1}} \bigl( \mu_i^k - \mu_i^{k-1} \bigr)
+\end{aligned}
+\end{equation}
+Avec la notation suivante : \( \forall j \in \{1,2\} \quad \partial_j G := \frac{\partial G}{\partial s_j}(s)\Big|_{s=0} \)
+
+P.S. On retrouve bien les expressions établies par Yuling Zheng dans l'appendix B.2.
+\end{propositionbox}
+
+\begin{proof}\\
+Dérivons les expressions de $\Sigma_i^{k+1}$ et $\mu_i^{k+1}$ de la Proposition~\ref{prop:update_x0i} : \\
+
+\begin{equation*}
+\begin{aligned}
+   \Sigma_i^{k+1} &= \Bigl( \frac{1-s_1+s_2}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}}  \Bigr)^{-1} \\
+    \mu_i^{k+1} &= \Sigma_i^{k+1} \Biggl( \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Biggr)
+\end{aligned}
+\end{equation*}
+
+De plus, on rappelle que $\Sigma_i^{k+1}(s=0) = \Sigma_i^k$.
+
+\medskip
+\noindent\textbf{Étape 1 :}
+\begin{equation*}
+\frac{\partial \Sigma_i^{k+1}}{\partial s_1} = - \Bigl(\frac{1}{\Sigma_i^{r,k} } - \frac{1}{\Sigma_i^k}\Bigr) \Bigl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Bigr)^{-2}
+\end{equation*}
+Donc en $s=0$, il vient que :
+\begin{equation*}
+\partial_1 \Sigma_i^{k+1} =  \Sigma_i^k - \frac{(\Sigma_i^k)^2}{\Sigma_i^{r,k}}.
+\end{equation*}
+
+\noindent\textbf{Étape 2 :}
+\begin{equation*}
+\frac{\partial \Sigma_i^{k+1}}{\partial s_2} = - \Bigl(\frac{1}{\Sigma_i^{k} } - \frac{1}{\Sigma_i^{k-1}}\Bigr) \Bigl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Bigr)^{-2}
+\end{equation*}
+Donc en $s=0$, il vient que :
+\begin{equation*}
+\partial_2 \Sigma_i^{k+1} = \frac{(\Sigma_i^k)^2}{\Sigma_i^{k-1}} - \Sigma_i^k
+\end{equation*}
+
+\noindent\textbf{Étape 3 :}
+\begin{equation*}
+\frac{\partial \mu_i^{k+1}}{\partial s_1} = \frac{\partial \Sigma_i^{k+1}}{\partial s_1} \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \Sigma_i^{k+1} \Bigl( 
+        \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Bigr)
+\end{equation*}
+En $s=0$, sachant que $\Sigma_i^{k+1}(s=0)= \Sigma_i^k$ :
+\begin{equation*}
+\partial_1 \mu_i^{k+1} = \Bigl( \Sigma_i^{k} - \frac{(\Sigma_i^k)^2}{\Sigma_i^{r,k}}\Bigr)\frac{\mu_i^k}{\Sigma_i^k} + \Sigma_i^k\Bigl( \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^k}{\Sigma_i^k}\Bigr) = \frac{\Sigma_i^k}{\Sigma_i^{r,k}} \Bigl( 
+    \mu_i^{r,k} - \mu_i^k
+\Bigr)
+\end{equation*}
+
+\noindent\textbf{Étape 4 :}
+\begin{equation*}
+\frac{\partial \mu_i^{k+1}}{\partial s_2}(s) = \frac{\partial \Sigma_i^{k+1}}{\partial s_2} \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \Sigma_i^{k+1} \Bigl( 
+        \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+\Bigr)
+\end{equation*}
+En $s=0$, sachant que $\Sigma_i^{k+1}(s=0)= \Sigma_i^k$ :
+\begin{equation*}
+\partial_2 \mu_i^{k+1} = \frac{\Sigma_i^k}{\Sigma_i^{k-1}}\Bigl( \mu_i^k - \mu_i^{k-1}\Bigr)
+\end{equation*}
+\end{proof}
 
 
-% \subsubsection{Algorithme complet VB-$\Pi$GDM}
+\begin{propositionbox}[Dérivées de degré 2]
+\label{prop:deriv2}
+Pour tous $j, \ell \in \{1, 2\}$ :
+\begin{equation}
+    \begin{aligned}
+    \partial_{j\ell}\, \Sigma_i^{k+1} &= 2\,\frac{\bigl(\partial_j \Sigma_i^{k+1}\bigr)\bigl( \partial_{\ell} \Sigma_i^{k+1} \bigr) }{\Sigma_i^k}
+     \\[6pt]
+    \partial_{j\ell}\, \mu_i^{k+1} &= \frac{\bigl(\partial_j \Sigma_i^{k+1}\bigr) \bigl(\partial_{\ell} \mu_i^{k+1}\bigr) + \bigl(\partial_{\ell} \Sigma_i^{k+1}\bigr) \bigl(\partial_{j} \mu_i^{k+1}\bigr)}{\Sigma_i^k}
+    \end{aligned}
+\end{equation}
 
-% \begin{theorembox}[Algorithme VB-$\Pi$GDM]
-% \label{thm:algorithm}
-% \textbf{Entrées :} observations $y$, opérateur $A$, état bruité $x_t$, denoiser $\hat{x}_0(x_t)$, coefficient $\alt$, hyperparamètres $(a_0, b_0, c_0, d_0)$.
-
-% \textbf{Initialisation :}
-% \begin{itemize}
-%     \item $\boldsymbol{\mu}^0 = \hat{x}_0(x_t)$, $\boldsymbol{\Sigma}^0 = (1 - \alt)\, \mathbf{1}_n$
-%     \item $a_r^0 = a_0$, $b_r^0 = b_0$, $a_b^0 = c_0$, $b_b^0 = d_0$
-% \end{itemize}
-
-% \textbf{Itérations :} Pour $k = 0, 1, 2, \ldots$ jusqu'à convergence :
-% \begin{enumerate}[label=\textbf{\arabic*.}]
-%     \item \textbf{Calcul des moments :}
-%     \[
-%     \langle\tau_r\rangle^k = \frac{a_r^k}{b_r^k}, \qquad \langle\tau_b\rangle^k = \frac{a_b^k}{b_b^k}
-%     \]
-    
-%     \item \textbf{Distributions de référence :}
-%     \begin{itemize}
-%         \item $q_{\tau_r}^r = \mathrm{Gamma}(\tilde{a}_r, \tilde{b}_r^k)$ par \eqref{eq:atilde_r}--\eqref{eq:btilde_r}
-%         \item $q_{\tau_b}^r = \mathrm{Gamma}(\tilde{a}_b, \tilde{b}_b^k)$ par \eqref{eq:atilde_b}--\eqref{eq:btilde_b}
-%         \item $q_i^r = \mathcal{N}(\mu_i^{r,k}, \Sigma_i^{r,k})$ par \eqref{eq:sigma_r_i}--\eqref{eq:m_r_i}, $\forall i$
-%     \end{itemize}
-    
-%     \item \textbf{Pas sous-optimal :} calculer $\hat{s} = (\hat{s}_1, \hat{s}_2)$ par \eqref{eq:subopt_step}
-    
-%     \item \textbf{Mises à jour EMG-VBA :}
-%     \begin{itemize}
-%         \item $(a_r^{k+1}, b_r^{k+1})$ par Proposition \ref{prop:update_taur}
-%         \item $(a_b^{k+1}, b_b^{k+1})$ par Proposition \ref{prop:update_taub}
-%         \item $(\mu_i^{k+1}, \Sigma_i^{k+1})$ par Proposition \ref{prop:update_x0i}, $\forall i$
-%     \end{itemize}
-    
-%     \item \textbf{Convergence :} vérifier $|\mathcal{F}(q^{k+1}) - \mathcal{F}(q^k)| < \epsilon$
-% \end{enumerate}
-
-% \textbf{Sorties :}
-% \begin{itemize}
-%     \item Reconstruction : $\hat{x}_0^{\mathrm{VB}} = \boldsymbol{\mu}^K$ (moyenne a posteriori approchée)
-%     \item Incertitude : $\boldsymbol{\Sigma}^K$ (variance marginale approchée)
-%     \item Hyperparamètres estimés : $\hat{r}_t^2 = b_r^K / a_r^K$, $\hat{\sigma}_b^2 = b_b^K / a_b^K$
-% \end{itemize}
-% \end{theorembox}
-
-% \begin{remarkbox}[Complexité]
-% À chaque itération :
-% \begin{itemize}
-%     \item Le calcul de $q_i^r$ pour tous les $i$ est $O(n)$ si $A^T A$ est creux ou diagonal.
-%     \item Les mises à jour des précisions sont $O(n)$ (calcul des résidus).
-%     \item Le pas sous-optimal nécessite $O(n)$ opérations.
-% \end{itemize}
-% La complexité totale par itération est donc $O(n)$, ce qui est optimal pour un problème en dimension $n$.
-% \end{remarkbox}
-
-% \begin{remarkbox}[Intégration dans la boucle de diffusion]
-% L'algorithme VB-$\Pi$GDM est exécuté à \textbf{chaque pas de temps} $t$ de la SDE reverse. Pour $t$ fixé :
-% \begin{enumerate}
-%     \item On reçoit $x_t$ de l'itération précédente.
-%     \item On calcule $\hat{x}_0(x_t)$ via le denoiser.
-%     \item On exécute quelques itérations VB (typiquement 3--10) pour estimer $\boldsymbol{\mu}$, $r_t^2$, $\sigma_b^2$.
-%     \item On calcule le score conditionnel par le Résultat \ref{res:score_vbpigdm} avec $\mu_{\mathrm{post}} \approx \boldsymbol{\mu}$.
-%     \item On fait un pas de la SDE reverse.
-% \end{enumerate}
-% L'estimation automatique de $r_t^2$ et $\sigma_b^2$ s'adapte à chaque niveau de bruit, sans réglage manuel.
-% \end{remarkbox}
+P.S. On retrouve bien les expressions établies par Yuling Zheng dans l'appendix B.2.
+\end{propositionbox}
 
 
+\begin{proof}
+
+\textbf{Étape 1 : $\partial_{11}\Sigma_i^{k+1}$}
+\begin{equation*}
+    \begin{aligned}
+\frac{\partial}{\partial s_1}\Biggl[ \frac{\partial \Sigma_i^{k+1}}{\partial s_1} \Biggr] &= \frac{\partial}{\partial s_1}\Biggl[  - \Bigl(\frac{1}{\Sigma_i^{r,k} } - \frac{1}{\Sigma_i^k}\Bigr) \Biggl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Biggr)^{-2}
+\Biggr] \\
+&= -2 \cdot \Bigl(\frac{1}{\Sigma_i^{r,k} } - \frac{1}{\Sigma_i^k}\Bigr)^2\cdot \Biggl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Biggr)^{-3}
+    \end{aligned}
+\end{equation*}
+Donc en $s=0$ :
+\begin{equation*}
+\partial_{11} \Sigma_i^{k+1} = 2 \frac{\Bigl(\partial_1 \Sigma_i^{k+1}\Bigr)^2}{\Sigma_i^k}
+\end{equation*}
+
+\medskip
+\textbf{Étape 2 : $\partial_{12}\Sigma_i^{k+1}$}
+\begin{equation*}
+    \begin{aligned}
+\frac{\partial}{\partial s_2} \Biggl[ 
+    \frac{\partial \Sigma_i^{k+1}}{\partial s_1}
+\Biggr] &= \frac{\partial}{\partial s_2} \Biggl[ 
+ - \Bigl(\frac{1}{\Sigma_i^{r,k} } - \frac{1}{\Sigma_i^k}\Bigr) \Biggl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Biggr)^{-2}
+\Biggr]\\
+&= 2  \Bigl(
+    \frac{1}{\Sigma_i^{r,k} } - \frac{1}{\Sigma_i^k}
+\Bigr) \cdot \Bigl( 
+        \frac{1}{\Sigma_i^{k}} - \frac{1}{\Sigma_i^{k-1}}
+\Bigr) 
+\Biggl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Biggr)^{-3}
+    \end{aligned}
+\end{equation*}
+Donc en $s=0$ :
+\begin{equation*}
+\begin{aligned}
+\partial_{12} \Sigma_i^{k+1} &= 2 \Bigl(
+    \frac{1}{\Sigma_i^{r,k} } - \frac{1}{\Sigma_i^k}
+\Bigr) \cdot \Bigl( 
+        \frac{1}{\Sigma_i^{k}} - \frac{1}{\Sigma_i^{k-1}}
+\Bigr)
+\cdot (\Sigma_i^k)^3 = 2 
+\underbrace{
+\Bigl(
+    \frac{(\Sigma_i^k)^2}{\Sigma_i^{r,k} } - \Sigma_i^k
+\Bigr)}_{=-\partial_1 \Sigma_i^{k+1}}
+ \cdot 
+ \underbrace{
+ \Bigl( 
+        \Sigma_i^{k} - \frac{(\Sigma_i^k)^2}{\Sigma_i^{k-1}}
+\Bigr)}_{=-\partial_2 \Sigma_i^{k+1} } \cdot \frac{1}{\Sigma_i^k}\\
+&=
+2\frac{(\partial_1 \Sigma_i^{k+1})(\partial_2 \Sigma_i^{k+1})}{\Sigma_i^k} \underset{\text{symétrie des rôles de $s_1$ et $s_2$}}{=} \partial_{21} \Sigma_i^{k+1}
+\end{aligned}
+\end{equation*}
+
+\medskip
+\textbf{Étape 3 : $\partial_{22}\Sigma_i^{k+1}$}
+\begin{equation*}
+    \begin{aligned}
+\frac{\partial}{\partial s_2}\Biggl[ \frac{\partial \Sigma_i^{k+1}}{\partial s_2} \Biggr] &= \frac{\partial}{\partial s_2}\Biggl[  - \Bigl(\frac{1}{\Sigma_i^{k} } - \frac{1}{\Sigma_i^{k-1}}\Bigr) \Biggl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Biggr)^{-2}
+\Biggr] \\
+&= -2 \cdot \Bigl(\frac{1}{\Sigma_i^{k} } - \frac{1}{\Sigma_i^{k-1}}\Bigr)^2\cdot \Biggl( \frac{(1-s_1+s_2)}{\Sigma_i^{k}} + \frac{s_1}{\Sigma_i^{r,k}} - \frac{s_2}{\Sigma_i^{k-1}} \Biggr)^{-3}
+    \end{aligned}
+\end{equation*}
+Donc en $s=0$ :
+\begin{equation*}
+\partial_{22} \Sigma_i^{k+1} = 2 \frac{\Bigl(\partial_2 \Sigma_i^{k+1}\Bigr)^2}{\Sigma_i^k}
+\end{equation*}
+On vérifie que les trois cas se résument par la formule unifiée $\partial_{j\ell}\Sigma_i^{k+1} = 2\,\frac{(\partial_j\Sigma_i^{k+1})(\partial_\ell\Sigma_i^{k+1})}{\Sigma_i^k}$.
+
+\medskip
+\textbf{Étape 4 : $\partial_{11}\mu_i^{k+1}$}
+\begin{equation*}
+\begin{aligned}
+\frac{\partial}{\partial s_1}\Biggl[
+    \frac{\partial \mu_i^{k+1}}{\partial s_1}
+\Biggr] 
+=& \frac{\partial}{\partial s_1}\Biggl[ 
+\frac{\partial \Sigma_i^{k+1}}{\partial s_1} \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \Sigma_i^{k+1} \Bigl( 
+        \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Bigr)
+\Biggr]\\
+=& \frac{\partial^2 \Sigma_i^{k+1}}{\partial s_1^2 }  \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \frac{\partial \Sigma_i^{k+1}}{\partial s_1} \cdot \Biggl(
+        \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Biggr)\\
+    &+ \frac{\partial \Sigma_i^{k+1}}{\partial s_1}  \Bigl( 
+        \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Bigr)
+\end{aligned}
+\end{equation*}
+En $s=0$ :
+\begin{equation*}
+    \begin{aligned}
+\partial_{11} \mu_i^{k+1} &= \partial_{11} \Sigma_i^{k+1} \cdot \frac{\mu_i^k}{\Sigma_i^k} + 2(\partial_1 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} -  \frac{\mu_i^{k}}{\Sigma_i^{k}}
+\Bigr)\\
+&=2 \frac{\Bigl(\partial_1 \Sigma_i^{k+1}\Bigr)^2}{\Sigma_i^k} \cdot \frac{\mu_i^k}{\Sigma_i^k} +  2(\partial_1 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} -  \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Bigr)
+    \\
+    &=2\Bigl(\partial_1 \Sigma_i^{k+1}\Bigr)\cdot \Biggl(
+    \frac{\mu_i^k \cdot (\partial_1 \Sigma_i^{k+1})}{(\Sigma_i^{k})^2} + \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^k}{\Sigma_i^k}
+    \Biggr)
+    \end{aligned}
+\end{equation*}
+Or, on rappelle que $\frac{\partial_1 \Sigma_i^{k+1}}{(\Sigma_i^k)^2} =  \frac{1}{\Sigma_i^k} - \frac{1}{\Sigma_i^{r,k}}$, donc :
+\begin{equation*}
+\frac{\mu_i^k \cdot (\partial_1 \Sigma_i^{k+1})}{(\Sigma_i^{k})^2} + \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^k}{\Sigma_i^k} = \mu_i^k\Bigl(\frac{1}{\Sigma_i^k} - \frac{1}{\Sigma_i^{r,k}}\Bigr) + \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^k}{\Sigma_i^k} = \frac{\mu_i^{r,k} - \mu_i^k}{\Sigma_i^{r,k}} = \frac{\partial_1\mu_i^{k+1}}{\Sigma_i^k}
+\end{equation*}
+D'où :
+\begin{equation*}
+\partial_{11} \mu_i^{k+1} = 2 \frac{(\partial_1 \Sigma_i^{k+1})(\partial_1 \mu_i^{k+1})}{\Sigma_i^k}
+\end{equation*}
+
+\medskip
+\textbf{Étape 5 : $\partial_{22}\mu_i^{k+1}$}
+\begin{equation*}
+\begin{aligned}
+\frac{\partial}{\partial s_2}\Biggl[
+    \frac{\partial \mu_i^{k+1}}{\partial s_2}
+\Biggr] 
+=& \frac{\partial}{\partial s_2}\Biggl[ 
+\frac{\partial \Sigma_i^{k+1}}{\partial s_2} \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \Sigma_i^{k+1} \Bigl( 
+        \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+    \Bigr)
+\Biggr]\\
+=& \frac{\partial^2 \Sigma_i^{k+1}}{\partial s_2^2 }  \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \frac{\partial \Sigma_i^{k+1}}{\partial s_2} \cdot \Biggl(
+        \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+    \Biggr)\\
+    &+ \frac{\partial \Sigma_i^{k+1}}{\partial s_2}  \Bigl( 
+        \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+    \Bigr)
+\end{aligned}
+\end{equation*}
+En $s=0$ :
+\begin{equation*}
+    \begin{aligned}
+\partial_{22} \mu_i^{k+1} &= \partial_{22} \Sigma_i^{k+1} \cdot \frac{\mu_i^k}{\Sigma_i^k} + 2(\partial_2 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{k}}{\Sigma_i^{k}} -  \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+\Bigr)\\
+&=2 \frac{\Bigl(\partial_2 \Sigma_i^{k+1}\Bigr)^2}{\Sigma_i^k} \cdot \frac{\mu_i^k}{\Sigma_i^k} +  2(\partial_2 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{k}}{\Sigma_i^{k}} -  \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+    \Bigr)
+    \\
+    &=2\Bigl(\partial_2 \Sigma_i^{k+1}\Bigr)\cdot \Biggl(
+    \frac{\mu_i^k \cdot (\partial_2 \Sigma_i^{k+1})}{(\Sigma_i^{k})^2} + \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+    \Biggr)
+    \end{aligned}
+\end{equation*}
+Or, on rappelle que $\frac{\partial_2 \Sigma_i^{k+1}}{(\Sigma_i^k)^2} =  \frac{1}{\Sigma_i^{k-1}} - \frac{1}{\Sigma_i^{k}}$, donc :
+\begin{equation*}
+\frac{\mu_i^k \cdot (\partial_2 \Sigma_i^{k+1})}{(\Sigma_i^{k})^2} + \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}} = \mu_i^k\Bigl(\frac{1}{\Sigma_i^{k-1}} - \frac{1}{\Sigma_i^{k}}\Bigr) + \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}} = \frac{\mu_i^{k} - \mu_i^{k-1}}{\Sigma_i^{k-1}} = \frac{\partial_2\mu_i^{k+1}}{\Sigma_i^k}
+\end{equation*}
+D'où :
+\begin{equation*}
+\partial_{22} \mu_i^{k+1} = 2 \frac{(\partial_2 \Sigma_i^{k+1})(\partial_2 \mu_i^{k+1})}{\Sigma_i^k}
+\end{equation*}
+
+\medskip
+\textbf{Étape 6 : $\partial_{12}\mu_i^{k+1}$}
+\begin{equation*}
+\begin{aligned}
+\frac{\partial}{\partial s_2}\Biggl[
+    \frac{\partial \mu_i^{k+1}}{\partial s_1}
+\Biggr] 
+=& \frac{\partial}{\partial s_2}\Biggl[ 
+\frac{\partial \Sigma_i^{k+1}}{\partial s_1} \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \Sigma_i^{k+1} \Bigl( 
+        \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Bigr)
+\Biggr]\\
+=& \frac{\partial^2 \Sigma_i^{k+1}}{\partial s_2\,\partial s_1 }  \Bigl( 
+    \frac{(1-s_1+s_2)\mu_i^k}{\Sigma_i^{k}} + \frac{s_1\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{s_2\mu_i^{k-1}}{\Sigma_i^{k-1}} \Bigr) 
+    + \frac{\partial \Sigma_i^{k+1}}{\partial s_1} \cdot \Biggl(
+        \frac{\mu_i^{k}}{\Sigma_i^{k}} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+    \Biggr)\\
+    &+ \frac{\partial \Sigma_i^{k+1}}{\partial s_2}  \Bigl( 
+        \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^{k}}{\Sigma_i^{k}}
+    \Bigr)
+\end{aligned}
+\end{equation*}
+En $s=0$ :
+\begin{equation*}
+    \begin{aligned}
+\partial_{12} \mu_i^{k+1} &= \partial_{12} \Sigma_i^{k+1} \cdot \frac{\mu_i^k}{\Sigma_i^k} + (\partial_1 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{k}}{\Sigma_i^{k}} -  \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}
+\Bigr) + (\partial_2 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} -  \frac{\mu_i^{k}}{\Sigma_i^{k}}
+\Bigr)
+    \end{aligned}
+\end{equation*}
+
+Pour le premier et le deuxième terme, on écrit :
+\begin{equation*}
+\partial_{12}\Sigma_i^{k+1}\cdot\frac{\mu_i^k}{\Sigma_i^k} + (\partial_1\Sigma_i^{k+1})\Bigl(\frac{\mu_i^k}{\Sigma_i^k} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}\Bigr) = (\partial_1\Sigma_i^{k+1})\Biggl(\frac{\mu_i^k\cdot(\partial_2\Sigma_i^{k+1})}{(\Sigma_i^k)^2}\cdot\frac{2}{\partial_1\Sigma_i^{k+1}}\cdot(\partial_1\Sigma_i^{k+1})\cdot\frac{\mu_i^k}{\Sigma_i^k}\Biggr)
+\end{equation*}
+Regroupons les termes contenant $\partial_1\Sigma_i^{k+1}$ d'une part et $\partial_2\Sigma_i^{k+1}$ d'autre part. 
+En substituant $\partial_{12}\Sigma_i^{k+1} = 2\frac{(\partial_1\Sigma_i^{k+1})(\partial_2\Sigma_i^{k+1})}{\Sigma_i^k}$, il vient que :
+
+\begin{equation*}
+    \begin{aligned}
+\partial_{12} \mu_i^{k+1} &= (\partial_1 \Sigma_i^{k+1})\Biggl[\frac{2(\partial_2\Sigma_i^{k+1})\mu_i^k}{(\Sigma_i^k)^2} + \frac{\mu_i^{k}}{\Sigma_i^{k}} -  \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}}\Biggr] + (\partial_2 \Sigma_i^{k+1}) \Bigl(
+    \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} -  \frac{\mu_i^{k}}{\Sigma_i^{k}}
+\Bigr)
+    \end{aligned}
+\end{equation*}
+En utilisant $\frac{\partial_2\Sigma_i^{k+1}}{(\Sigma_i^k)^2} = \frac{1}{\Sigma_i^{k-1}} - \frac{1}{\Sigma_i^k}$, le crochet vaut :
+\begin{equation*}
+\frac{2\mu_i^k(\partial_2\Sigma_i^{k+1})}{(\Sigma_i^k)^2} + \frac{\mu_i^k}{\Sigma_i^k} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}} = 2\mu_i^k\Bigl(\frac{1}{\Sigma_i^{k-1}} - \frac{1}{\Sigma_i^k}\Bigr) + \frac{\mu_i^k}{\Sigma_i^k} - \frac{\mu_i^{k-1}}{\Sigma_i^{k-1}} = \frac{\mu_i^k - \mu_i^{k-1}}{\Sigma_i^{k-1}} + \frac{\mu_i^k}{\Sigma_i^{k-1}} - \frac{\mu_i^k}{\Sigma_i^k}
+\end{equation*}
+
+Cela se simplifie en remarquant que $\frac{\mu_i^k}{\Sigma_i^{k-1}} - \frac{\mu_i^k}{\Sigma_i^k} = \mu_i^k\bigl(\frac{1}{\Sigma_i^{k-1}} - \frac{1}{\Sigma_i^k}\bigr) = \frac{\mu_i^k\cdot\partial_2\Sigma_i^{k+1}}{(\Sigma_i^k)^2}$, d'où le crochet vaut $\frac{\partial_2\mu_i^{k+1}}{\Sigma_i^k}$ (par la même astuce utilisée à l'étape~5). Le dernier terme donne de même $(\partial_2\Sigma_i^{k+1})\cdot\frac{\partial_1\mu_i^{k+1}}{\Sigma_i^k}$ (par l'astuce de l'étape~4). Finalement, on a :
+
+\begin{equation*}
+\partial_{12}\mu_i^{k+1} = \frac{(\partial_1\Sigma_i^{k+1})(\partial_2\mu_i^{k+1}) + (\partial_2\Sigma_i^{k+1})(\partial_1\mu_i^{k+1})}{\Sigma_i^k}
+\end{equation*}
+Les six cas se résument bien par la formule unfiéee annoncée.
+\end{proof}
 
 
 
 
+
+%% ============================================================
+%% GRADIENT de g^{k+1}
+%% ============================================================
+\subsubsection*{Gradient et hessienne de $g^{k+1}$}
+
+Nous avons maintenant tous les ingrédients pour exprimer $\frac{\partial g^{k+1}}{\partial s}\big|_{s=0}$ et $\frac{\partial^2 g^{k+1}}{\partial s\,\partial s^T}\big|_{s=0}$. En effet, $g^{k+1}(s)$ ne dépend de $s$ qu'à travers les $\mu_i^{k+1}(s)$ et $\Sigma_i^{k+1}(s)$. En appliquant la règle de la chaîne aux expressions obtenues dans les propositions précédentes, chaque composante du gradient s'écrit :
+
+\begin{propositionbox}[Gradient de $g^{k+1}$]
+Pour $j \in \{1,2\}$ :
+\begin{equation}
+\frac{\partial g^{k+1}}{\partial s_j}\bigg|_{s=0} = \sum_{i=1}^n \Bigl[ \frac{\partial g^{k+1}}{\partial \mu_i^{k+1}}\,\partial_j\mu_i^{k+1} + \frac{\partial g^{k+1}}{\partial \Sigma_i^{k+1}}\,\partial_j\Sigma_i^{k+1} \Bigr]
+\label{eq:grad_g}
+\end{equation}
+\end{propositionbox}
+\begin{proof}\\
+Application directe de la règle de la chaine.
+\end{proof}
+
+
+
+
+
+
+
+
+%% ============================================================
+%% DÉRIVÉES D'ORDRE 1 DE g PAR RAPPORT AUX PARAMÈTRES VAR
+%% ============================================================
+
+\subsubsection*{Dérivées partielles d'ordre 1 de $g^{k+1}$ par rapport aux paramètres variationnels}
+
+On rappelle que $g^{k+1}(s)$ s'écrit, comme une fonction des vecteurs $\boldsymbol{\mu}^{k+1}(s) \in \mathbb{R}^n$ et $\boldsymbol{\Sigma}^{k+1}(s) \in \mathbb{R}^n$ :
+\begin{equation}
+\begin{aligned}
+g^{k+1}(s) &= \underbrace{-\frac{1}{2(1-\alt)}\Bigl(\left\|x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1}\right\|^2 + \alt\,\mathrm{tr}(\boldsymbol{\Sigma}^{k+1})\Bigr)}_{(I)}\\
+&\quad \underbrace{-\frac{\langle\tau_b\rangle}{2}\Bigl[\left\|y - A\boldsymbol{\mu}^{k+1}\right\|^2 + \mathrm{tr}\bigl(\mathrm{diag}(A^TA)\cdot\boldsymbol{\Sigma}^{k+1}\bigr)\Bigr]}_{(II)}\\
+&\quad \underbrace{-\frac{\langle\tau_r\rangle}{2}\Bigl[\left\|\boldsymbol{\mu}^{k+1} - \hat{x}_0\right\|^2 + \mathrm{tr}(\boldsymbol{\Sigma}^{k+1})\Bigr]}_{(III)}\\
+&\quad \underbrace{+\frac{1}{2}\sum_{i=1}^n \log \Sigma_i^{k+1}}_{(IV)} + \;\mathrm{cte}
+\end{aligned}
+\label{eq:g_explicit}
+\end{equation}
+où $\mathrm{cte}$ regroupe les termes en $\langle\log\tau_b\rangle$, $\langle\log\tau_r\rangle$, $d_0$, $b_0$ et les constantes qui ne dépendent pas de $s$. On calcule les dérivées partielles de chacun des quatre blocs.
+
+\begin{propositionbox}[Dérivées partielles d'ordre 1 de $g^{k+1}$ par rapport à $\mu_i^{k+1}$ et $\Sigma_i^{k+1}$]
+\label{prop:dg_order1}
+\begin{equation}
+\frac{\partial g^{k+1}}{\partial \mu_i^{k+1}}\bigg|_{s=0} = \frac{\mu_i^{r,k} - \mu_i^k}{\Sigma_i^{r,k}},
+\label{eq:dg_dmu}
+\end{equation}
+\begin{equation}
+\frac{\partial g^{k+1}}{\partial \Sigma_i^{k+1}}\bigg|_{s=0} = \frac{1}{2}\Bigl(\frac{1}{\Sigma_i^k} - \frac{1}{\Sigma_i^{r,k}}\Bigr).
+\label{eq:dg_dSigma}
+\end{equation}
+\end{propositionbox}
+
+\begin{proof}
+
+\textbf{Calcul de $\dfrac{\partial g^{k+1}}{\partial \mu_i^{k+1}}$ :}
+
+\medskip
+\textbf{Bloc (I).} On développe $\left\|x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1}\right\|^2 = x_t^Tx_t - 2\sqrt{\alt}\,x_t^T\boldsymbol{\mu}^{k+1} + \alt\,(\boldsymbol{\mu}^{k+1})^T\boldsymbol{\mu}^{k+1}$. Le terme $\mathrm{tr}(\boldsymbol{\Sigma^{k+1}})$ ne dépend pas de $\mu_i^{k+1}$. En dérivant par rapport à $\mu_i^{k+1}$ :
+\begin{equation*}
+\frac{\partial}{\partial \mu_i^{k+1}}\Bigl[-\frac{1}{2(1-\alt)}\left\|x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1}\right\|^2\Bigr] = -\frac{1}{2(1-\alt)}\bigl(-2\sqrt{\alt}(x_t)_i + 2\alt\,\mu_i^{k+1}\bigr) = \frac{\sqrt{\alt}}{1-\alt}\bigl(x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1}\bigr)_i.
+\end{equation*}
+
+\textbf{Bloc (II).} On développe $\|y - A\boldsymbol{\mu}^{k+1}\|^2 = y^Ty - 2y^TA\boldsymbol{\mu}^{k+1} + (\boldsymbol{\mu}^{k+1})^TA^TA\boldsymbol{\mu}^{k+1}$. Le terme $\mathrm{tr}(\mathrm{diag}(A^TA)\cdot\boldsymbol{\Sigma}^{k+1})$ ne dépend pas de $\mu_i^{k+1}$. En dérivant :
+\begin{equation*}
+\frac{\partial}{\partial \mu_i^{k+1}}\Bigl[-\frac{\langle\tau_b\rangle}{2}\left\|y - A\boldsymbol{\mu}^{k+1}\right\|^2\Bigr] = -\frac{\langle\tau_b\rangle}{2}\bigl(-2(A^Ty)_i + 2(A^TA\boldsymbol{\mu}^{k+1})_i\bigr) = \langle\tau_b\rangle\bigl(A^T(y - A\boldsymbol{\mu}^{k+1})\bigr)_i.
+\end{equation*}
+
+\textbf{Bloc (III).} On développe $\|\boldsymbol{\mu}^{k+1} - \hat{x}_0\|^2 = (\boldsymbol{\mu}^{k+1})^T\boldsymbol{\mu}^{k+1} - 2\hat{x}_0^T\boldsymbol{\mu}^{k+1} + \|\hat{x}_0\|^2$. En dérivant :
+\begin{equation*}
+\frac{\partial}{\partial \mu_i^{k+1}}\Bigl[-\frac{\langle\tau_r\rangle}{2}\left\|\boldsymbol{\mu}^{k+1} - \hat{x}_0\right\|^2\Bigr] = -\frac{\langle\tau_r\rangle}{2}\bigl(2\mu_i^{k+1} - 2(\hat{x}_0)_i\bigr) = \langle\tau_r\rangle\bigl(\hat{x}_0 - \boldsymbol{\mu}^{k+1}\bigr)_i.
+\end{equation*}
+
+\textbf{Bloc (IV).} Le terme entropique $\frac{1}{2}\sum_j \log\Sigma_j^{k+1}$ ne dépend pas de $\mu_i^{k+1}$.
+
+\medskip
+En sommant les quatre contributions et en évaluant en $s=0$ (c'est-à-dire $\boldsymbol{\mu}^{k+1} = \boldsymbol{\mu}^k$) :
+\begin{equation}
+\frac{\partial g^{k+1}}{\partial \mu_i^{k+1}}\bigg|_{s=0} = \frac{\sqrt{\alt}}{1-\alt}\bigl(x_t - \sqrt{\alt}\,\boldsymbol{\mu}^k\bigr)_i + \langle\tau_b\rangle\bigl(A^T(y - A\boldsymbol{\mu}^k)\bigr)_i + \langle\tau_r\rangle\bigl(\hat{x}_0 - \boldsymbol{\mu}^k\bigr)_i.
+\label{eq:dg_dmu_expanded}
+\end{equation}
+
+\textbf{Simplification.} Montrons que cette expression est égale à $(\mu_i^{r,k} - \mu_i^k)/\Sigma_i^{r,k}$. D'après les expressions~\eqref{eq:sigma_r_i} de la distribution de référence :
+\[
+\frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} = \frac{\sqrt{\alt}}{1-\alt}(x_t)_i + \langle\tau_b\rangle\bigl[(A^Ty)_i - (A^TA\boldsymbol{\mu}^k)_i + (A^TA)_{ii}\mu_i^k\bigr] + \langle\tau_r\rangle(\hat{x}_0)_i
+\]
+et
+\[
+\frac{1}{\Sigma_i^{r,k}} = \frac{\alt}{1-\alt} + \langle\tau_b\rangle(A^TA)_{ii} + \langle\tau_r\rangle.
+\]
+En formant la différence :
+\begin{equation*}
+\begin{aligned}
+\frac{\mu_i^{r,k} - \mu_i^k}{\Sigma_i^{r,k}} &= \frac{\mu_i^{r,k}}{\Sigma_i^{r,k}} - \frac{\mu_i^k}{\Sigma_i^{r,k}}\\
+&= \frac{\sqrt{\alt}}{1-\alt}(x_t)_i + \langle\tau_b\rangle\bigl[(A^Ty)_i - (A^TA\boldsymbol{\mu}^k)_i + (A^TA)_{ii}\mu_i^k\bigr] + \langle\tau_r\rangle(\hat{x}_0)_i \\
+&\quad - \mu_i^k\Bigl[\frac{\alt}{1-\alt} + \langle\tau_b\rangle(A^TA)_{ii} + \langle\tau_r\rangle\Bigr]\\
+&= \frac{\sqrt{\alt}}{1-\alt}\bigl[(x_t)_i - \sqrt{\alt}\,\mu_i^k\bigr] + \langle\tau_b\rangle\bigl[(A^Ty)_i - (A^TA\boldsymbol{\mu}^k)_i\bigr] + \langle\tau_r\rangle\bigl[(\hat{x}_0)_i - \mu_i^k\bigr]
+\end{aligned}
+\end{equation*}
+où les termes $\langle\tau_b\rangle(A^TA)_{ii}\mu_i^k$ se sont annulés. On retrouve exactement~\eqref{eq:dg_dmu_expanded} !
+
+\bigskip
+
+\textbf{Calcul de $\dfrac{\partial g^{k+1}}{\partial \Sigma_i^{k+1}}$ :}
+
+\medskip
+\textbf{Bloc (I).} Le terme $\|x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1}\|^2$ ne dépend pas de $\Sigma_i^{k+1}$. Le terme $\alt\,\mathrm{tr}(\boldsymbol{\Sigma}^{k+1}) = \alt\sum_j \Sigma_j^{k+1}$ donne :
+\begin{equation*}
+\frac{\partial}{\partial \Sigma_i^{k+1}}\Bigl[-\frac{\alt}{2(1-\alt)}\,\mathrm{tr}(\boldsymbol{\Sigma}^{k+1})\Bigr] = -\frac{\alt}{2(1-\alt)}.
+\end{equation*}
+
+\textbf{Bloc (II).} Le terme $\|y - A\boldsymbol{\mu}^{k+1}\|^2$ ne dépend pas de $\Sigma_i$. Le terme $\mathrm{tr}(\mathrm{diag}(A^TA)\cdot\boldsymbol{\Sigma^{k+1}}) = \sum_j(A^TA)_{jj}\Sigma_j^{k+1}$ donne :
+\begin{equation*}
+\frac{\partial}{\partial \Sigma_i^{k+1}}\Bigl[-\frac{\langle\tau_b\rangle}{2}\,\mathrm{tr}\bigl(\mathrm{diag}(A^TA)\cdot\boldsymbol{\Sigma^{k+1}}\bigr)\Bigr] = -\frac{\langle\tau_b\rangle}{2}(A^TA)_{ii}.
+\end{equation*}
+
+\textbf{Bloc (III).} Le terme $\|\boldsymbol{\mu}^{k+1} - \hat{x}_0\|^2$ ne dépend pas de $\Sigma_i^{k+1}$. Le terme $\mathrm{tr}(\boldsymbol{\Sigma}^{k+1}) = \sum_j\Sigma_j^{k+1}$ donne :
+\begin{equation*}
+\frac{\partial}{\partial \Sigma_i^{k+1}}\Bigl[-\frac{\langle\tau_r\rangle}{2}\,\mathrm{tr}(\boldsymbol{\Sigma}^{k+1})\Bigr] = -\frac{\langle\tau_r\rangle}{2}.
+\end{equation*}
+
+\textbf{Bloc (IV).}
+\begin{equation*}
+\frac{\partial}{\partial \Sigma_i^{k+1}}\Bigl[\frac{1}{2}\sum_j \log\Sigma_j^{k+1}\Bigr] = \frac{1}{2\Sigma_i^{k+1}}.
+\end{equation*}
+
+En sommant et en évaluant en $s=0$ ($\Sigma_i^{k+1} = \Sigma_i^k$) :
+\begin{equation}
+\frac{\partial g^{k+1}}{\partial \Sigma_i^{k+1}}\bigg|_{s=0} = \frac{1}{2\Sigma_i^k} - \frac{\alt}{2(1-\alt)} - \frac{\langle\tau_b\rangle}{2}(A^TA)_{ii} - \frac{\langle\tau_r\rangle}{2} = \frac{1}{2}\Bigl(\frac{1}{\Sigma_i^k} - \underbrace{\Bigl[\frac{\alt}{1-\alt} + \langle\tau_b\rangle(A^TA)_{ii} + \langle\tau_r\rangle\Bigr]}_{= 1/\Sigma_i^{r,k}}\Bigr).
+\label{eq:dg_dSigma_expanded}
+\end{equation}
+\end{proof}
+
+\medskip
+
+Pour alléger les notations, on pose :
+\begin{equation}
+G_{\mu,i} := \frac{\mu_i^{r,k} - \mu_i^k}{\Sigma_i^{r,k}}, \qquad G_{\Sigma,i} := \frac{1}{2}\Bigl(\frac{1}{\Sigma_i^k} - \frac{1}{\Sigma_i^{r,k}}\Bigr),
+\label{eq:Gnotation}
+\end{equation}
+et on note $\boldsymbol{G}_\mu, \boldsymbol{G}_\Sigma \in \mathbb{R}^n$ les vecteurs de composantes $G_{\mu,i}$ et $G_{\Sigma,i}$.
+
+%% ============================================================
+%% GRADIENT DE g PAR RAPPORT À s
+%% ============================================================
+
+\subsubsection*{Expression du gradient de $g^{k+1}$ par rapport à $s$}
+
+La fonction $g^{k+1}(s)$ dépend de $s$ uniquement à travers les vecteurs $\boldsymbol{\mu}^{k+1}(s)$ et $\boldsymbol{\Sigma}^{k+1}(s)$. Par la règle de la chaîne :
+
+\begin{propositionbox}[Gradient de $g^{k+1}$]
+\label{prop:grad_explicit}
+Pour $j \in \{1,2\}$ :
+\begin{equation}
+\boxed{
+\frac{\partial g^{k+1}}{\partial s_j}\bigg|_{s=0} = \sum_{i=1}^n \Bigl[ G_{\mu,i}\,\partial_j\mu_i^{k+1} + G_{\Sigma,i}\,\partial_j\Sigma_i^{k+1} \Bigr] = \boldsymbol{G}_\mu^T(\partial_j\boldsymbol{\mu}) + \boldsymbol{G}_\Sigma^T(\partial_j\boldsymbol{\Sigma})
+}
+\label{eq:grad_explicit}
+\end{equation}
+où $\partial_j\boldsymbol{\mu} \in \mathbb{R}^n$ et $\partial_j\boldsymbol{\Sigma} \in \mathbb{R}^n$ sont les vecteurs de composantes $\partial_j\mu_i^{k+1}$ et $\partial_j\Sigma_i^{k+1}$ donnés par la Proposition~\ref{prop:deriv1}.
+\end{propositionbox}
+
+\begin{proof}\\
+Règle de la chaine évaluée en $s=0$ et en substituant les expressions~\eqref{eq:dg_dmu} et~\eqref{eq:dg_dSigma}, on obtient~\eqref{eq:grad_explicit}.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%% ============================================================
+%% DÉRIVÉES D'ORDRE 2 DE g PAR RAPPORT AUX PARAMÈTRES
+%% ============================================================
+
+\subsubsection*{Dérivées partielles d'ordre 2 de $g^{k+1}$ par rapport aux paramètres variationnels}
+
+Pour exprimer la hessienne de $g^{k+1}$ par rapport à $s$, nous avons besoin des dérivées secondes de $g^{k+1}$ par rapport aux paramètres variationnels. Il est essentiel de noter que les dérivées secondes par rapport à $\boldsymbol{\mu}^{k+1}$ ne sont \emph{pas} diagonales : le terme $\|y - A\boldsymbol{\mu}^{k+1}\|^2$ couple les différentes composantes de $\boldsymbol{\mu^{k+1}}$ à travers la matrice $A^TA$.
+
+\begin{propositionbox}[Dérivées partielles d'ordre 2 de $g^{k+1}$ par rapport aux paramètres variationnels]
+\label{prop:dg_order2}
+\begin{equation}
+\frac{\partial^2 g^{k+1}}{\partial \mu_i^{k+1}\,\partial \mu_m^{k+1}}\bigg|_{s=0} = -\Bigl[\frac{\alt}{1-\alt} + \langle\tau_r\rangle\Bigr]\delta_{im} - \langle\tau_b\rangle(A^TA)_{im},
+\label{eq:d2g_dmudmu}
+\end{equation}
+soit, en notation matricielle :
+
+\begin{equation}
+\frac{\partial^2 g^{k+1}}{\partial\boldsymbol{\mu}^{k+1}\,\partial(\boldsymbol{\mu}^{k+1})^T}\bigg|_{s=0} = -\underbrace{\Bigl[\Bigl(\frac{\alt}{1-\alt} + \langle\tau_r\rangle\Bigr)I_n + \langle\tau_b\rangle A^TA\Bigr]}_{=:\,M}.
+\label{eq:d2g_dmudmu_mat}
+\end{equation}
+
+En particulier, pour $i = m$ : $\;\dfrac{\partial^2 g^{k+1}}{\partial(\mu_i^{k+1})^2}\bigg|_{s=0} = -\dfrac{1}{\Sigma_i^{r,k}}$. \\
+
+Pour $i \neq m$ : $\;\dfrac{\partial^2 g^{k+1}}{\partial\mu_i^{k+1}\,\partial\mu_m^{k+1}}\bigg|_{s=0} = -\langle\tau_b\rangle(A^TA)_{im}$.\\
+
+
+\begin{equation}
+\frac{\partial^2 g^{k+1}}{\partial(\Sigma_i^{k+1})^2}\bigg|_{s=0} = -\frac{1}{2(\Sigma_i^k)^2}, \qquad \frac{\partial^2 g^{k+1}}{\partial\Sigma_i^{k+1}\,\partial\Sigma_m^{k+1}}\bigg|_{s=0} = 0 \;\text{pour}\; i \neq m.
+\label{eq:d2g_dSigma2}
+\end{equation}
+
+\begin{equation}
+\frac{\partial^2 g^{k+1}}{\partial\mu_i^{k+1}\,\partial\Sigma_m^{k+1}}\bigg|_{s=0} = 0 \quad \text{pour tous } i, m.
+\label{eq:d2g_dmuSigma}
+\end{equation}
+\end{propositionbox}
+
+\begin{proof}\\
+On dérive une seconde fois les expressions obtenues dans la preuve de la Proposition~\ref{prop:dg_order1}.
+
+\medskip
+\textbf{Dérivée $\partial^2 g / \partial\mu_i^{k+1}\,\partial\mu_m^{k+1}$ :}
+
+En repartant de l'expression~\eqref{eq:dg_dmu_expanded} de $\partial g/\partial\mu_i^{k+1}$, on dérive par rapport à $\mu_m^{k+1}$ chacun des trois termes.
+
+\medskip
+
+\textbf{Bloc (I).} $\;\frac{\partial}{\partial\mu_m^{k+1}}\Bigl[\frac{\sqrt{\alt}}{1-\alt}(x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1})_i\Bigr] = -\frac{\alt}{1-\alt}\,\delta_{im}$, car $(x_t - \sqrt{\alt}\,\boldsymbol{\mu}^{k+1})_i$ ne dépend de $\mu_m^{k+1}$ que si $m = i$.
+
+\medskip
+
+\textbf{Bloc (II).} $\;\frac{\partial}{\partial\mu_m^{k+1}}\Bigl[\langle\tau_b\rangle\bigl(A^T(y - A\boldsymbol{\mu}^{k+1})\bigr)_i\Bigr] = \langle\tau_b\rangle\frac{\partial}{\partial\mu_m^{k+1}}\Bigl[(A^Ty)_i - (A^TA\boldsymbol{\mu}^{k+1})_i\Bigr] = -\langle\tau_b\rangle(A^TA)_{im}$, car $(A^TA\boldsymbol{\mu}^{k+1})_i = \sum_j(A^TA)_{ij}\mu_j^{k+1}$, dont la dérivée par rapport à $\mu_m^{k+1}$ est $(A^TA)_{im}$. Ce terme est non nul même pour $i \neq m$ dès que $A$ n'est pas diagonal.
+
+\medskip
+
+\textbf{Bloc (III).} $\;\frac{\partial}{\partial\mu_m^{k+1}}\Bigl[\langle\tau_r\rangle(\hat{x}_0 - \boldsymbol{\mu}^{k+1})_i\Bigr] = -\langle\tau_r\rangle\,\delta_{im}$.
+
+\medskip
+
+En sommant : $\frac{\partial^2 g}{\partial\mu_i^{k+1}\,\partial\mu_m^{k+1}} = -\frac{\alt}{1-\alt}\,\delta_{im} - \langle\tau_b\rangle(A^TA)_{im} - \langle\tau_r\rangle\,\delta_{im}$, ce qui est~\eqref{eq:d2g_dmudmu}. Pour $i = m$, on retrouve $-[\frac{\alt}{1-\alt} + \langle\tau_b\rangle(A^TA)_{ii} + \langle\tau_r\rangle] = -1/\Sigma_i^{r,k}$.
+
+\medskip
+\textbf{Dérivée $\partial^2 g / \partial\Sigma_i^{k+1}\,\partial\Sigma_m^{k+1}$ :}
+
+En repartant de~\eqref{eq:dg_dSigma_expanded}, les trois premiers termes ($-\alt/[2(1-\alt)]$, $-\langle\tau_b\rangle(A^TA)_{ii}/2$, $-\langle\tau_r\rangle/2$) sont des constantes, donc de dérivée nulle. Il reste :
+\[
+\frac{\partial}{\partial\Sigma_m^{k+1}}\Bigl[\frac{1}{2\Sigma_i^{k+1}}\Bigr] = -\frac{\delta_{im}}{2(\Sigma_i^{k+1})^2},
+\]
+d'où $\partial^2 g/\partial\Sigma_i^{k+1}\,\partial\Sigma_m^{k+1} = -\delta_{im}/(2(\Sigma_i^{k+1})^2)$. En $s=0$ : $-\delta_{im}/(2(\Sigma_i^k)^2)$.
+
+\medskip
+\textbf{Dérivée croisée $\partial^2 g / \partial\mu_i^{k+1}\,\partial\Sigma_m^{k+1}$ :}
+
+Dans l'expression~\eqref{eq:g_explicit}, il n'y a aucun terme qui couple $\mu_i^{k+1}$ et $\Sigma_m^{k+1}$ (les termes en $\boldsymbol{\mu}^{k+1}$ et ceux en $\boldsymbol{\Sigma}^{k+1}$ apparaissent séparément). Donc $\partial^2 g/\partial\mu_i^{k+1}\,\partial\Sigma_m^{k+1} = 0$.
+\end{proof}
+
+
+
+%% ============================================================
+%% HESSIENNE DE g PAR RAPPORT À s
+%% ============================================================
+
+\subsubsection*{Expression de la hessienne de $g^{k+1}$ par rapport à $s$}
+
+\begin{propositionbox}[Hessienne de $g^{k+1}$]
+\label{prop:hess_explicit}
+La hessienne de $g^{k+1}$ en $s=0$ est la matrice $H \in \mathbb{R}^{2\times 2}$ de coefficients :
+\begin{equation}
+\boxed{
+H_{j\ell} = \frac{\partial^2 g^{k+1}}{\partial s_j\,\partial s_\ell}\bigg|_{s=0} = \boldsymbol{G}_\mu^T(\partial_{j\ell}\boldsymbol{\mu}) + \boldsymbol{G}_\Sigma^T(\partial_{j\ell}\boldsymbol{\Sigma}) - (\partial_j\boldsymbol{\mu})^T M\,(\partial_\ell\boldsymbol{\mu}) - \frac{1}{2}(\partial_j\boldsymbol{\Sigma})^T D\,(\partial_\ell\boldsymbol{\Sigma})
+}
+\label{eq:hess_explicit}
+\end{equation}
+où :
+\begin{itemize}
+\item $M = \bigl[\frac{\alt}{1-\alt} + \langle\tau_r\rangle\bigr]I_n + \langle\tau_b\rangle A^TA \;\in\mathbb{R}^{n\times n}$ \;(Proposition~\ref{prop:dg_order2}),
+\item $D = \mathrm{diag}\bigl(1/(\Sigma_1^k)^2, \ldots, 1/(\Sigma_n^k)^2\bigr) \;\in\mathbb{R}^{n\times n}$,
+\item $\partial_{j\ell}\boldsymbol{\mu}$, $\partial_{j\ell}\boldsymbol{\Sigma}$ sont les vecteurs de composantes $\partial_{j\ell}\mu_i^{k+1}$ et $\partial_{j\ell}\Sigma_i^{k+1}$ donnés par la Proposition~\ref{prop:deriv2}.
+\end{itemize}
+\end{propositionbox}
+
+\begin{proof}\\
+On dérive~\eqref{eq:grad_explicit} par rapport à $s_\ell$. Puisque $g^{k+1}$ dépend de $s$ à travers le vecteur de paramètres $\boldsymbol{\theta}(s) = (\boldsymbol{\mu}^{k+1}(s), \boldsymbol{\Sigma}^{k+1}(s)) \in \mathbb{R}^{2n}$, la règle de la chaîne au second ordre donne :
+\begin{equation*}
+\frac{\partial^2 g^{k+1}}{\partial s_j\,\partial s_\ell} = \sum_{i=1}^n \Bigl[\frac{\partial g}{\partial \mu_i}\,\partial_{j\ell}\mu_i + \frac{\partial g}{\partial \Sigma_i}\,\partial_{j\ell}\Sigma_i\Bigr] + \sum_{i=1}^n\sum_{m=1}^n \frac{\partial^2 g}{\partial\mu_i\,\partial\mu_m}\,(\partial_j\mu_i)(\partial_\ell\mu_m) + \sum_{i=1}^n \frac{\partial^2 g}{\partial\Sigma_i^2}\,(\partial_j\Sigma_i)(\partial_\ell\Sigma_i).
+\end{equation*}
+En effet :
+\begin{itemize}
+\item Les termes croisés $\frac{\partial^2 g}{\partial\mu_i\,\partial\Sigma_m}$ sont nuls par~\eqref{eq:d2g_dmuSigma}.
+\item Les termes $\frac{\partial^2 g}{\partial\Sigma_i\,\partial\Sigma_m}$ sont nuls pour $i \neq m$ par~\eqref{eq:d2g_dSigma2}, d'où la somme simple sur $i$.
+\item Les termes $\frac{\partial^2 g}{\partial\mu_i\,\partial\mu_m}$ sont en général non nuls pour $i \neq m$ par~\eqref{eq:d2g_dmudmu}, d'où la double somme.
+\end{itemize}
+
+En substituant les expressions de la Proposition~\ref{prop:dg_order2} :
+
+\medskip
+\textbf{Premier terme :}
+\begin{equation*}
+\sum_{i=1}^n \Bigl[\frac{\partial g}{\partial\mu_i}\,\partial_{j\ell}\mu_i + \frac{\partial g}{\partial\Sigma_i}\,\partial_{j\ell}\Sigma_i\Bigr]\bigg|_{s=0} = \sum_{i=1}^n\bigl[G_{\mu,i}\,\partial_{j\ell}\mu_i + G_{\Sigma,i}\,\partial_{j\ell}\Sigma_i\bigr] = \boldsymbol{G}_\mu^T(\partial_{j\ell}\boldsymbol{\mu}) + \boldsymbol{G}_\Sigma^T(\partial_{j\ell}\boldsymbol{\Sigma}).
+\end{equation*}
+
+\textbf{Deuxième terme :} Par~\eqref{eq:d2g_dmudmu_mat}, la double somme s'écrit :
+\begin{equation*}
+\sum_{i,m} \frac{\partial^2 g}{\partial\mu_i\,\partial\mu_m}\,(\partial_j\mu_i)(\partial_\ell\mu_m) = -(\partial_j\boldsymbol{\mu})^T M\,(\partial_\ell\boldsymbol{\mu}).
+\end{equation*}
+On note que ce terme fait intervenir la matrice $M$ \emph{entière}, y compris les éléments hors-diagonaux $\langle\tau_b\rangle(A^TA)_{im}$ pour $i \neq m$. Développé :
+\begin{equation*}
+(\partial_j\boldsymbol{\mu})^T M\,(\partial_\ell\boldsymbol{\mu}) = \Bigl[\frac{\alt}{1-\alt} + \langle\tau_r\rangle\Bigr](\partial_j\boldsymbol{\mu})^T(\partial_\ell\boldsymbol{\mu}) + \langle\tau_b\rangle\,(A\,\partial_j\boldsymbol{\mu})^T(A\,\partial_\ell\boldsymbol{\mu}).
+\end{equation*}
+
+\textbf{Troisième terme :}
+\begin{equation*}
+\sum_{i=1}^n \frac{\partial^2 g}{\partial\Sigma_i^2}\,(\partial_j\Sigma_i)(\partial_\ell\Sigma_i)\bigg|_{s=0} = -\sum_{i=1}^n\frac{(\partial_j\Sigma_i)(\partial_\ell\Sigma_i)}{2(\Sigma_i^k)^2} = -\frac{1}{2}(\partial_j\boldsymbol{\Sigma})^T D\,(\partial_\ell\boldsymbol{\Sigma}).
+\end{equation*}
+
+En sommant les trois termes, on obtient~\eqref{eq:hess_explicit}.
+\end{proof}
+
+
+\begin{comment}
+%% ============================================================
+%% RÉSULTAT FINAL : PAS SOUS-OPTIMAL
+%% ============================================================
+
+\subsubsection*{Résultat final : pas sous-optimal}
+
+En rassemblant l'ensemble des calculs, on obtient le pas sous-optimal en forme fermée.
+
+\begin{resultbox}[Pas sous-optimal $\hat{s}_{\mathrm{subopt}}$]
+\label{res:sopt_final}
+\begin{equation}
+\boxed{
+\hat{s}_{\mathrm{subopt}} = -H^{-1}\,\nabla g
+}
+\end{equation}
+
+\medskip
+\noindent\textbf{Gradient} $\nabla g \in \mathbb{R}^2$ :
+\begin{equation}
+(\nabla g)_j = \boldsymbol{G}_\mu^T(\partial_j\boldsymbol{\mu}) + \boldsymbol{G}_\Sigma^T(\partial_j\boldsymbol{\Sigma}), \qquad j = 1, 2.
+\end{equation}
+
+\noindent\textbf{Hessienne} $H \in \mathbb{R}^{2\times 2}$ :
+\begin{equation}
+H_{j\ell} = \boldsymbol{G}_\mu^T(\partial_{j\ell}\boldsymbol{\mu}) + \boldsymbol{G}_\Sigma^T(\partial_{j\ell}\boldsymbol{\Sigma}) - (\partial_j\boldsymbol{\mu})^T M\,(\partial_\ell\boldsymbol{\mu}) - \frac{1}{2}(\partial_j\boldsymbol{\Sigma})^T D\,(\partial_\ell\boldsymbol{\Sigma}).
+\end{equation}
+
+\noindent\textbf{Rappel des quantités intermédiaires :}
+\begin{equation}
+G_{\mu,i} = \frac{\mu_i^{r,k} - \mu_i^k}{\Sigma_i^{r,k}}, \qquad G_{\Sigma,i} = \frac{1}{2}\Bigl(\frac{1}{\Sigma_i^k} - \frac{1}{\Sigma_i^{r,k}}\Bigr),
+\end{equation}
+\begin{equation}
+M = \Bigl[\frac{\alt}{1-\alt} + \langle\tau_r\rangle\Bigr]I_n + \langle\tau_b\rangle\,A^TA, \qquad D = \mathrm{diag}\Bigl(\frac{1}{(\Sigma_1^k)^2}, \ldots, \frac{1}{(\Sigma_n^k)^2}\Bigr),
+\end{equation}
+
+\noindent\textbf{Dérivées premières} (Proposition~\ref{prop:deriv1}) :
+\begin{equation}
+\begin{aligned}
+&\partial_1 \Sigma_i^{k+1} = \Sigma_i^k - \frac{(\Sigma_i^k)^2}{\Sigma_i^{r,k}}, \qquad
+&&\partial_2 \Sigma_i^{k+1} = \frac{(\Sigma_i^k)^2}{\Sigma_i^{k-1}} - \Sigma_i^k,\\[4pt]
+&\partial_1 \mu_i^{k+1} = \frac{\Sigma_i^k}{\Sigma_i^{r,k}} \bigl( \mu_i^{r,k} - \mu_i^k \bigr), \qquad
+&&\partial_2 \mu_i^{k+1} = \frac{\Sigma_i^k}{\Sigma_i^{k-1}} \bigl( \mu_i^k - \mu_i^{k-1} \bigr).
+\end{aligned}
+\end{equation}
+
+\noindent\textbf{Dérivées secondes} (Proposition~\ref{prop:deriv2}) :
+\begin{equation}
+\partial_{j\ell}\Sigma_i^{k+1} = \frac{2(\partial_j\Sigma_i^{k+1})(\partial_\ell\Sigma_i^{k+1})}{\Sigma_i^k}, \qquad \partial_{j\ell}\mu_i^{k+1} = \frac{(\partial_j\Sigma_i^{k+1})(\partial_\ell\mu_i^{k+1}) + (\partial_\ell\Sigma_i^{k+1})(\partial_j\mu_i^{k+1})}{\Sigma_i^k}.
+\end{equation}
+
+\noindent\textbf{Inversion $2\times 2$ :}
+\begin{equation}
+\hat{s}_{\mathrm{subopt}} = -\frac{1}{H_{11}H_{22} - H_{12}^2}\begin{pmatrix} H_{22} & -H_{12} \\ -H_{12} & H_{11} \end{pmatrix}\begin{pmatrix} (\nabla g)_1 \\ (\nabla g)_2 \end{pmatrix}.
+\end{equation}
+
+\noindent\textbf{Calcul efficace de $(\partial_j\boldsymbol{\mu})^T M\,(\partial_\ell\boldsymbol{\mu})$ :}
+\begin{equation}
+(\partial_j\boldsymbol{\mu})^T M\,(\partial_\ell\boldsymbol{\mu}) = \Bigl[\frac{\alt}{1-\alt} + \langle\tau_r\rangle\Bigr]\,(\partial_j\boldsymbol{\mu})^T(\partial_\ell\boldsymbol{\mu}) \;+\; \langle\tau_b\rangle\,(A\,\partial_j\boldsymbol{\mu})^T(A\,\partial_\ell\boldsymbol{\mu}).
+\end{equation}
+\end{resultbox}
+
+\medskip
+
+\noindent\textbf{Remarque (complexité).} L'ensemble du calcul de $\hat{s}_{\mathrm{subopt}}$ requiert :
+\begin{itemize}
+\item une passe en $O(n)$ pour accumuler les produits scalaires $\boldsymbol{G}_\mu^T(\partial_j\boldsymbol{\mu})$, $\boldsymbol{G}_\Sigma^T(\partial_j\boldsymbol{\Sigma})$, $(\partial_j\boldsymbol{\mu})^T(\partial_\ell\boldsymbol{\mu})$, et $(\partial_j\boldsymbol{\Sigma})^T D\,(\partial_\ell\boldsymbol{\Sigma})$ ;
+\item deux produits matrice-vecteur $A\,(\partial_1\boldsymbol{\mu})$ et $A\,(\partial_2\boldsymbol{\mu})$ en $O(mn)$ chacun ;
+\item l'inversion d'une matrice $2\times 2$.
+\end{itemize}
+Le coût total est dominé par les produits $A\,(\partial_j\boldsymbol{\mu})$, soit $O(mn)$. Si $A$ possède une structure rapide (convolution $\to$ FFT, sous-échantillonnage $\to$ blocs), ce coût se réduit à $O(n\log n)$.
+
+
+\end{comment}
 
 
 
@@ -2368,20 +3084,6 @@ Y. Zheng, A. Fraysse and T. Rodet.\\
 \newblock Efficient Variational Bayesian Approximation Method
 Based on Subspace optimization.\\
 \newblock In \textit{IEEE Transactions on Image Processing}, 2014
-% \bibitem{ho2020ddpm}
-% J. Ho, A. Jain, and P. Abbeel.\\
-% \newblock Denoising diffusion probabilistic models.\\
-% \newblock In \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 2020.
-
-% \bibitem{song2021sde}
-% Y. Song, J. Sohl-Dickstein, D. P. Kingma, A. Kumar, S. Ermon, and B. Poole.\\
-% \newblock Score-based generative modeling through stochastic differential equations.\\
-% \newblock In \textit{International Conference on Learning Representations (ICLR)}, 2021.
-
-% \bibitem{song2020ddim}
-% J. Song, C. Meng, and S. Ermon.\\
-% \newblock Denoising diffusion implicit models.\\
-% \newblock In \textit{International Conference on Learning Representations (ICLR)}, 2021.
 
 \bibitem{chung2023dps}
 H. Chung, J. Kim, M. T. McCann, M. L. Klasky, and J. C. Ye.\\
@@ -2404,26 +3106,6 @@ B. D. O. Anderson.\\
 P. Vincent.\\
 \newblock A connection between score matching and denoising autoencoders.\\
 \newblock \textit{Neural Computation}, 23(7):1661--1674, 2011.
-
-% \bibitem{rozet2024moment}
-% F. Rozet and G. Louppe.\\
-% \newblock Score-based data assimilation.\\
-% \newblock In \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 2023.
-
-% \bibitem{kawar2022ddrm}
-% B. Kawar, M. Elad, S. Ermon, and J. Song.\\
-% \newblock Denoising diffusion restoration models.\\
-% \newblock In \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 2022.
-
-% \bibitem{wang2022ddnm}
-% Y. Wang, J. Yu, and J. Zhang.\\
-% \newblock Zero-shot image restoration using denoising diffusion null-space model.\\
-% \newblock In \textit{International Conference on Learning Representations (ICLR)}, 2023.
-
-% \bibitem{mardani2023reddiff}
-% M. Mardani, J. Song, J. Kautz, and A. Vahdat.\\
-% \newblock A variational perspective on solving inverse problems with diffusion models.\\
-% \newblock In \textit{International Conference on Learning Representations (ICLR)}, 2024.
 
 \end{thebibliography}
 

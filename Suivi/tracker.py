@@ -54,6 +54,31 @@ def parse(pages):
                         total=total,objectifs=t("Objectifs"),notes=t("Notes"),humeur=hum))
     out.sort(key=lambda e:e.get("date",""));return out
 
+def aggregate_by_day(entries):
+    """Fusionne les entrées par date, avec objectifs associés au thème dominant."""
+    by_date={}
+    for e in entries:
+        d=e.get("date","")
+        if not d: continue
+        if d not in by_date:
+            by_date[d]=dict(date=d, jour=e["jour"], **{k.lower():0 for k in TH_KEYS}, total=0, humeur="")
+            for k in TH_KEYS: by_date[d][f"obj_{k.lower()}"]=[]
+        for k in TH_KEYS:
+            by_date[d][k.lower()]+=e.get(k.lower(),0)
+        by_date[d]["total"]=sum(by_date[d].get(k.lower(),0) for k in TH_KEYS)
+        if e.get("humeur") and not by_date[d]["humeur"]:
+            by_date[d]["humeur"]=e["humeur"]
+        # associer objectifs au thème avec le plus d'heures dans cette entrée
+        obj=e.get("objectifs","").strip()
+        if obj:
+            best_k=max(TH_KEYS, key=lambda k: e.get(k.lower(),0))
+            if e.get(best_k.lower(),0)>0:
+                by_date[d][f"obj_{best_k.lower()}"].append(obj)
+    for d in by_date.values():
+        for k in TH_KEYS:
+            d[f"obj_{k.lower()}"]=" · ".join(d[f"obj_{k.lower()}"])
+    return sorted(by_date.values(), key=lambda x:x["date"])
+
 def notion_write(vals,page_id=None):
     props={}
     for k in TH_KEYS: props[k]={"number":float(vals.get(k,0))}
@@ -71,10 +96,15 @@ def notion_write(vals,page_id=None):
     r.raise_for_status()
 
 def page(entries):
+    days=aggregate_by_day(entries)
     ej=json.dumps(entries,ensure_ascii=False)
+    dj=json.dumps(days,ensure_ascii=False)
     tj=json.dumps([dict(key=k,label=l,color=c) for k,l,c in TH])
     today=datetime.date.today().isoformat()
     now=datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+    tot=sum(d["total"] for d in days)
+    dw=sum(1 for d in days if d["total"]>0)
+    avg=f'{tot/dw:.1f}h' if dw else '—'
     return f'''<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VB-ΠGDM Tracker</title>
@@ -119,11 +149,22 @@ select{{border:1px solid #ddd;border-radius:8px;padding:8px 12px;font-size:13px;
 .msg{{text-align:center;padding:8px;font-size:13px;margin-top:8px;border-radius:6px}}
 .ok{{background:#ecfdf5;color:#059669}}.er{{background:#fef2f2;color:#dc2626}}
 .badge{{display:inline-block;font-size:10px;font-weight:600;background:#eef2ff;color:#6366f1;padding:2px 8px;border-radius:4px;margin-left:8px}}
+#tip{{position:fixed;pointer-events:none;background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px 14px;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:99;display:none;max-width:320px;line-height:1.6}}
+#tip .tip-title{{font-weight:700;color:#333;margin-bottom:4px}}
+#tip .tip-row{{display:flex;justify-content:space-between;gap:16px}}
+#tip .tip-row span:first-child{{color:#888}}
+#tip .tip-row span:last-child{{font-family:'IBM Plex Mono',monospace;font-weight:600}}
+.bar-wrap{{position:relative}}
 </style></head><body>
 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
 <div><h1><b>◈</b> Stage VB-ΠGDM</h1><p class="sub">Tracker local · Notion</p></div>
 <p class="sub">{now} · <a href="/" class="lnk">↻ Rafraîchir</a></p></div>
-<div class="stats" id="S"></div>
+<div class="stats">
+<div class="st"><div class="sv" style="color:#6366f1">{tot:.1f}</div><div class="sl">Heures</div></div>
+<div class="st"><div class="sv" style="color:#2563eb">{dw}</div><div class="sl">Jours</div></div>
+<div class="st"><div class="sv" style="color:#059669">{avg}</div><div class="sl">Moy/j</div></div>
+<div class="st"><div class="sv" style="color:#d97706">{len(days)}</div><div class="sl">Entrées</div></div>
+</div>
 
 <div class="fs" id="FC">
 <div style="display:flex;align-items:center"><div class="ch" id="fT" style="margin-bottom:0">Nouvelle entrée</div><span class="badge" id="fB" style="display:none">Édition</span></div>
@@ -140,24 +181,15 @@ select{{border:1px solid #ddd;border-radius:8px;padding:8px 12px;font-size:13px;
 <button class="btn bp" id="sBtn" onclick="save()">Ajouter dans Notion</button></div>
 <div id="sMsg"></div></div>
 
-<div class="card"><div class="ch">Heures par jour</div><canvas id="bar" height="150"></canvas></div>
+<div class="card"><div class="ch">Heures par jour</div><div class="bar-wrap"><canvas id="bar" height="170"></canvas></div></div>
+<div id="tip"></div>
 <div class="card"><div class="ch">Courbes par thème</div><div class="gr2" id="sp"></div></div>
 <div class="card"><div class="ch">Historique <span style="font-size:10px;font-weight:400;color:#bbb;text-transform:none">— cliquer pour éditer</span></div>
 <div style="overflow-x:auto"><table id="T"></table></div></div>
 
 <script>
-const E={ej},TH={tj},dpr=devicePixelRatio||1;
+const E={ej},D={dj},TH={tj},dpr=devicePixelRatio||1;
 const fv={{}};TH.forEach(t=>fv[t.key]=0);let eId=null;
-
-// ── Stats ──
-function stats(){{
-  const tot=E.reduce((s,e)=>s+(e.total||0),0),dw=E.filter(e=>(e.total||0)>0).length;
-  document.getElementById("S").innerHTML=[
-    {{l:"Heures",v:tot.toFixed(1),c:"#6366f1"}},{{l:"Jours",v:dw,c:"#2563eb"}},
-    {{l:"Moy/j",v:dw?(tot/dw).toFixed(1)+"h":"—",c:"#059669"}},{{l:"Entrées",v:E.length,c:"#d97706"}}
-  ].map(s=>`<div class="st"><div class="sv" style="color:${{s.c}}">${{s.v}}</div><div class="sl">${{s.l}}</div></div>`).join("");
-}}
-stats();
 
 // ── Form ──
 const fEl=document.getElementById("fTH");
@@ -196,20 +228,62 @@ async function save(){{const btn=document.getElementById("sBtn"),msg=document.ge
   }}catch(e){{msg.innerHTML=`<div class="msg er">${{e}}</div>`;btn.disabled=false;btn.textContent="Réessayer"}}
 }}
 
-// ── Bar chart ──
-!function(){{const c=document.getElementById("bar"),x=c.getContext("2d"),W=c.parentElement.clientWidth-44,H=150;
+// ── Bar chart with Y-axis + tooltip ──
+const barRects=[];
+!function(){{const c=document.getElementById("bar"),x=c.getContext("2d"),W=c.parentElement.clientWidth-20,H=170;
 c.width=W*dpr;c.height=H*dpr;c.style.width=W+"px";c.style.height=H+"px";x.scale(dpr,dpr);
-if(!E.length)return;const bw=Math.min(30,(W-40)/E.length-3),mx=Math.max(...E.map(e=>TH.reduce((s,t)=>s+(e[t.key.toLowerCase()]||0),0)),1);
-E.forEach((e,i)=>{{let y=H-22;const bx=32+i*(bw+3);
-TH.forEach(t=>{{const v=e[t.key.toLowerCase()]||0,bh=v/mx*(H-32);if(bh>0){{x.fillStyle=t.color;x.globalAlpha=.75;x.beginPath();x.roundRect(bx,y-bh,bw,bh,3);x.fill();x.globalAlpha=1}}y-=bh}});
-x.fillStyle="#aaa";x.font="500 9px IBM Plex Mono";x.textAlign="center";x.fillText((e.date||"").slice(5),bx+bw/2,H-8)}})}}();
+if(!D.length)return;
+const pad={{l:40,r:10,t:10,b:24}},cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+const mx=Math.max(...D.map(e=>TH.reduce((s,t)=>s+(e[t.key.toLowerCase()]||0),0)),1);
+const niceMax=Math.ceil(mx);
+// Y-axis
+const steps=Math.min(niceMax,6);const stepVal=niceMax/steps;
+x.strokeStyle="#e5e3de";x.lineWidth=1;
+for(let i=0;i<=steps;i++){{
+  const yy=pad.t+cH-i*(cH/steps);
+  x.beginPath();x.moveTo(pad.l,yy);x.lineTo(W-pad.r,yy);x.stroke();
+  x.fillStyle="#aaa";x.font="500 10px IBM Plex Mono";x.textAlign="right";
+  x.fillText(Math.round(stepVal*i)+"h",pad.l-6,yy+3);
+}}
+// Bars
+const bw=Math.min(32,(cW-10)/D.length-3);
+D.forEach((e,i)=>{{let y=pad.t+cH;const bx=pad.l+8+i*(bw+3);
+TH.forEach(t=>{{const v=e[t.key.toLowerCase()]||0;const bh=v/niceMax*cH;
+if(bh>0){{x.fillStyle=t.color;x.globalAlpha=.8;x.beginPath();x.roundRect(bx,y-bh,bw,bh,2);x.fill();x.globalAlpha=1;
+  barRects.push({{x:bx,y:y-bh,w:bw,h:bh,theme:t.key,dayIdx:i}});
+}}y-=bh}});
+x.fillStyle="#aaa";x.font="500 9px IBM Plex Mono";x.textAlign="center";
+x.fillText((e.date||"").slice(5),bx+bw/2,H-6)}})}}();
+// Tooltip
+const tip=document.getElementById("tip"),barCanvas=document.getElementById("bar");
+barCanvas.addEventListener("mousemove",function(ev){{
+  const rect=barCanvas.getBoundingClientRect();
+  const mx=ev.clientX-rect.left,my=ev.clientY-rect.top;
+  const hit=barRects.find(r=>mx>=r.x&&mx<=r.x+r.w&&my>=r.y&&my<=r.y+r.h);
+  if(hit){{
+    const day=D[hit.dayIdx];
+    tip.style.display="block";
+    const tx=Math.min(ev.clientX+14,window.innerWidth-340);
+    tip.style.left=tx+"px";tip.style.top=(ev.clientY-10)+"px";
+    let html=`<div class="tip-title">${{day.date}} · ${{day.total}}h</div>`;
+    TH.forEach(t=>{{const v=day[t.key.toLowerCase()]||0;if(v>0){{
+      const isHovered=t.key===hit.theme;
+      const style=isHovered?"font-weight:700":"opacity:.55";
+      html+=`<div class="tip-row" style="${{style}}"><span style="color:${{t.color}}">⬤ ${{t.label}}</span><span style="color:${{t.color}}">${{v}}h</span></div>`;
+      const obj=day["obj_"+t.key.toLowerCase()];
+      if(obj && isHovered)html+=`<div style="font-size:11px;color:#555;padding:2px 0 4px 14px;line-height:1.4">${{obj}}</div>`;
+    }}}});
+    tip.innerHTML=html;
+  }}else{{tip.style.display="none"}}
+}});
+barCanvas.addEventListener("mouseleave",()=>{{tip.style.display="none"}});
 
-// ── Sparklines ──
+// ── Sparklines (sur données agrégées par jour) ──
 const sp=document.getElementById("sp");
-TH.forEach((t,i)=>{{const d=E.map(e=>e[t.key.toLowerCase()]||0),s=d.reduce((a,b)=>a+b,0);
+TH.forEach((t,i)=>{{const d=D.map(e=>e[t.key.toLowerCase()]||0),s=d.reduce((a,b)=>a+b,0);
 sp.innerHTML+=`<div class="tb"><div class="th"><span class="tn" style="color:${{t.color}}">${{t.label}}</span><span class="tt">${{s.toFixed(1)}}h</span></div><canvas id="s${{i}}" height="44"></canvas></div>`}});
 TH.forEach((t,i)=>{{const cv=document.getElementById("s"+i);if(!cv)return;
-const d=E.map(e=>e[t.key.toLowerCase()]||0);if(d.length<2)return;
+const d=D.map(e=>e[t.key.toLowerCase()]||0);if(d.length<2)return;
 const x=cv.getContext("2d"),W=cv.parentElement.clientWidth-12,H=44;
 cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+"px";cv.style.height=H+"px";x.scale(dpr,dpr);
 const mx=Math.max(...d,.5),pts=d.map((v,j)=>[j/(d.length-1)*W,H-3-v/mx*(H-8)]);
