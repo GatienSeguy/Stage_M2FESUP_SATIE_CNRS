@@ -2,7 +2,6 @@ import numpy as np
 from scipy.special import digamma
 
 
-
 class EMG_VBA:
     def __init__(self, A, y, alpha_bar_t, xt, xhat0, a_0, b_0, c_0, d_0):
         
@@ -20,6 +19,7 @@ class EMG_VBA:
         self.AtA      = A.T @ A
         self.Aty      = A.T @ y               
         self.AtA_diag = np.diag(self.AtA)      
+
 
     def initialiser(self, mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init):
 
@@ -132,7 +132,8 @@ class EMG_VBA:
 
         return(np.clip(s1,0.0,1.0))
     
-    def mise_a_jou_x0(self,s1):
+    
+    def mise_a_jour_x0(self,s1):
         # maj de q(x0)
         self.mu_k_1   = self.mu.copy()
         self.Sigma_k_1 = self.Sigma.copy()
@@ -146,7 +147,7 @@ class EMG_VBA:
         self.Sigma = Sigma_new
 
 
-    def energie_libre_negative(self):
+    def calculer_energie_libre_negative(self):
         abar = self.alpha_bar_t
         tau_r = self.tau_r_moy
         tau_b = self.tau_b_moy
@@ -179,7 +180,60 @@ class EMG_VBA:
 
         Energie_libre_negative = Log_jointe - Entropie
 
+        return(Energie_libre_negative)
+    
 
+    def calculer_score_conditionnel(self):
+        abar = self.alpha_bar_t
+        return (np.sqrt(abar) * self.mu - self.xt) / (1.0 - abar)
+    
+
+    def executer(self, n_iter, mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init, verbose=True):
+
+        self.initialiser(mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init)
+
+        historique = {
+            'energie_libre': [],
+            's1':            [],
+            'tau_r':         [],
+            'tau_b':         [],
+        }
+
+        for k in range(n_iter):
+
+            # Étape 1
+            self.mise_a_jour_taur_taub()
+
+            # Étape 2
+            self.calculer_distributions_reference_x0()
+
+            # Étape 3 
+            s1 = self.calculer_pas_sousopt()
+
+            # Étape 4
+            self.mise_a_jour_x0(s1)
+
+            # Calcul NRJ libre negative
+            Energie_libre_negative = self.calculer_energie_libre_negative()
+
+            historique['energie_libre'].append(Energie_libre_negative)
+            historique['s1'].append(s1)
+            historique['tau_r'].append(self.tau_r_moy)
+            historique['tau_b'].append(self.tau_b_moy)
+
+            if verbose and (k % 10 == 0 or k == n_iter - 1):
+                print(f"  k={k:3d} | F={F:+.2f} | s1={s1:.4f} | "
+                      f"r2_t={1/self.tau_r_moy:.6f} | "
+                      f"sig2_b={1/self.tau_b_moy:.6f}")
+
+        return {
+            'mu':                  self.mu.copy(),
+            'Sigma':               self.Sigma.copy(),
+            'tau_r':               self.tau_r_moy,
+            'tau_b':               self.tau_b_moy,
+            'score_conditionnel':  self.calculer_score_conditionnel(),
+            'historique':          historique,
+        }
 
 
 
