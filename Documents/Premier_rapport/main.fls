@@ -861,6 +861,14 @@ INPUT ./images.png
 INPUT ./images.png
 INPUT ./images.png
 INPUT ./images.png
+INPUT ./satie-cnrs.png
+INPUT ./satie-cnrs.png
+INPUT ./satie-cnrs.png
+INPUT ./satie-cnrs.png
+INPUT ./images.png
+INPUT ./images.png
+INPUT ./images.png
+INPUT ./images.png
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out

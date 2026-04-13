@@ -2040,7 +2040,7 @@ Sous l'hypothèse de champ moyen \eqref{eq:MF}, la distribution de référence p
 avec :
 \begin{align}
     (\Sigma_i^r)^{-1} &= \frac{\alt}{1-\alt} + \langle\tau_b\rangle (A^T A)_{ii} + \langle\tau_r\rangle \label{eq:sigma_r_i}\\[6pt]
-    \mu_i^r &= \Sigma_i^r \left(\frac{\sqrt{\alt}}{1-\alt}(x_t)_i + \langle\tau_b\rangle \left[(A^T y)_i + (A^T A)_{ii}\mu_i^k  (A^T A \boldsymbol{\mu}^k)_i\right] + \langle\tau_r\rangle (\hat{x}_0)_i\right) \label{eq:m_r_i}
+    \mu_i^r &= \Sigma_i^r \left(\frac{\sqrt{\alt}}{1-\alt}(x_t)_i + \langle\tau_b\rangle \left[(A^T y)_i + (A^T A)_{ii}\mu_i^k - (A^T A \boldsymbol{\mu}^k)_i\right] + \langle\tau_r\rangle (\hat{x}_0)_i\right) \label{eq:m_r_i}
 \end{align}
 ou, de manière équivalente :
 \begin{equation}
@@ -2993,7 +2993,7 @@ En sommant les trois termes, on obtient~\eqref{eq:hess_explicit}.
 \end{proof}
 
 
-\begin{comment}
+
 %% ============================================================
 %% RÉSULTAT FINAL : PAS SOUS-OPTIMAL
 %% ============================================================
@@ -3063,10 +3063,9 @@ M = \Bigl[\frac{\alt}{1-\alt} + \langle\tau_r\rangle\Bigr]I_n + \langle\tau_b\ra
 \item deux produits matrice-vecteur $A\,(\partial_1\boldsymbol{\mu})$ et $A\,(\partial_2\boldsymbol{\mu})$ en $O(mn)$ chacun ;
 \item l'inversion d'une matrice $2\times 2$.
 \end{itemize}
-Le coût total est dominé par les produits $A\,(\partial_j\boldsymbol{\mu})$, soit $O(mn)$. Si $A$ possède une structure rapide (convolution $\to$ FFT, sous-échantillonnage $\to$ blocs), ce coût se réduit à $O(n\log n)$.
+Le coût total est dominé par les produits $A\,(\partial_j\boldsymbol{\mu})$, soit $O(mn)$. 
 
 
-\end{comment}
 
 
 
