@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.special import digamma
-
+import matplotlib.pyplot as plt
 
 class EMG_VBA:
     def __init__(self, A, y, alpha_bar_t, xt, xhat0, a_0, b_0, c_0, d_0):
@@ -132,7 +132,7 @@ class EMG_VBA:
 
         return(np.clip(s1,0.0,1.0))
     
-    
+
     def mise_a_jour_x0(self,s1):
         # maj de q(x0)
         self.mu_k_1   = self.mu.copy()
@@ -188,7 +188,7 @@ class EMG_VBA:
         return (np.sqrt(abar) * self.mu - self.xt) / (1.0 - abar)
     
 
-    def executer(self, n_iter, mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init, verbose=True):
+    def executer(self, n_iter, mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init, verbose=True, affichage = True):
 
         self.initialiser(mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init)
 
@@ -222,9 +222,16 @@ class EMG_VBA:
             historique['tau_b'].append(self.tau_b_moy)
 
             if verbose and (k % 10 == 0 or k == n_iter - 1):
-                print(f"  k={k:3d} | F={F:+.2f} | s1={s1:.4f} | "
+                print(f"  k={k:3d} | NRJ libre negative={Energie_libre_negative:+.2f} | s1={s1:.4f} | "
                       f"r2_t={1/self.tau_r_moy:.6f} | "
                       f"sig2_b={1/self.tau_b_moy:.6f}")
+
+        if affichage == True:
+            plt.plot(Energie_libre_negative)
+            plt.title("Énergie libre négative en fonction des itérations")
+            plt.xlabel("#itération EMG-VBA")
+            plt.ylabel("Énergie libre négative")
+            plt.legend()
 
         return {
             'mu':                  self.mu.copy(),
@@ -234,12 +241,3 @@ class EMG_VBA:
             'score_conditionnel':  self.calculer_score_conditionnel(),
             'historique':          historique,
         }
-
-
-
-
-
-
-
-        
-
