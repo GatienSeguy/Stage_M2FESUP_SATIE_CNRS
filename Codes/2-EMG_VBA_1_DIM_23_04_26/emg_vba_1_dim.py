@@ -42,22 +42,22 @@ class EMG_VBA:
 
     def mise_a_jour_taur_taub(self):
         ## q^r(tau_b)
-        self.a_tilde_b = self.m / 2.0 + self.c0 #(75)
+        self.a_tilde_b = self.m / 2.0 + self.c_0 #(75)
 
         res = self.y - self.A @ self.mu 
 
-        self.b_tilde_b = (self.d0 + 0.5 * (np.dot(res, res) + np.dot(self.AtA_diag, self.Sigma))) # (76)
+        self.b_tilde_b = (self.d_0 + 0.5 * (np.dot(res, res) + np.dot(self.AtA_diag, self.Sigma))) # (76)
 
         ##  q^r(tau_r)
-        self.a_tilde_r = self.n / 2.0 + self.a0 #(84)
+        self.a_tilde_r = self.n / 2.0 + self.a_0 #(84)
 
         diff = self.mu - self.xhat0
 
-        self.b_tilde_r = (self.b0 + 0.5 * (np.dot(diff, diff) + np.sum(self.Sigma))) #(85)
+        self.b_tilde_r = (self.b_0 + 0.5 * (np.dot(diff, diff) + np.sum(self.Sigma))) #(85)
 
         #Moyennes
-        self.tau_r_moy = self.a_r / self.b_r 
-        self.tau_b_moy = self.a_b / self.b_b 
+        self.tau_r_moy = self.a_tilde_r / self.b_tilde_r
+        self.tau_b_moy = self.a_tilde_b / self.b_tilde_b 
 
 
     def calculer_distributions_reference_x0(self):
@@ -152,8 +152,8 @@ class EMG_VBA:
         tau_r = self.tau_r_moy
         tau_b = self.tau_b_moy
 
-        log_tau_r = digamma(self.a_r) - np.log(self.b_r) 
-        log_tau_b = digamma(self.a_b) - np.log(self.b_b)
+        log_tau_r = digamma(self.a_tilde_r) - np.log(self.b_tilde_r) 
+        log_tau_b = digamma(self.a_tilde_b) - np.log(self.b_tilde_b)
 
         ## Entropie - (113)
         Entropie = -0.5 * sum(np.log(self.Sigma)) + 0.5 * self.n * (1.0 + np.log(2.0 * np.pi))
