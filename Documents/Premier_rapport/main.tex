@@ -747,6 +747,8 @@ Les trois variantes partagent la même structure : $X_t = \alpha_t X_0 + \sigma_
 \end{figure}
 
 
+\newpage
+
 \section{Génération d'images}
 
 \subsection{SDE reverse}
@@ -760,21 +762,174 @@ Toute SDE forward (Définition \ref{def:sde}) admet une SDE reverse :
 \end{equation}
 \end{theorembox}
 
-Le terme $-g^2 \nabla \log p_t$ pousse $X_t$ vers les régions de haute densité. L'algorithme : $X_T \sim \mathcal{N}(0,I)$, discrétiser de $T$ à $0$ en remplaçant le score par $s_\theta$ (Théorème \ref{thm:dsm}).
+Le terme $-g^2 \nabla \log p_t$ pousse $X_t$ vers les régions de haute densité. L'algorithme : $X_T \sim \mathcal{N}(0,I)$, discrétiser de $T$ à $0$ en remplaçant le score par $s_\theta$ (Résultat \ref{res:dsm}).
 
-\subsection{DDPM vs DDIM}
+\subsection{Discrétisation DDPM de la SDE reverse}
 
-\textbf{DDPM} : discrétisation stochastique, $T = 1000$ pas :
+On explicite maintenant comment la discrétisation de la SDE reverse \eqref{eq:reverse_sde} dans le cadre DDPM (Définition \ref{def:ddpm}) conduit à la formule d'échantillonnage.
+
+\subsubsection{Transition reverse exacte}
+
+\begin{propositionbox}[Transition reverse sachant $x_0$]
+\label{prop:reverse_exact}
+Sachant $x_0$ et $x_t$, la loi reverse est gaussienne :
+\begin{equation}
+    q(x_{t-1} \mid x_t, x_0) = \mathcal{N}\!\left(\tilde{\mu}_t(x_t, x_0),\; \tilde{\beta}_t\, I_n\right)
+    \label{eq:reverse_transition}
+\end{equation}
+avec :
+\begin{equation}
+    \boxed{\tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}}\, \beta_t}{1 - \bar{\alpha}_t}\, x_0 + \frac{\sqrt{\alpha_t}\,(1 - \bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}\, x_t}
+    \label{eq:mu_tilde}
+\end{equation}
+\begin{equation}
+    \boxed{\tilde{\beta}_t = \frac{(1 - \bar{\alpha}_{t-1})}{(1 - \bar{\alpha}_t)}\, \beta_t}
+    \label{eq:beta_tilde}
+\end{equation}
+\end{propositionbox}
+
+\begin{proof}
+\textbf{Étape 1 : Bayes.} Par la règle de Bayes :
 \[
-x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\!\left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}\,\epsilon_\theta\right) + \sigma_t z, \quad z \sim \mathcal{N}(0, I)
+q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1})\; q(x_{t-1} \mid x_0)}{q(x_t \mid x_0)}
+\]
+où l'on a utilisé la propriété de Markov du forward : $q(x_t \mid x_{t-1}, x_0) = q(x_t \mid x_{t-1})$.
+
+Les trois densités sont connues :
+\begin{align}
+q(x_t \mid x_{t-1}) &= \mathcal{N}\!\left(\sqrt{\alpha_t}\, x_{t-1},\; \beta_t\, I_n\right) & &\text{(Définition \ref{def:ddpm})}
+\label{eq:proof_qtrans} \\
+q(x_{t-1} \mid x_0) &= \mathcal{N}\!\left(\sqrt{\bar{\alpha}_{t-1}}\, x_0,\; (1 - \bar{\alpha}_{t-1})\, I_n\right) & &\text{(Résultat \ref{res:ddpm} au temps $t{-}1$)}
+\label{eq:proof_qmarg_tm1} \\
+q(x_t \mid x_0) &= \mathcal{N}\!\left(\sqrt{\bar{\alpha}_t}\, x_0,\; (1 - \bar{\alpha}_t)\, I_n\right) & &\text{(Résultat \ref{res:ddpm} au temps $t$)}
+\label{eq:proof_qmarg_t}
+\end{align}
+
+\textbf{Étape 2 : log-densité.} Le dénominateur $q(x_t \mid x_0)$ ne dépend pas de $x_{t-1}$, donc :
+\[
+\log q(x_{t-1} \mid x_t, x_0) = \log q(x_t \mid x_{t-1}) + \log q(x_{t-1} \mid x_0) + \text{cte}
 \]
 
-\textbf{DDIM} : déterministe, 10--50 pas : $x_{t-1} = \sqrt{\bar\alpha_{t-1}}\, \hat{x}_0 + \sqrt{1-\bar\alpha_{t-1}}\, \epsilon_\theta$ où $\hat{x}_0$ est donné par le résultat \ref{thm:tweedie_vp}.
+En développant avec \eqref{eq:proof_qtrans} et \eqref{eq:proof_qmarg_tm1} :
+\[
+= -\frac{1}{2\beta_t}\|x_t - \sqrt{\alpha_t}\, x_{t-1}\|^2 - \frac{1}{2(1-\bar{\alpha}_{t-1})}\|x_{t-1} - \sqrt{\bar{\alpha}_{t-1}}\, x_0\|^2 + \text{cte}
+\]
+
+\textbf{Étape 3 : complétion du carré.} On développe et regroupe les termes en $x_{t-1}$ :
+\begin{itemize}
+\item \emph{Termes quadratiques en $x_{t-1}$} :
+\[
+-\frac{1}{2}\,x_{t-1}^\top \underbrace{\left(\frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}\right)}_{=: 1/\tilde{\beta}_t} x_{t-1}
+\]
+
+\item \emph{Termes linéaires en $x_{t-1}$} :
+\[
++\, x_{t-1}^\top \left(\frac{\sqrt{\alpha_t}}{\beta_t}\, x_t + \frac{\sqrt{\bar{\alpha}_{t-1}}}{1-\bar{\alpha}_{t-1}}\, x_0\right)
+\]
+\end{itemize}
+
+C'est la forme $-\frac{1}{2\tilde{\beta}_t}\|x_{t-1} - \tilde{\mu}_t\|^2 + \text{cte}$, donc $q(x_{t-1} \mid x_t, x_0)$ est gaussienne de variance $\tilde{\beta}_t$ et de moyenne $\tilde{\mu}_t = \tilde{\beta}_t \times (\text{termes linéaires})$.
+
+\textbf{Étape 4 : identification de $\tilde{\beta}_t$.} On réduit au même dénominateur :
+\[
+\frac{1}{\tilde{\beta}_t} = \frac{\alpha_t(1-\bar{\alpha}_{t-1}) + \beta_t}{\beta_t(1-\bar{\alpha}_{t-1})}
+\]
+Au numérateur, en utilisant $\alpha_t = 1 - \beta_t$ et $\bar{\alpha}_t = \alpha_t \bar{\alpha}_{t-1}$ :
+\[
+\alpha_t(1-\bar{\alpha}_{t-1}) + \beta_t = \alpha_t - \underbrace{\alpha_t \bar{\alpha}_{t-1}}_{= \bar{\alpha}_t} + \underbrace{\beta_t}_{= 1-\alpha_t} = 1 - \bar{\alpha}_t
+\]
+D'où $\tilde{\beta}_t = \beta_t(1-\bar{\alpha}_{t-1})/(1-\bar{\alpha}_t)$.
+
+\textbf{Étape 5 : identification de $\tilde{\mu}_t$.} La moyenne est $\tilde{\mu}_t = \tilde{\beta}_t \times (\text{termes linéaires})$ :
+\begin{align*}
+\tilde{\mu}_t &= \frac{\beta_t(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} \left(\frac{\sqrt{\alpha_t}}{\beta_t}\, x_t + \frac{\sqrt{\bar{\alpha}_{t-1}}}{1-\bar{\alpha}_{t-1}}\, x_0\right) \\[4pt]
+&= \frac{\cancel{(1-\bar{\alpha}_{t-1})} \cdot \cancel{\beta_t}}{1-\bar{\alpha}_t} \cdot \frac{\sqrt{\alpha_t}}{\cancel{\beta_t}}\, x_t \;+\; \frac{\cancel{(1-\bar{\alpha}_{t-1})} \cdot \beta_t}{1-\bar{\alpha}_t} \cdot \frac{\sqrt{\bar{\alpha}_{t-1}}}{\cancel{(1-\bar{\alpha}_{t-1})}}\, x_0 \\[4pt]
+&= \frac{\sqrt{\alpha_t}\,(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\, x_t + \frac{\sqrt{\bar{\alpha}_{t-1}}\, \beta_t}{1-\bar{\alpha}_t}\, x_0
+\end{align*}
+\end{proof}
+
+\subsubsection{Formulation en fonction du score}
+
+On ne connaît pas $x_0$ dans \eqref{eq:mu_tilde}. On le remplace par l'estimateur de Tweedie $\hat{x}_0 = \mathbb{E}[X_0 | X_t]$.
+
+\begin{resultbox}[Pas reverse DDPM en fonction du score]
+\label{res:reverse_score}
+En substituant l'estimateur de Tweedie \eqref{eq:tweedie_vp} dans \eqref{eq:mu_tilde} :
+\begin{equation}
+    \boxed{x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\!\left(x_t + \beta_t\, \nabla_{x_t} \log p_t(x_t)\right) + \sqrt{\tilde{\beta}_t}\, z, \qquad z \sim \mathcal{N}(0, I_n)}
+    \label{eq:reverse_score}
+\end{equation}
+\end{resultbox}
+
+\begin{proof}
+\textbf{Étape 1 : substitution de Tweedie.} Par le Résultat \ref{res:tweedie_vp} :
+\[
+\hat{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}\left(x_t + (1-\bar{\alpha}_t)\,\nabla_{x_t} \log p_t(x_t)\right)
+\]
+
+En substituant $x_0 \leftarrow \hat{x}_0$ dans \eqref{eq:mu_tilde} :
+\begin{align*}
+\tilde{\mu}_t &= \frac{\sqrt{\bar{\alpha}_{t-1}}\,\beta_t}{1-\bar{\alpha}_t} \cdot \frac{x_t + (1-\bar{\alpha}_t)\, \nabla \log p_t}{\sqrt{\bar{\alpha}_t}} + \frac{\sqrt{\alpha_t}\,(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\, x_t
+\end{align*}
+
+\textbf{Étape 2 : simplification.} On utilise $\bar{\alpha}_t = \alpha_t \bar{\alpha}_{t-1}$, donc $\sqrt{\bar{\alpha}_{t-1}} / \sqrt{\bar{\alpha}_t} = 1/\sqrt{\alpha_t}$ :
+\[
+\tilde{\mu}_t = \underbrace{\frac{\beta_t}{\sqrt{\alpha_t}\,(1-\bar{\alpha}_t)}\,x_t}_{\text{terme A}} + \underbrace{\frac{\beta_t}{\sqrt{\alpha_t}}\,\nabla \log p_t}_{\text{terme B}} + \underbrace{\frac{\sqrt{\alpha_t}\,(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\,x_t}_{\text{terme C}}
+\]
+
+\textbf{Étape 3 : regroupement de A et C.}
+\[
+\text{A} + \text{C} = \frac{\beta_t + \alpha_t(1-\bar{\alpha}_{t-1})}{\sqrt{\alpha_t}\,(1-\bar{\alpha}_t)}\, x_t
+\]
+Or, on a montré dans la preuve de la Proposition \ref{prop:reverse_exact} (Étape 4) que $\beta_t + \alpha_t(1-\bar{\alpha}_{t-1}) = 1 - \bar{\alpha}_t$. Donc $\text{A} + \text{C} = \frac{1}{\sqrt{\alpha_t}}\, x_t$.
+
+\textbf{Conclusion.}
+\[
+\tilde{\mu}_t = \frac{1}{\sqrt{\alpha_t}}\, x_t + \frac{\beta_t}{\sqrt{\alpha_t}}\, \nabla_{x_t} \log p_t(x_t) = \frac{1}{\sqrt{\alpha_t}}\left(x_t + \beta_t\, \nabla_{x_t} \log p_t(x_t)\right)
+\]
+En ajoutant le bruit $\sqrt{\tilde{\beta}_t}\, z$ avec $z \sim \mathcal{N}(0, I_n)$, on obtient \eqref{eq:reverse_score}.
+\end{proof}
+
+\begin{remarkbox}
+L'équation \eqref{eq:reverse_score} montre l'équivalence entre les deux écritures du pas reverse :
+\begin{itemize}
+\item \textbf{Paramétrisation denoiser} \eqref{eq:mu_tilde} : en fonction de $\hat{x}_0 = \mathbb{E}[X_0 | X_t]$
+\item \textbf{Paramétrisation score} \eqref{eq:reverse_score} : en fonction de $\nabla \log p_t$
+\end{itemize}
+Les deux sont équivalentes par la bijection de Tweedie (Résultat \ref{res:tweedie_vp}). En pratique, le réseau $\epsilon_\theta$ prédit le bruit $\epsilon$, ce qui donne le score via $\nabla_{x_t} \log p_t(x_t) \approx -\epsilon_\theta / \sqrt{1-\bar{\alpha}_t}$, et le denoiser via $\hat{x}_0 = (x_t - \sqrt{1-\bar{\alpha}_t}\,\epsilon_\theta)/\sqrt{\bar{\alpha}_t}$.
+\end{remarkbox}
+
+\subsubsection{Formulation usuelle (en fonction de $\epsilon_\theta$)}
+
+En substituant $\nabla \log p_t \approx -\epsilon_\theta / \sqrt{1-\bar{\alpha}_t}$ dans \eqref{eq:reverse_score} :
+
+\begin{equation}
+    \boxed{x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\!\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\,\epsilon_\theta(x_t, t)\right) + \sqrt{\tilde{\beta}_t}\, z}
+    \label{eq:ddpm_sample}
+\end{equation}
+
+C'est l'Algorithme 2 de Ho et al.\ (2020) \cite{ho2020denoising}. Le réseau prédit le bruit, on le soustrait (pondéré), on divise par $\sqrt{\alpha_t}$ (on ``déshrink''), et on rajoute du bruit $\sqrt{\tilde{\beta}_t}\, z$.
+
+\subsubsection{DDIM (variante déterministe)}
+
+DDIM (Song et al., 2021) \cite{song2021denoising} est une discrétisation \emph{déterministe} : on saute directement de $x_t$ à $x_{t-1}$ via le denoiser, sans bruit ajouté :
+\[
+x_{t-1} = \sqrt{\bar{\alpha}_{t-1}}\, \hat{x}_0 + \sqrt{1-\bar{\alpha}_{t-1}}\, \epsilon_\theta(x_t, t)
+\]
+où $\hat{x}_0 = (x_t - \sqrt{1-\bar{\alpha}_t}\,\epsilon_\theta) / \sqrt{\bar{\alpha}_t}$ (Résultat \ref{res:tweedie_vp}). C'est une discrétisation de la Probability Flow ODE $\mathrm{d}X_t = [f - \frac{1}{2}g^2 \nabla \log p_t]\,\mathrm{d}t$ (le facteur $\frac{1}{2}$ compense l'absence du terme de bruit). DDIM permet de réduire le nombre de pas (10--50 au lieu de 1000) car la trajectoire est déterministe.
 
 \subsection{Probability Flow ODE}
 
-Équivalent déterministe (mêmes marginales) : $\mathrm{d}X_t = [f - \tfrac{1}{2}g^2 \nabla \log p_t]\,\mathrm{d}t$. DDIM en est une discrétisation. Le facteur $\frac{1}{2}$ compense l'absence du terme de bruit.
+Équivalent déterministe (mêmes marginales) : $\mathrm{d}X_t = [f - \frac{1}{2}g^2 \nabla \log p_t]\,\mathrm{d}t$. DDIM en est une discrétisation. Le facteur $\frac{1}{2}$ compense l'absence du terme de bruit.
 
+
+
+
+
+
+
+
+% PB INVERSES
 \section{Problèmes inverses}
 
 Le processus reverse (Théorème \ref{thm:anderson}) permet de générer des images en intégrant la SDE inverse avec le score appris $s_\theta$. Pour résoudre un \textbf{problème inverse}, autrement dit, pour reconstruire $x_0$ à partir de mesures dégradées $y$, on remplace le score inconditionnel par le score conditionnel $\nabla \log p_t(x_t | y)$. 
@@ -1046,10 +1201,6 @@ En appliquant la formule de Tweedie à la distribution conditionnelle $p_t(\cdot
 
 
 
-
-
-
-
 \textbf{Étape 1 : marginalisation.}
 \[
 p_t(x_t | y) = \int p_t(x_t, x_0 | y)\, \mathrm{d}x_0 = \int \frac{p(y | x_0)\, p_t(x_t | x_0)\, p(x_0)}{p(y)}\, \mathrm{d}x_0
@@ -1198,6 +1349,93 @@ On retrouve les méthodes précédentes comme cas limites :
     \item $\Pi$GDM classique (Résultat \ref{res:pigdm}) calcule $\nabla_{x_t} \log p(y | x_t)$ séparément, puis l'ajoute au score inconditionnel. Ici, on obtient directement le score conditionnel total, ce qui évite les problèmes numériques liés à la somme de deux termes de grandeurs très différentes.
 \end{enumerate}
 \end{remarkbox}
+
+
+
+
+
+
+\subsection{Processus reverse conditionnel en forme fermée}
+
+Le Résultat \ref{res:score_vbpigdm} fournit le score conditionnel $\nabla_{x_t} \log p_t(x_t | y)$ en forme fermée. En l'injectant dans le pas reverse DDPM (Résultat \ref{res:reverse_score}), on obtient la formule d'échantillonnage conditionnelle.
+
+\begin{resultbox}[Pas reverse DDPM conditionnel]
+\label{res:reverse_cond}
+Sous les hypothèses \ref{eq:H1}--\ref{eq:H2}, le pas reverse conditionnel s'écrit :
+\begin{equation}
+    \boxed{x_{t-1} = \frac{\sqrt{\bar{\alpha}_{t-1}}\, \beta_t}{1 - \bar{\alpha}_t}\, \mu_{\text{post}} + \frac{\sqrt{\alpha_t}\,(1 - \bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}\, x_t + \sqrt{\tilde{\beta}_t}\, z, \qquad z \sim \mathcal{N}(0, I_n)}
+    \label{eq:reverse_cond}
+\end{equation}
+C'est exactement la formule du reverse inconditionnel \eqref{eq:mu_tilde} avec $\mu_{\text{post}}$ à la place de $x_0$.
+\end{resultbox}
+
+\begin{proof}
+\textbf{Étape 1 : substitution du score conditionnel.} Par le Résultat \ref{res:reverse_score}, le pas reverse DDPM en fonction du score est :
+\[
+x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\left(x_t + \beta_t\, \nabla_{x_t} \log p_t(x_t | y)\right) + \sqrt{\tilde{\beta}_t}\, z
+\]
+
+En substituant le Résultat \ref{res:score_vbpigdm} :
+\[
+x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\left(x_t + \beta_t \cdot \frac{\sqrt{\bar{\alpha}_t}\, \mu_{\text{post}} - x_t}{1 - \bar{\alpha}_t}\right) + \sqrt{\tilde{\beta}_t}\, z
+\]
+
+\textbf{Étape 2 : développement.}
+\[
+= \frac{1}{\sqrt{\alpha_t}} \cdot \frac{(1-\bar{\alpha}_t)\, x_t + \beta_t \sqrt{\bar{\alpha}_t}\, \mu_{\text{post}} - \beta_t\, x_t}{1 - \bar{\alpha}_t} + \sqrt{\tilde{\beta}_t}\, z
+\]
+
+\textbf{Étape 3 : simplification du coefficient de $x_t$.} Au numérateur :
+\[
+(1-\bar{\alpha}_t - \beta_t)\, x_t = (\alpha_t - \bar{\alpha}_t)\, x_t = \alpha_t(1 - \bar{\alpha}_{t-1})\, x_t
+\]
+où l'on a utilisé $\beta_t = 1 - \alpha_t$ et $\bar{\alpha}_t = \alpha_t \bar{\alpha}_{t-1}$.
+
+\textbf{Étape 4 : simplification du coefficient de $\mu_{\text{post}}$.}
+\[
+\frac{\beta_t \sqrt{\bar{\alpha}_t}}{\sqrt{\alpha_t}(1-\bar{\alpha}_t)} = \frac{\beta_t \sqrt{\bar{\alpha}_{t-1}}}{1-\bar{\alpha}_t} = \frac{\sqrt{\bar{\alpha}_{t-1}}\, \beta_t}{1-\bar{\alpha}_t}
+\]
+car $\sqrt{\bar{\alpha}_t} / \sqrt{\alpha_t} = \sqrt{\bar{\alpha}_{t-1}}$.
+
+\textbf{Étape 5 : regroupement.} On obtient :
+\[
+x_{t-1} = \frac{\sqrt{\bar{\alpha}_{t-1}}\, \beta_t}{1-\bar{\alpha}_t}\, \mu_{\text{post}} + \frac{\sqrt{\alpha_t}\,(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\, x_t + \sqrt{\tilde{\beta}_t}\, z
+\]
+qui est la formule \eqref{eq:mu_tilde} de la Proposition \ref{prop:reverse_exact} avec $\mu_{\text{post}}$ à la place de $x_0$.
+\end{proof}
+
+\begin{remarkbox}[Équivalence des deux points de vue]
+Le Résultat \ref{res:reverse_cond} montre que les deux formulations suivantes sont équivalentes :
+\begin{itemize}
+\item \textbf{Point de vue score :} utiliser le score conditionnel $\nabla_{x_t} \log p_t(x_t | y)$ (Résultat \ref{res:score_vbpigdm}) dans la SDE reverse (Théorème \ref{thm:anderson}).
+\item \textbf{Point de vue denoiser :} remplacer $\hat{x}_0 = \mathbb{E}[X_0 | X_t]$ (inconditionnel) par $\mu_{\text{post}} = \mathbb{E}[X_0 | X_t, Y]$ (conditionnel) dans le pas DDPM \eqref{eq:mu_tilde}.
+\end{itemize}
+L'équivalence est exacte par la bijection de Tweedie (Résultat \ref{res:tweedie_vp}). La formule du pas reverse ne change pas --- seule son entrée passe de $\hat{x}_0$ à $\mu_{\text{post}}$.
+\end{remarkbox}
+
+\begin{remarkbox}[Comparaison avec DPS et $\Pi$GDM]
+Les trois méthodes partagent la même formule de reverse DDPM \eqref{eq:mu_tilde}. Elles diffèrent uniquement par ce qu'elles mettent à la place de $x_0$ :
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+\toprule
+\textbf{Méthode} & \textbf{Entrée du reverse} & \textbf{Score utilisé} \\
+\midrule
+Inconditionnel & $\hat{x}_0 = \mathbb{E}[X_0 | X_t]$ & $\nabla \log p_t(x_t)$ \\
+DPS & $\hat{x}_0$ + correction Dirac & $\nabla \log p_t + \nabla \log p(y | \hat{x}_0)$ \\
+$\Pi$GDM & $\hat{x}_0$ + correction gaussienne & $\nabla \log p_t + \nabla \log \mathcal{N}(y; A\hat{x}_0, \Sigma_y)$ \\
+\textbf{EMG-VBA (nous)} & $\mu_{\text{post}}$ directement & $\nabla \log p_t(x_t | y)$ total (Rés. \ref{res:score_vbpigdm}) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+Notre approche évite la décomposition $\nabla \log p_t + \nabla \log p(y|x_t)$ et fournit le score conditionnel total en une seule expression. De plus, les hyperparamètres $r_t^2$ et $\sigma_b^2$ (ou de manière équivalente $\tau_r$ et $\tau_b$) ne sont pas fixés manuellement mais estimés automatiquement par l'algorithme EMG-VBA (Section \ref{sec:emgvba}).
+\end{remarkbox}
+
+
 
 \subsection{Vers l'optimisation variationnelle de $r_t^2$ et $\sigma_b^2$}
 

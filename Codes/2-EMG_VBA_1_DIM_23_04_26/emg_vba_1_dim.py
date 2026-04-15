@@ -3,7 +3,7 @@ from scipy.special import digamma
 import matplotlib.pyplot as plt
 
 class EMG_VBA:
-    def __init__(self, A, y, alpha_bar_t, xt, xhat0, a_0, b_0, c_0, d_0):
+    def __init__(self, A, y, alpha_bar_t, xt, xhat0, a_0, b_0, c_0, d_0, AtA=None, Aty=None, AtA_diag=None):
         
         self.A = A
         self.y = y
@@ -16,9 +16,9 @@ class EMG_VBA:
         self.c_0, self.d_0 = c_0, d_0
 
         # Précalculs
-        self.AtA      = A.T @ A
-        self.Aty      = A.T @ y               
-        self.AtA_diag = np.diag(self.AtA)      
+        self.AtA      = AtA if AtA is not None else A.T @ A                
+        self.Aty      = Aty if Aty is not None else A.T @ y               
+        self.AtA_diag = AtA_diag if AtA_diag is not None else np.diag(self.AtA)  
 
 
     def initialiser(self, mu_init, Sigma_init, a_0_init, b_0_init, c_0_init, d_0_init):
@@ -30,14 +30,6 @@ class EMG_VBA:
         # Sauvegarde k−1 (inutile car s2 = 0,  POUR APRÈS)
         self.mu_k_1    = self.mu.copy()
         self.Sigma_k_1 = self.Sigma.copy()
-
-        # q(tau_r) — (52)
-        self.a_0 = float(a_0_init)
-        self.b_0 = float(b_0_init)
-
-        # q(tau_b)  - (53)
-        self.c_0 = float(c_0_init)
-        self.d_0 = float(d_0_init)
 
 
     def mise_a_jour_taur_taub(self):
@@ -56,7 +48,7 @@ class EMG_VBA:
         self.b_tilde_r = (self.b_0 + 0.5 * (np.dot(diff, diff) + np.sum(self.Sigma))) #(85)
 
         #Moyennes
-        self.tau_r_moy = self.a_tilde_r / self.b_tilde_r
+        self.tau_r_moy = self.a_tilde_r / self.b_tilde_r 
         self.tau_b_moy = self.a_tilde_b / self.b_tilde_b 
 
 
@@ -155,15 +147,15 @@ class EMG_VBA:
         log_tau_r = digamma(self.a_tilde_r) - np.log(self.b_tilde_r) 
         log_tau_b = digamma(self.a_tilde_b) - np.log(self.b_tilde_b)
 
-        ## Entropie - (113)
-        Entropie = -0.5 * sum(np.log(self.Sigma)) + 0.5 * self.n * (1.0 + np.log(2.0 * np.pi))
+        ## Entropie - (113)  E_q[log q]
+        Entropie = -0.5 * np.sum(np.log(self.Sigma)) - 0.5 * self.n * (1.0 + np.log(2.0 * np.pi))  
 
         
         ## Terme log jointe
         # Forward - (114)
         forward_diff = self.xt - np.sqrt(abar)*self.mu
 
-        Forward = -0.5/(1 - abar) * (np.dot(forward_diff,forward_diff)) + abar*sum(self.Sigma)
+        Forward = -0.5/(1 - abar) * (np.dot(forward_diff,forward_diff) + abar*np.sum(self.Sigma)) 
 
         ## Mesure - (114)
         mesure_diff = self.y - self.A @ self.mu
@@ -227,11 +219,10 @@ class EMG_VBA:
                       f"sig2_b={1/self.tau_b_moy:.6f}")
 
         if affichage == True:
-            plt.plot(Energie_libre_negative)
+            plt.plot(historique['energie_libre'])  
             plt.title("Énergie libre négative en fonction des itérations")
             plt.xlabel("#itération EMG-VBA")
             plt.ylabel("Énergie libre négative")
-            plt.legend()
 
         return {
             'mu':                  self.mu.copy(),
