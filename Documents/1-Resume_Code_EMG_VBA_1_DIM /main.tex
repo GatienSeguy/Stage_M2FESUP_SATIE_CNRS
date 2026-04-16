@@ -538,11 +538,13 @@ avec $q_i(x_{0,i}) = \N(x_{0,i} | \mu_i, \Sigma_i)$ pour chaque pixel $i$.
 \subsection{Log-vraisemblance jointe}
 
 \begin{resultbox}[Log-jointe \rapport{55}]
-\begin{multline}
-  \log p_t(w, y) = -\frac{\|x_t - \sqrt{\abar_t}\, x_0\|^2}{2(1-\abar_t)} \\
-  + \left(\tfrac{m}{2}+c_0-1\right)\!\log\tau_b - \left(d_0 + \tfrac{1}{2}\|y-Ax_0\|^2\right)\tau_b \\
-  + \left(\tfrac{n}{2}+a_0-1\right)\!\log\tau_r - \left(b_0 + \tfrac{1}{2}\|x_0-\xhat\|^2\right)\tau_r + \text{cte} \label{eq:logjointe}
-\end{multline}
+\begin{equation*}
+\begin{aligned}
+  \log p_t(w, y) &= -\frac{\|x_t - \sqrt{\abar_t}\, x_0\|^2}{2(1-\abar_t)} \\
+  &+ \left(\tfrac{m}{2}+c_0-1\right)\!\log\tau_b - \left(d_0 + \tfrac{1}{2}\|y-Ax_0\|^2\right)\tau_b \\
+  &+ \left(\tfrac{n}{2}+a_0-1\right)\!\log\tau_r - \left(b_0 + \tfrac{1}{2}\|x_0-\xhat\|^2\right)\tau_r + \text{cte} \label{eq:logjointe}
+\end{aligned}
+\end{equation*}
 \end{resultbox}
 
 %% ============================================================
@@ -717,12 +719,15 @@ ou :
 \subsection{Energie libre negative (diagnostic)}
 
 \begin{resultbox}[Energie libre negative \rapport{59, 113--114}]
-\begin{multline}
-  \mathcal{F}(q) = \underbrace{-\frac{1}{2(1-\abar_t)}\left(\|x_t - \sqrt{\abar_t}\mu\|^2 + \abar_t \sum_i \Sigma_i\right)}_{\text{forward}} \\
-  + \underbrace{\left(\tfrac{m}{2}+c_0-1\right)\langle\log\tau_b\rangle - \left(d_0 + \tfrac{1}{2}\left(\|y-A\mu\|^2 + (A^TA)_{\text{diag}}^T\Sigma\right)\right)\langle\tau_b\rangle}_{\text{mesure}} \\
-  + \underbrace{\left(\tfrac{n}{2}+a_0-1\right)\langle\log\tau_r\rangle - \left(b_0 + \tfrac{1}{2}\left(\|\mu-\xhat\|^2 + \|\Sigma\|_1\right)\right)\langle\tau_r\rangle}_{\text{a priori}} \\
-  + \underbrace{\frac{1}{2}\sum_i \log\Sigma_i + \text{cte}}_{\text{entropie}} \label{eq:energy}
-\end{multline}
+\begin{equation*}
+    \begin{aligned}
+  \mathcal{F}(q) &= \underbrace{-\frac{1}{2(1-\abar_t)}\left(\|x_t - \sqrt{\abar_t}\mu\|^2 + \abar_t \sum_i \Sigma_i\right)}_{\text{forward}} \\
+  &+ \underbrace{\left(\tfrac{m}{2}+c_0-1\right)\langle\log\tau_b\rangle - \left(d_0 + \tfrac{1}{2}\left(\|y-A\mu\|^2 + (A^TA)_{\text{diag}}^T\Sigma\right)\right)\langle\tau_b\rangle}_{\text{mesure}} \\
+  &+ \underbrace{\left(\tfrac{n}{2}+a_0-1\right)\langle\log\tau_r\rangle - \left(b_0 + \tfrac{1}{2}\left(\|\mu-\xhat\|^2 + \|\Sigma\|_1\right)\right)\langle\tau_r\rangle}_{\text{a priori}} \\
+  &+ \underbrace{\frac{1}{2}\sum_i \log\Sigma_i + \text{cte}}_{\text{entropie}} \label{eq:energy}
+    \end{aligned}
+\end{equation*}
+
 ou $\langle\log\tau_r\rangle = \psi(\tilde{a}_r) - \log(\tilde{b}_r)$ et $\langle\log\tau_b\rangle = \psi(\tilde{a}_b) - \log(\tilde{b}_b)$ avec $\psi$ la fonction digamma.
 
 \textbf{Propriete fondamentale :} $\mathcal{F}(q)$ doit \textbf{croitre} a chaque iteration $k$ (Resultat XII.2.1).

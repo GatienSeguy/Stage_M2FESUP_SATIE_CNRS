@@ -14,12 +14,12 @@ from diffusion.Training import train
 # HYPERPARAMÈTRES
 # ==================
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
-TRAIN_DIR      = os.path.join(BASE_DIR, '..', 'Data', 'celeba_hq_256')
-MODEL_NAME     = 'unet_celeba64'
+TRAIN_DIR      = os.path.join(BASE_DIR, '..', 'Data', 'ffhq256')
+MODEL_NAME     = 'unet_ffhq64'
 IMG_SIZE       = 64
 IN_CH          = 1
 BATCH_SIZE     = 32
-EPOCHS         = 100
+EPOCHS         = 1000
 LR             = 2e-4
 EMA_DECAY      = 0.9999
 GRAD_CLIP      = 1.0

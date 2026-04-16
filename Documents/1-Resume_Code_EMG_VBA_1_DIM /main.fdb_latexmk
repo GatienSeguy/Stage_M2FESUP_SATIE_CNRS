@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1776328531.7361 "main.tex" "main.pdf" "main" 1776328533.29053 0
+["pdflatex"] 1776336506.65166 "main.tex" "main.pdf" "main" 1776336507.78535 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1136768653 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -250,10 +250,10 @@
   "logo_cnrs.png" 1776280318.02005 47943 708836d791c7fd696513be8786033b9c ""
   "logo_satie.png" 1776280318.02486 8910 f68f2cc984480d4a2e5e0a5b29514e5a ""
   "logo_univPS.png" 1776280318.02742 6461 65f149b44b41c4acba92cca591b34223 ""
-  "main.aux" 1776328533.10653 11490 de8e2007b5c5e3b1bd857339a021bd27 "pdflatex"
-  "main.out" 1776328533.10853 6000 ee1ab8a2932502f3c2adf10d5e5ca19c "pdflatex"
-  "main.tex" 1776328531.51107 44470 1af893090d2088bf150597b3a5e07555 ""
-  "main.toc" 1776328533.10884 2797 fbcae3316f30e826ef534ed4eed59cda "pdflatex"
+  "main.aux" 1776336507.65616 11495 3efc759edb2ddac8e1ce0a2c9860d3ef "pdflatex"
+  "main.out" 1776336507.65747 6000 ee1ab8a2932502f3c2adf10d5e5ca19c "pdflatex"
+  "main.tex" 1776336506.47631 44550 557bf207132feac51ff7103212aecffe ""
+  "main.toc" 1776336507.6577 2797 fbcae3316f30e826ef534ed4eed59cda "pdflatex"
   (generated)
   "main.aux"
   "main.log"
