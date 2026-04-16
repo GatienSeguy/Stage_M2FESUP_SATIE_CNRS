@@ -1,0 +1,935 @@
+\documentclass[12pt]{article}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{{./}}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools, bm}
+\usepackage{cancel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems, breakable, skins}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+
+\newcommand{\w}{\boldsymbol{w}}
+\newcommand{\y}{\boldsymbol{y}}
+\newcommand{\alt}{\bar\alpha_t}
+
+\newcommand{\indep}{\perp\!\!\!\perp}
+
+% --- Commandes du récap ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\abar}{\bar{\alpha}}
+\newcommand{\xhat}{\hat{x}_0}
+\newcommand{\mupost}{\mu_{\mathrm{post}}}
+\newcommand{\file}[1]{\texttt{\color{codeblue}#1}}
+\newcommand{\func}[1]{\texttt{\color{codered}#1}}
+\newcommand{\var}[1]{\texttt{\color{codegreen}#1}}
+\newcommand{\rapport}[1]{\textcolor{codeblue}{\textbf{[Rapport~eq.~#1]}}}
+
+% --- Algorithmic en francais ---
+\algrenewcommand\algorithmicrequire{\textbf{Entree :}}
+\algrenewcommand\algorithmicensure{\textbf{Sortie :}}
+\algrenewcommand\algorithmicif{\textbf{si}}
+\algrenewcommand\algorithmicthen{\textbf{alors}}
+\algrenewcommand\algorithmicelse{\textbf{sinon}}
+\algrenewcommand\algorithmicfor{\textbf{pour}}
+\algrenewcommand\algorithmicdo{\textbf{faire}}
+\algrenewcommand\algorithmicwhile{\textbf{tant que}}
+\algrenewcommand\algorithmicreturn{\textbf{retourner}}
+\algrenewcommand\algorithmicend{\textbf{fin}}
+
+% -- Couleurs --
+\definecolor{sectioncolor}{rgb}{0.7, 0.1, 0.1}
+\definecolor{subsectioncolor}{rgb}{0, 0.51, 0.58}
+\definecolor{hypcolor}{RGB}{110, 70, 140}
+\definecolor{proofgray}{RGB}{70, 70, 70}
+\definecolor{codeblue}{RGB}{30,90,170}
+\definecolor{codered}{RGB}{180,40,40}
+\definecolor{codegreen}{RGB}{30,130,60}
+
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
+
+% --- Compteurs ---
+\newcounter{cdef}[subsection]
+\newcounter{cprop}[subsection]
+\newcounter{cthm}[subsection]
+\newcounter{chyp}[subsection]
+\newcounter{cres}[subsection]
+
+\makeatletter
+\renewcommand{\thecdef}{\@Roman\c@section.\@arabic\c@subsection.\@arabic\c@cdef}
+\renewcommand{\thecprop}{\@Roman\c@section.\@arabic\c@subsection.\@arabic\c@cprop}
+\renewcommand{\thecthm}{\@Roman\c@section.\@arabic\c@subsection.\@arabic\c@cthm}
+\renewcommand{\thechyp}{\@Roman\c@section.\@arabic\c@subsection.\@arabic\c@chyp}
+\renewcommand{\thecres}{\@Roman\c@section.\@arabic\c@subsection.\@arabic\c@cres}
+\makeatother
+
+% --- Cadres ---
+
+\newcommand{\definitiontitle}[1]{%
+  \refstepcounter{cdef}%
+  \textbf{\color{subsectioncolor}Definition \thecdef\ifx\\#1\\\else --- #1\fi}}
+\newtcolorbox{definitionbox}[1][]{%
+  enhanced, breakable, colback=white, colframe=subsectioncolor,
+  boxrule=0.6pt, arc=0pt, outer arc=0pt,
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\definitiontitle{#1}\par\smallskip}}
+
+\newcommand{\propositiontitle}[1]{%
+  \refstepcounter{cprop}%
+  \textbf{\color{subsectioncolor}Proposition \thecprop\ifx\\#1\\\else --- #1\fi}}
+\newtcolorbox{propositionbox}[1][]{%
+  enhanced, breakable, colback=white, colframe=subsectioncolor,
+  boxrule=0.8pt, arc=0pt, outer arc=0pt,
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\propositiontitle{#1}\par\smallskip}}
+
+\newcommand{\theoremtitle}[1]{%
+    \refstepcounter{cres}%
+    \textbf{\color{sectioncolor}Theoreme \thecres\ifx\\#1\\\else --- #1\fi}}
+\newtcolorbox{theorembox}[1][]{%
+  enhanced, breakable, colback=white, colframe=sectioncolor,
+  boxrule=1.2pt, arc=0pt, outer arc=0pt,
+  borderline={0.4pt}{1.8pt}{sectioncolor},
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\theoremtitle{#1}\par\smallskip}}
+
+\newcommand{\resulttitle}[1]{%
+  \refstepcounter{cres}%
+  \textbf{\color{sectioncolor}Resultat \thecres\ifx\\#1\\\else --- #1\fi}}
+\newtcolorbox{resultbox}[1][]{%
+  enhanced, breakable, colback=white, colframe=sectioncolor,
+  boxrule=1.2pt, arc=0pt, outer arc=0pt,
+  borderline={0.4pt}{1.8pt}{sectioncolor},
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\resulttitle{#1}\par\smallskip}}
+
+\newcommand{\hypothesetitle}[1]{%
+  \refstepcounter{chyp}%
+  \textbf{\color{hypcolor}Hypotheses \thechyp\ifx\\#1\\\else --- #1\fi}}
+\newtcolorbox{hypothesebox}[1][]{%
+  enhanced, breakable, colback=white, colframe=hypcolor,
+  boxrule=0.6pt, arc=0pt, outer arc=0pt,
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\hypothesetitle{#1}\par\smallskip}}
+
+\newtcolorbox{remarkbox}[1][]{%
+  enhanced, breakable, colback=white, colframe=subsectioncolor!50,
+  boxrule=0.3pt, arc=0pt, outer arc=0pt,
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\textit{\color{subsectioncolor!70!black}Remarque\ifx\\#1\\\else --- #1\fi}\par\smallskip}}
+
+\newtcolorbox{rappelbox}[1][]{%
+  enhanced, breakable, colback=white, colframe=subsectioncolor!50,
+  boxrule=0.3pt, arc=0pt, outer arc=0pt,
+  left=3mm, right=3mm, top=0mm, bottom=2mm,
+  before upper={\textit{\color{subsectioncolor!70!black}Rappel\ifx\\#1\\\else --- #1\fi}\par\smallskip}}
+
+% -- Preuve --
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewenvironment{proof}[1][\proofname]{%
+  \par\medskip\noindent
+  \textit{\color{proofgray}#1.}\enspace\ignorespaces
+}{\hfill\qedsymbol\par\medskip}
+\renewcommand{\proofname}{Preuve}
+
+% -- Table des matieres --
+\renewcommand{\cftsecfont}{\color{sectioncolor}\bfseries}
+\renewcommand{\cftsecpagefont}{\color{sectioncolor}\bfseries}
+\setlength{\cftsecnumwidth}{2.5em}
+\cftsetindents{section}{0em}{3em}
+\renewcommand{\cftsubsecfont}{\color{subsectioncolor}\bfseries}
+\renewcommand{\cftsubsecpagefont}{\color{subsectioncolor}\bfseries}
+\setlength{\cftsubsecnumwidth}{3em}
+\cftsetindents{subsection}{2em}{4em}
+\renewcommand{\cftsubsubsecfont}{\color{subsectioncolor}}
+\cftsetindents{subsubsection}{4em}{4.5em}
+\renewcommand{\cftsubsubsecpagefont}{\color{subsectioncolor}}
+\renewcommand{\cftpartfont}{\color{sectioncolor}\bfseries\Large}
+\renewcommand{\cftpartpagefont}{\color{sectioncolor}\bfseries\Large}
+\cftsetindents{part}{0em}{4em}
+\renewcommand{\cftbeforepartskip}{1em}
+\renewcommand{\cftpartfont}{\color{sectioncolor}\bfseries\Large\rule{\linewidth}{0.4pt}\\}
+\renewcommand{\cftpartpresnum}{}
+\setlength{\cftpartnumwidth}{0em}
+\renewcommand{\thepart}{}
+
+\hypersetup{linktoc=all, colorlinks=true,
+  linkcolor=sectioncolor, citecolor=subsectioncolor, urlcolor=subsectioncolor, pdfborder={0 0 0}}
+
+\geometry{a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm,
+  headheight=36.0976pt, includeheadfoot}
+
+\pagestyle{fancy}\fancyhf{}
+% Pas de logos header/footer pour ce document autonome
+\fancyhead[L]{\small\textit{Document Recapitulatif --- Pipeline EMG-VBA}}
+\fancyhead[R]{\small\textit{SATIE - CNRS - ENS Paris-Saclay}}
+\fancyfoot[L]{Gatien Seguy}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0.4pt}
+
+\titleformat{\part}[display]
+  {\Huge\bfseries\centering\color{sectioncolor}}{}{0pt}
+  {\rule{\textwidth}{1pt}\\\vspace{0.2em}}[\vspace{0.2em}\rule{\textwidth}{1pt}]
+\titlespacing*{\part}{0pt}{-60pt}{20pt}
+\titleformat{\section}{\normalfont\Large\bfseries\color{sectioncolor}}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\renewcommand{\thesection}{\Roman{section}}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{subsectioncolor}}{\thesubsection}{1em}{}
+
+\begin{document}
+
+% ============================================================
+%   PAGE DE TITRE
+% ============================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{-3.2cm}
+\begin{center}
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=1\linewidth]{Logo_ENS_leger(1).jpg}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=1\linewidth]{logo_univPS.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=0.7\linewidth]{logo_satie.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}\centering
+        \includegraphics[width=0.7\linewidth]{logo_cnrs.png}
+    \end{minipage}
+
+    \vspace{2cm}
+
+    {\Large \textbf{ECOLE NORMALE SUPERIEURE PARIS-SACLAY}}\\[0.15cm]
+    {\normalsize Universite Paris-Saclay}\\
+    \vspace{0.5cm}
+
+    {\Large \textbf{SATIE}}\\[0.15cm]
+    {\normalsize Laboratoire des systemes et applications des technologies de l'information et de l'energie}
+    \vspace{1cm}
+
+    {\color{black}\rule{1\textwidth}{1.2pt}}
+    {\color{black}\rule{0.9\textwidth}{0.8pt}}
+
+    \vspace{0.45cm}
+
+    {\Huge \color{black} \textbf{Document Recapitulatif}}
+
+    \vspace{0.25cm}
+
+    {\LARGE \color{sectioncolor} Pipeline de Reconstruction par Diffusion\\avec Correction EMG-VBA une dimension}
+
+    \vspace{0.25cm}
+
+    {\Large Equations, Pseudo-code et Architecture du Code}
+
+    \vspace{0.35cm}
+
+    {\Huge Gatien Seguy}
+
+    \vspace{0.35cm}
+
+    {\color{black}\rule{0.9\textwidth}{0.8pt}}
+    {\color{black}\rule{1\textwidth}{1.2pt}}
+
+    \vspace{0.5cm}
+
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{r@{\hspace{0.8em}:\hspace{0.8em}}l}
+    \textbf{Laboratoire }  & SATIE -- ENS Paris-Saclay\\
+    \textbf{Superviseur}    & Thomas Rodet (SATIE -- CNRS)\\
+    \end{tabular}
+    \renewcommand{\arraystretch}{1}
+
+    \vspace{0.3cm}
+    \begin{center}
+    \textbf{DESCRIPTION}
+    \end{center}
+    \begin{minipage}{0.88\textwidth}\small
+    Ce document recapitule l'ensemble des equations et algorithmes implementes dans le code
+    de reconstruction d'images par modeles de diffusion avec correction EMG-VBA. Pour chaque
+    equation, le numero correspondant dans le rapport de stage est indique en bleu. Le pseudo-code
+    algorithmique explicite le lien entre les formules mathematiques et les fichiers Python.
+    \end{minipage}
+    \vfill
+\end{center}
+\vfill
+\begin{center}
+    {\color{sectioncolor}\rule{0.3\textwidth}{0.4pt}}\\[0.35cm]
+    {\small\color{proofgray} Stage de recherche -- Master 2 FESup -- Avril 2026}
+\end{center}
+\vspace*{-1.5cm}
+\end{titlepage}
+
+\setcounter{page}{2}\newpage\vspace*{0.5cm}\tableofcontents\newpage
+
+
+%% ============================================================
+\section{Vue d'ensemble de la pipeline}
+%% ============================================================
+
+La pipeline complete se decompose en quatre grandes phases :
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Entrainement} (\file{Training.py}) : apprentissage du reseau $\varepsilon_\theta$ sur des images propres.
+  \item \textbf{Degradation} (\file{degrade.py}) : construction de l'observation $y = Ax_0$ (flou gaussien).
+  \item \textbf{Inference conditionnelle} (\file{Reverse.py} + \file{emg\_vba\_1\_dim.py}) : boucle reverse $t = T, \ldots, 1$ avec correction EMG-VBA a chaque pas.
+  \item \textbf{Orchestration} (\file{main.py}) : chaine complete degradation $\to$ reconstruction $\to$ affichage.
+\end{enumerate}
+
+\begin{remarkbox}[Convention de normalisation]
+Toutes les images sont stockees dans $[-1,1]$ dans le code :
+\[
+  x_{[-1,1]} = 2\,x_{[0,1]} - 1, \qquad x_{[0,1]} = \frac{x_{[-1,1]}+1}{2}.
+\]
+Le reseau $\varepsilon_\theta$ est entraine sur des images en $[-1,1]$. La sortie finale est reconvertie en $[0,1]$ par \texttt{clamp(-1,1)} puis $(x+1)/2$.
+\end{remarkbox}
+
+\noindent\textbf{Fichiers et dependances :}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Fichier} & \textbf{Role} & \textbf{Depend de} \\
+\midrule
+\file{Schedules.py}       & Definition de $\beta_t, \alpha_t, \abar_t, \sigma_t$ & --- \\
+\file{Forward.py}         & Processus forward + Tweedie              & \file{Schedules} \\
+\file{Training.py}        & Boucle d'entrainement (loss MSE + EMA)   & \file{Forward} \\
+\file{model.py}           & Architecture UNet                         & --- \\
+\file{degrade.py}         & Flou gaussien, construction de $A$        & --- \\
+\file{operators.py}       & Classe \func{GaussianBlurOperator} (FFT) & --- \\
+\file{emg\_vba\_1\_dim.py} & Algorithme EMG-VBA complet               & --- \\
+\file{Reverse.py}         & Reverse DDPM + correction EMG-VBA        & \file{Forward}, \file{emg\_vba\_1\_dim} \\
+\file{main.py}            & Orchestration                             & tous \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+%% ============================================================
+\section{Phase 1 : Entrainement du reseau \texorpdfstring{$\varepsilon_\theta$}{epsilon\_theta}}
+%% ============================================================
+
+\subsection{Schedule DDPM}
+\label{sec:schedule}
+
+\begin{resultbox}[Definitions \rapport{III.3.1}]
+\begin{align}
+  \beta_t &= \text{linspace}(\beta_{\min}, \beta_{\max}, T), \quad t=0,\ldots,T{-}1 \label{eq:beta}\\
+  \alpha_t &= 1 - \beta_t \label{eq:alpha}\\
+  \abar_t &= \prod_{s=0}^{t} \alpha_s \label{eq:alphabar}\\
+  \sigma_t &= \sqrt{1-\abar_t} \label{eq:sigma}
+\end{align}
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Initialisation du schedule DDPM --- \file{Schedules.py} $\to$ \func{DDPMSchedule.\_\_init\_\_}}
+\begin{algorithmic}[1]
+\Require $T$, $\beta_{\min}$, $\beta_{\max}$
+\State $\boldsymbol{\beta} \gets \text{torch.linspace}(\beta_{\min},\, \beta_{\max},\, T)$ \Comment{vecteur GPU}
+\State $\boldsymbol{\alpha} \gets \mathbf{1} - \boldsymbol{\beta}$
+\State $\bar{\boldsymbol{\alpha}} \gets \text{torch.cumprod}(\boldsymbol{\alpha})$ \Comment{produit cumule vectorise}
+\State $\boldsymbol{\sigma} \gets \sqrt{\mathbf{1} - \bar{\boldsymbol{\alpha}}}$
+\Ensure $\boldsymbol{\beta}, \boldsymbol{\alpha}, \bar{\boldsymbol{\alpha}}, \boldsymbol{\sigma}$ (tenseurs de taille $T$)
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Processus forward}
+\label{sec:forward}
+
+\begin{resultbox}[Loi marginale forward (VP-DDPM) \rapport{III.3.1}]
+\begin{equation}
+  X_t = \sqrt{\abar_t}\, X_0 + \sqrt{1-\abar_t}\,\varepsilon, \qquad \varepsilon \sim \N(0, I_n) \label{eq:forward}
+\end{equation}
+soit $X_t | X_0 \sim \N\!\left(\sqrt{\abar_t}\,X_0,\; (1-\abar_t)\,I_n\right)$.
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Processus forward --- \file{Forward.py} $\to$ \func{forward\_process}}
+\begin{algorithmic}[1]
+\Require $x_0 \in \R^{B \times C \times H \times W}$ (batch, torch), $t \in \{0,\ldots,T{-}1\}^B$, $\bar{\boldsymbol{\alpha}}$, $\boldsymbol{\sigma}$
+\State $\sqrt{\abar_t} \gets \bar{\boldsymbol{\alpha}}[t].\text{view}(B,1,1,1)$ \Comment{broadcast pour images}
+\State $\sigma_t \gets \boldsymbol{\sigma}[t].\text{view}(B,1,1,1)$
+\State $\varepsilon \gets \text{torch.randn\_like}(x_0)$
+\State $x_t \gets \sqrt{\abar_t} \cdot x_0 + \sigma_t \cdot \varepsilon$
+\Ensure $x_t$, $\varepsilon$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Formule de Tweedie}
+\label{sec:tweedie}
+
+\begin{resultbox}[Estimateur de Tweedie (VP-DDPM) \rapport{12}]
+\begin{equation}
+  \xhat(x_t) = \E[X_0 | X_t = x_t] = \frac{x_t - \sigma_t\, \varepsilon_\theta(x_t, t)}{\sqrt{\abar_t}} \label{eq:tweedie}
+\end{equation}
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Estimateur de Tweedie --- \file{Forward.py} $\to$ \func{tweedie\_estimate}}
+\begin{algorithmic}[1]
+\Require $x_t$ (torch), $\varepsilon_{\text{pred}}$ (torch), $t$, $\bar{\boldsymbol{\alpha}}$, $\boldsymbol{\sigma}$
+\State $\sqrt{\abar_t} \gets \sqrt{\bar{\boldsymbol{\alpha}}[t]}$, \quad $\sigma_t \gets \boldsymbol{\sigma}[t]$
+\State $\xhat \gets (x_t - \sigma_t \cdot \varepsilon_{\text{pred}}) \,/\, \sqrt{\abar_t}$
+\Ensure $\xhat$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Objectif d'entrainement}
+
+\begin{resultbox}[Loss de Denoising Score Matching \rapport{15}]
+\begin{equation}
+  \mathcal{L}(\theta) = \E_{t, x_0, \varepsilon}\!\left[\left\| \varepsilon_\theta(x_t, t) - \varepsilon \right\|^2\right] \label{eq:loss}
+\end{equation}
+ou $t \sim \mathcal{U}\{0,\ldots,T{-}1\}$, $x_0 \sim p_{\text{data}}$, $\varepsilon \sim \N(0,I)$, et $x_t$ est donne par~\eqref{eq:forward}.
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Boucle d'entrainement --- \file{Training.py} $\to$ \func{train}}
+\begin{algorithmic}[1]
+\Require reseau $\varepsilon_\theta$, schedule, dataloader, $E$ epoques, lr, $\lambda_{\text{EMA}}$, $\gamma_{\text{clip}}$
+\State $\varepsilon_{\text{EMA}} \gets \text{copie}(\varepsilon_\theta)$ \Comment{Exponential Moving Average}
+\State optimizer $\gets$ Adam($\varepsilon_\theta$, lr)
+\For{epoch $= 1, \ldots, E$}
+  \For{chaque batch $x_0$ du dataloader}  \Comment{$x_0 \in [-1,1]$}
+    \State $t \gets \text{randint}(0, T, (B,))$ \Comment{echantillonnage uniforme}
+    \State $x_t, \varepsilon \gets \func{forward\_process}(x_0, t, \bar{\boldsymbol{\alpha}}, \boldsymbol{\sigma})$ \Comment{eq.~\eqref{eq:forward}}
+    \State $\varepsilon_{\text{pred}} \gets \varepsilon_\theta(x_t, t)$
+    \State loss $\gets \text{MSE}(\varepsilon_{\text{pred}}, \varepsilon)$ \Comment{eq.~\eqref{eq:loss}}
+    \State loss.backward()
+    \State clip\_grad\_norm$(\varepsilon_\theta, \gamma_{\text{clip}})$
+    \State optimizer.step()
+    \For{$(p_{\text{ema}}, p) \in \text{zip}(\varepsilon_{\text{EMA}}, \varepsilon_\theta)$} \Comment{mise a jour EMA}
+      \State $p_{\text{ema}} \gets \lambda_{\text{EMA}}\, p_{\text{ema}} + (1-\lambda_{\text{EMA}})\, p$
+    \EndFor
+  \EndFor
+  \State Sauvegarder checkpoint (etat du modele, EMA, optimizer, epoch)
+\EndFor
+\Ensure $\varepsilon_\theta$, $\varepsilon_{\text{EMA}}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{remarkbox}[Subtilite : EMA]
+A l'inference, on charge les poids EMA (\var{ema\_state\_dict}) plutot que les poids du modele, car ils produisent des echantillons de meilleure qualite. C'est fait dans \func{load\_net} de \file{main.py} via \texttt{ckpt.get('ema\_state\_dict', ckpt['model\_state\_dict'])}.
+\end{remarkbox}
+
+%% ============================================================
+\section{Phase 2 : Degradation de l'image}
+%% ============================================================
+
+\subsection{Modele d'observation}
+
+\begin{resultbox}[Probleme inverse lineaire \rapport{H2}]
+\begin{equation}
+  y = A\,x_0 + b, \qquad b \sim \N(0, \sigma_b^2\, I_m) \label{eq:obs}
+\end{equation}
+Dans le code actuel : $b = 0$ (pas de bruit de mesure ajoute), $A$ est l'operateur de flou gaussien.
+\end{resultbox}
+
+\subsection{Construction de l'operateur $A$}
+
+\begin{algorithm}[H]
+\caption{Construction de la matrice $A$ --- \file{degrade.py} $\to$ \func{build\_A}}
+\begin{algorithmic}[1]
+\Require $\sigma_{\text{blur}}$, taille $H \times W$ ($n = H \cdot W$)
+\State $A \gets \mathbf{0}_{n \times n}$ \Comment{numpy, CPU}
+\For{$j = 0, \ldots, n-1$}
+  \State $e_j \gets$ vecteur canonique de $\R^n$
+  \State $A[:,j] \gets \text{blur}(e_j.\text{reshape}(H,W),\; \sigma_{\text{blur}}).\text{ravel}()$
+\EndFor
+\Ensure $A \in \R^{n \times n}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{remarkbox}[Subtilite : conditions aux bords]
+Le flou utilise \texttt{mode='wrap'} (conditions periodiques), ce qui rend $A$ une matrice circulante par blocs. Le fichier \file{operators.py} propose une version FFT (\func{GaussianBlurOperator}) qui exploite cette structure pour $A\,v$ en $O(n \log n)$ au lieu de $O(n^2)$, mais la construction explicite de $A$ est necessaire pour EMG-VBA (acces a $A^T A$, $(A^T A)_{ii}$).
+\end{remarkbox}
+
+\subsection{Precalculs pour EMG-VBA}
+\label{sec:precalculs}
+
+Avant la boucle reverse, on precalcule une fois pour toutes (dans \file{main.py}) :
+\begin{algorithm}[H]
+\caption{Precalculs --- \file{main.py}}
+\begin{algorithmic}[1]
+\Require $A \in \R^{n \times n}$, $y \in \R^n$ (en $[-1,1]$, vectorise)
+\State $A^T A \gets A^T \cdot A$ \Comment{numpy, $O(n^2 \cdot m)$, fait une seule fois}
+\State $A^T y \gets A^T \cdot y_{\text{flat}}$
+\State $(A^T A)_{\text{diag}} \gets \diag(A^T A)$ \Comment{vecteur des elements diagonaux}
+\end{algorithmic}
+\end{algorithm}
+
+%% ============================================================
+\section{Phase 3 : Inference conditionnelle (boucle reverse)}
+%% ============================================================
+
+\subsection{Architecture globale}
+
+Pour chaque pas $t = T{-}1, T{-}2, \ldots, 0$ :
+\begin{enumerate}
+  \item \textbf{Tweedie} : estimer $\xhat$ via le reseau $\varepsilon_\theta$ \quad (eq.~\eqref{eq:tweedie})
+  \item \textbf{EMG-VBA} : corriger $\xhat \to \mupost \approx \E[X_0|X_t, Y]$ \quad (eq.~\eqref{eq:mupost}--\eqref{eq:Sigmapost})
+  \item \textbf{Reverse step} : echantillonner $x_{t-1} | x_t, \mupost$ \quad (eq.~\eqref{eq:reverse})
+\end{enumerate}
+
+\subsection{Score conditionnel et $\mupost$}
+\label{sec:score}
+
+\begin{resultbox}[Score conditionnel \rapport{44}]
+\begin{equation}
+  \nabla_{x_t} \log p_t(x_t | y) = \frac{\sqrt{\abar_t}\,\mupost - x_t}{1 - \abar_t} \label{eq:score_cond}
+\end{equation}
+avec :
+\begin{align}
+  \Sigma_{\text{post}}^{-1} &= \frac{A^T A}{\sigma_b^2} + \frac{I_n}{r_t^2} \label{eq:Sigmapost} \\
+  \mupost &= \Sigma_{\text{post}} \left(\frac{A^T y}{\sigma_b^2} + \frac{\xhat(x_t)}{r_t^2}\right) \label{eq:mupost}
+\end{align}
+\end{resultbox}
+
+\noindent L'idee cle est de \textbf{remplacer} $\xhat$ par $\mupost$ dans le pas reverse, ce qui est \textbf{exactement equivalent} a utiliser le score conditionnel total (Resultat~X.5.1 du rapport). Les hyperparametres $\tau_r = 1/r_t^2$ et $\tau_b = 1/\sigma_b^2$ sont estimes automatiquement par EMG-VBA.
+
+\subsection{Modele hierarchique bayesien}
+
+\begin{resultbox}[Modele generatif \rapport{M1--M5}]
+\begin{align}
+  x_t | x_0 &\sim \N\!\left(\sqrt{\abar_t}\, x_0,\; (1-\abar_t)\, I_n\right) & \text{(M1 : forward)} \label{eq:M1}\\
+  x_0 | \tau_r &\sim \N\!\left(\xhat(x_t),\; \tau_r^{-1} I_n\right) & \text{(M2 : a priori $\Pi$GDM)} \label{eq:M2}\\
+  y | x_0, \tau_b &\sim \N\!\left(A x_0,\; \tau_b^{-1} I_m\right) & \text{(M3 : vraisemblance)} \label{eq:M3}\\
+  \tau_r &\sim \text{Gamma}(a_0, b_0) & \text{(M4 : a priori sur $\tau_r$)} \label{eq:M4}\\
+  \tau_b &\sim \text{Gamma}(c_0, d_0) & \text{(M5 : a priori sur $\tau_b$)} \label{eq:M5}
+\end{align}
+\end{resultbox}
+
+\subsection{Approximation variationnelle}
+
+\begin{resultbox}[Hypothese champ moyen \rapport{MF, 60}]
+On approche l'a posteriori $p_t(w|y)$ par :
+\begin{equation}
+  q(w) = \left(\prod_{i=1}^n q_i(x_{0,i})\right) \cdot q(\tau_r) \cdot q(\tau_b) \label{eq:MF}
+\end{equation}
+avec $q_i(x_{0,i}) = \N(x_{0,i} | \mu_i, \Sigma_i)$ pour chaque pixel $i$.
+\end{resultbox}
+
+\begin{resultbox}[Objectif variationnel \rapport{58--59}]
+\begin{equation}
+  \min_q \mathrm{KL}[q \| p_t(\cdot|y)] \iff \max_q \; \mathcal{F}(q) = \E_q\!\left[\log \frac{p_t(w,y)}{q(w)}\right] \label{eq:elbo}
+\end{equation}
+\end{resultbox}
+
+\subsection{Log-vraisemblance jointe}
+
+\begin{resultbox}[Log-jointe \rapport{55}]
+\begin{multline}
+  \log p_t(w, y) = -\frac{\|x_t - \sqrt{\abar_t}\, x_0\|^2}{2(1-\abar_t)} \\
+  + \left(\tfrac{m}{2}+c_0-1\right)\!\log\tau_b - \left(d_0 + \tfrac{1}{2}\|y-Ax_0\|^2\right)\tau_b \\
+  + \left(\tfrac{n}{2}+a_0-1\right)\!\log\tau_r - \left(b_0 + \tfrac{1}{2}\|x_0-\xhat\|^2\right)\tau_r + \text{cte} \label{eq:logjointe}
+\end{multline}
+\end{resultbox}
+
+%% ============================================================
+\section{Phase 3a : Algorithme EMG-VBA (detail)}
+%% ============================================================
+
+L'algorithme EMG-VBA est execute $K$ fois \emph{a chaque pas de temps $t$} de la boucle reverse. Il met a jour les parametres variationnels $(\mu, \Sigma, \tau_r, \tau_b)$ en alternant quatre etapes.
+
+\subsection{Etape 1 : Mise a jour de $\langle\tau_b\rangle$ et $\langle\tau_r\rangle$}
+
+\begin{resultbox}[Distribution de reference pour $\tau_b$ \rapport{83--85}]
+\begin{align}
+  \tilde{a}_b &= \frac{m}{2} + c_0 \label{eq:atilde_b}\\
+  \tilde{b}_b &= d_0 + \frac{1}{2}\left(\|y - A\mu\|^2 + (A^TA)_{\text{diag}}^T \Sigma\right) \label{eq:btilde_b}\\
+  \langle\tau_b\rangle &= \tilde{a}_b \,/\, \tilde{b}_b \label{eq:tau_b}
+\end{align}
+\end{resultbox}
+
+\begin{resultbox}[Distribution de reference pour $\tau_r$ \rapport{92--94}]
+\begin{align}
+  \tilde{a}_r &= \frac{n}{2} + a_0 \label{eq:atilde_r}\\
+  \tilde{b}_r &= b_0 + \frac{1}{2}\left(\|\mu - \xhat\|^2 + \sum_i \Sigma_i\right) \label{eq:btilde_r}\\
+  \langle\tau_r\rangle &= \tilde{a}_r \,/\, \tilde{b}_r \label{eq:tau_r}
+\end{align}
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Mise a jour $\tau_r, \tau_b$ --- \file{emg\_vba\_1\_dim.py} $\to$ \func{mise\_a\_jour\_taur\_taub}}
+\begin{algorithmic}[1]
+\State \textcolor{gray}{// $\tau_b$ (precision du bruit de mesure)}
+\State $\tilde{a}_b \gets m/2 + c_0$ \Comment{eq.~\eqref{eq:atilde_b}}
+\State $\text{res} \gets y - A\mu$ \Comment{numpy, vecteur de taille $m$}
+\State $\tilde{b}_b \gets d_0 + \frac{1}{2}\left(\text{res}^T\text{res} + (A^TA)_{\text{diag}}^T \Sigma\right)$ \Comment{eq.~\eqref{eq:btilde_b}, produits scalaires vectorises}
+\State $\langle\tau_b\rangle \gets \tilde{a}_b / \tilde{b}_b$
+\State
+\State \textcolor{gray}{// $\tau_r$ (precision du denoiser)}
+\State $\tilde{a}_r \gets n/2 + a_0$ \Comment{eq.~\eqref{eq:atilde_r}}
+\State $\text{diff} \gets \mu - \xhat$
+\State $\tilde{b}_r \gets b_0 + \frac{1}{2}\left(\text{diff}^T\text{diff} + \mathbf{1}^T\Sigma\right)$ \Comment{eq.~\eqref{eq:btilde_r}}
+\State $\langle\tau_r\rangle \gets \tilde{a}_r / \tilde{b}_r$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Etape 2 : Distribution de reference $q_i^r(x_{0,i})$}
+
+\begin{resultbox}[Distribution de reference pour chaque pixel $x_{0,i}$ \rapport{102--104}]
+\begin{align}
+  (\Sigma_i^r)^{-1} &= \frac{\abar_t}{1-\abar_t} + \langle\tau_b\rangle (A^TA)_{ii} + \langle\tau_r\rangle \label{eq:Sigmar_inv}\\[4pt]
+  \mu_i^r &= \Sigma_i^r \left[\frac{\sqrt{\abar_t}}{1-\abar_t}(x_t)_i + \langle\tau_b\rangle\!\left((A^Ty)_i - (A^T\!A\mu^k)_i + (A^TA)_{ii}\mu_i^k\right) + \langle\tau_r\rangle(\xhat)_i\right] \label{eq:mur}
+\end{align}
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Distribution de reference --- \file{emg\_vba\_1\_dim.py} $\to$ \func{calculer\_distributions\_reference\_x0}}
+\begin{algorithmic}[1]
+\State \textcolor{gray}{// Toutes les operations sont vectorisees (vecteurs de taille $n$)}
+\State $(\Sigma^r)^{-1} \gets \frac{\abar_t}{1-\abar_t} + \langle\tau_b\rangle \cdot (A^TA)_{\text{diag}} + \langle\tau_r\rangle$ \Comment{eq.~\eqref{eq:Sigmar_inv}}
+\State $\Sigma^r \gets 1 / (\Sigma^r)^{-1}$ \Comment{division element par element}
+\State $\text{terme\_mesure} \gets A^Ty - (A^TA)\mu + (A^TA)_{\text{diag}} \odot \mu$ \Comment{eq.~\eqref{eq:mur}, astuce de soustraction}
+\State $\mu^r \gets \Sigma^r \odot \left(\frac{\sqrt{\abar_t}}{1-\abar_t} x_t + \langle\tau_b\rangle \cdot \text{terme\_mesure} + \langle\tau_r\rangle \cdot \xhat\right)$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{remarkbox}[Subtilite : astuce du terme mesure]
+Le terme $(A^Ty)_i - (A^TA\mu^k)_i + (A^TA)_{ii}\mu_i^k$ s'interprete comme $(A^Ty - A^TA\mu^k_{-i})_i$ (eq.~105 du rapport), c'est-a-dire le residu de vraisemblance en excluant le pixel $i$ courant. En code, on calcule d'abord le produit complet $A^TA\mu$ puis on corrige par l'ajout de $(A^TA)_{ii}\mu_i$, ce qui evite de former $\mu_{-i}$ explicitement.
+\end{remarkbox}
+
+\subsection{Etape 3 : Pas sous-optimal}
+
+\begin{resultbox}[Mise a jour multiplicative EMG (cas $s_2 = 0$) \rapport{77}]
+\begin{equation}
+  q_i^{k+1}(x_{0,i}) \propto q_i^k(x_{0,i})^{1-s_1} \cdot q_i^{r,k}(x_{0,i})^{s_1} \label{eq:maj_multi}
+\end{equation}
+soit pour des gaussiennes :
+\begin{align}
+  (\Sigma_i^{k+1})^{-1} &= \frac{1-s_1}{\Sigma_i^k} + \frac{s_1}{\Sigma_i^{r,k}} \label{eq:Sigma_update}\\
+  \mu_i^{k+1} &= \Sigma_i^{k+1}\left(\frac{(1-s_1)\mu_i^k}{\Sigma_i^k} + \frac{s_1 \mu_i^{r,k}}{\Sigma_i^{r,k}}\right) \label{eq:mu_update}
+\end{align}
+\end{resultbox}
+
+\noindent Le pas $s_1$ est determine par un developpement de Taylor d'ordre 2 de l'energie libre.
+
+\begin{resultbox}[Gradient et Hessienne de $g^{k+1}$ (cas 1D : $s_2 = 0$) \rapport{132--147}]
+
+\textit{Notations vectorielles :}
+\begin{align}
+  G_{\mu,i} &= \frac{\mu_i^r - \mu_i^k}{\Sigma_i^r}, \qquad G_{\Sigma,i} = \frac{1}{2}\left(\frac{1}{\Sigma_i^k} - \frac{1}{\Sigma_i^r}\right) \label{eq:G}
+\end{align}
+
+\textit{Derivees premieres par rapport a $s_1$ :}
+\begin{align}
+  \partial_1 \Sigma_i^{k+1} &= \Sigma_i^k - \frac{(\Sigma_i^k)^2}{\Sigma_i^r} \label{eq:d1Sigma}\\
+  \partial_1 \mu_i^{k+1} &= \frac{\Sigma_i^k}{\Sigma_i^r}\left(\mu_i^r - \mu_i^k\right) \label{eq:d1mu}
+\end{align}
+
+\textit{Gradient scalaire :}
+\begin{equation}
+  \nabla g_1 = G_\mu^T (\partial_1 \mu) + G_\Sigma^T (\partial_1 \Sigma) \label{eq:grad}
+\end{equation}
+
+\textit{Derivees secondes :}
+\begin{align}
+  \partial_{11} \Sigma_i^{k+1} &= \frac{2\,(\partial_1\Sigma_i^{k+1})^2}{\Sigma_i^k} \label{eq:d11Sigma}\\
+  \partial_{11} \mu_i^{k+1} &= \frac{2\,(\partial_1\Sigma_i^{k+1})(\partial_1\mu_i^{k+1})}{\Sigma_i^k} \label{eq:d11mu}
+\end{align}
+
+\textit{Hessienne scalaire :}
+\begin{equation}
+  H_{11} = G_\mu^T(\partial_{11}\mu) + G_\Sigma^T(\partial_{11}\Sigma) - (\partial_1\mu)^T M\, (\partial_1\mu) - \frac{1}{2}(\partial_1\Sigma)^T D\, (\partial_1\Sigma) \label{eq:hess}
+\end{equation}
+ou :
+\begin{align}
+  M &= \left(\frac{\abar_t}{1-\abar_t} + \langle\tau_r\rangle\right) I_n + \langle\tau_b\rangle A^TA \label{eq:M}\\
+  D &= \diag\!\left(\frac{1}{(\Sigma_1^k)^2}, \ldots, \frac{1}{(\Sigma_n^k)^2}\right) \label{eq:D}
+\end{align}
+
+\textit{Pas sous-optimal :}
+\begin{equation}
+  s_1^* = -\frac{\nabla g_1}{H_{11}}, \qquad \text{clippe dans } [0,1] \label{eq:s1}
+\end{equation}
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Pas sous-optimal --- \file{emg\_vba\_1\_dim.py} $\to$ \func{calculer\_pas\_sousopt}}
+\begin{algorithmic}[1]
+\State \textcolor{gray}{// Vecteurs $G_\mu$, $G_\Sigma$ (eq.~\eqref{eq:G})}
+\State $G_\mu \gets (\mu^r - \mu) / \Sigma^r$ \Comment{vecteur de taille $n$}
+\State $G_\Sigma \gets \frac{1}{2}\left(1/\Sigma - 1/\Sigma^r\right)$
+\State
+\State \textcolor{gray}{// Derivees premieres (eq.~\eqref{eq:d1Sigma}--\eqref{eq:d1mu})}
+\State $\partial_1\Sigma \gets \Sigma - \Sigma^2 / \Sigma^r$
+\State $\partial_1\mu \gets (\Sigma / \Sigma^r) \odot (\mu^r - \mu)$
+\State
+\State \textcolor{gray}{// Gradient (eq.~\eqref{eq:grad})}
+\State $\nabla g_1 \gets G_\mu^T \partial_1\mu + G_\Sigma^T \partial_1\Sigma$ \Comment{deux produits scalaires}
+\State
+\State \textcolor{gray}{// Derivees secondes (eq.~\eqref{eq:d11Sigma}--\eqref{eq:d11mu})}
+\State $\partial_{11}\Sigma \gets 2\,(\partial_1\Sigma)^2 / \Sigma$
+\State $\partial_{11}\mu \gets 2\,(\partial_1\Sigma) \odot (\partial_1\mu) / \Sigma$
+\State
+\State \textcolor{gray}{// Hessienne : terme $M$ (eq.~\eqref{eq:hess}--\eqref{eq:M})}
+\State $\text{coeff} \gets \abar_t/(1-\abar_t) + \langle\tau_r\rangle$
+\State $A\,\partial_1\mu \gets A \cdot \partial_1\mu$ \Comment{produit matrice-vecteur, $O(mn)$}
+\State terme\_M $\gets \text{coeff} \cdot \|\partial_1\mu\|^2 + \langle\tau_b\rangle \cdot \|A\,\partial_1\mu\|^2$
+\State
+\State \textcolor{gray}{// Hessienne : terme $D$ (eq.~\eqref{eq:D})}
+\State terme\_D $\gets \frac{1}{2}\sum_i (\partial_1\Sigma_i)^2 / (\Sigma_i)^2$
+\State
+\State $H_{11} \gets G_\mu^T(\partial_{11}\mu) + G_\Sigma^T(\partial_{11}\Sigma) - \text{terme\_M} - \text{terme\_D}$
+\State $s_1 \gets \text{clip}(-\nabla g_1 / H_{11},\; 0,\; 1)$ \Comment{eq.~\eqref{eq:s1}}
+\Ensure $s_1$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Etape 4 : Mise a jour de $q(x_0)$}
+
+\begin{algorithm}[H]
+\caption{Mise a jour de $\mu$ et $\Sigma$ --- \file{emg\_vba\_1\_dim.py} $\to$ \func{mise\_a\_jour\_x0}}
+\begin{algorithmic}[1]
+\Require $s_1$, $\mu^k$, $\Sigma^k$, $\mu^r$, $\Sigma^r$ (tous vecteurs numpy de taille $n$)
+\State $\mu^{k-1} \gets \mu^k.\text{copy}()$ \Comment{sauvegarde pour la memoire (utilise quand $s_2 \neq 0$)}
+\State $\Sigma^{k-1} \gets \Sigma^k.\text{copy}()$
+\State
+\State $(\Sigma^{k+1})^{-1} \gets (1-s_1)/\Sigma^k + s_1/\Sigma^r$ \Comment{eq.~\eqref{eq:Sigma_update}}
+\State $\Sigma^{k+1} \gets 1/(\Sigma^{k+1})^{-1}$
+\State $\mu^{k+1} \gets \Sigma^{k+1} \odot \left((1-s_1)\mu^k/\Sigma^k + s_1\mu^r/\Sigma^r\right)$ \Comment{eq.~\eqref{eq:mu_update}}
+\State
+\State $\mu \gets \mu^{k+1}$, \quad $\Sigma \gets \Sigma^{k+1}$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Energie libre negative (diagnostic)}
+
+\begin{resultbox}[Energie libre negative \rapport{59, 113--114}]
+\begin{multline}
+  \mathcal{F}(q) = \underbrace{-\frac{1}{2(1-\abar_t)}\left(\|x_t - \sqrt{\abar_t}\mu\|^2 + \abar_t \sum_i \Sigma_i\right)}_{\text{forward}} \\
+  + \underbrace{\left(\tfrac{m}{2}+c_0-1\right)\langle\log\tau_b\rangle - \left(d_0 + \tfrac{1}{2}\left(\|y-A\mu\|^2 + (A^TA)_{\text{diag}}^T\Sigma\right)\right)\langle\tau_b\rangle}_{\text{mesure}} \\
+  + \underbrace{\left(\tfrac{n}{2}+a_0-1\right)\langle\log\tau_r\rangle - \left(b_0 + \tfrac{1}{2}\left(\|\mu-\xhat\|^2 + \|\Sigma\|_1\right)\right)\langle\tau_r\rangle}_{\text{a priori}} \\
+  + \underbrace{\frac{1}{2}\sum_i \log\Sigma_i + \text{cte}}_{\text{entropie}} \label{eq:energy}
+\end{multline}
+ou $\langle\log\tau_r\rangle = \psi(\tilde{a}_r) - \log(\tilde{b}_r)$ et $\langle\log\tau_b\rangle = \psi(\tilde{a}_b) - \log(\tilde{b}_b)$ avec $\psi$ la fonction digamma.
+
+\textbf{Propriete fondamentale :} $\mathcal{F}(q)$ doit \textbf{croitre} a chaque iteration $k$ (Resultat XII.2.1).
+\end{resultbox}
+
+\subsection{Synthese : boucle EMG-VBA interne}
+
+\begin{algorithm}[H]
+\caption{EMG-VBA complet a $t$ fixe --- \file{emg\_vba\_1\_dim.py} $\to$ \func{executer}}
+\begin{algorithmic}[1]
+\Require $A$, $y$, $\abar_t$, $x_t$, $\xhat$, $(a_0, b_0, c_0, d_0)$, $K$ iterations, $\mu_{\text{init}}$, $\Sigma_{\text{init}}$
+\State $\mu \gets \mu_{\text{init}}$, \quad $\Sigma \gets \Sigma_{\text{init}}$
+\For{$k = 0, \ldots, K-1$}
+  \State \textbf{Etape 1 :} Mise a jour $\langle\tau_b\rangle, \langle\tau_r\rangle$ \Comment{eq.~\eqref{eq:atilde_b}--\eqref{eq:tau_r}}
+  \State \textbf{Etape 2 :} Calculer $\mu^r, \Sigma^r$ \Comment{eq.~\eqref{eq:Sigmar_inv}--\eqref{eq:mur}}
+  \State \textbf{Etape 3 :} Calculer $s_1$ \Comment{eq.~\eqref{eq:s1}}
+  \State \textbf{Etape 4 :} Mettre a jour $\mu, \Sigma$ \Comment{eq.~\eqref{eq:Sigma_update}--\eqref{eq:mu_update}}
+  \State Calculer $\mathcal{F}(q)$ \Comment{eq.~\eqref{eq:energy}, diagnostic}
+\EndFor
+\Ensure $\mu$ (= $\mupost$), $\Sigma$, $\langle\tau_r\rangle$, $\langle\tau_b\rangle$, historique
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Initialisation de EMG-VBA}
+\label{sec:init}
+
+\begin{remarkbox}[Subtilite critique : initialisation]
+
+\textbf{Premier appel} ($t = T{-}1$, pas de warm start) :
+\begin{itemize}[nosep]
+  \item $\mu_{\text{init}} = \xhat$ \quad (centre sur l'estimateur de Tweedie)
+  \item $\Sigma_{\text{init}} = r_t^2 \cdot \mathbf{1}_n$ \quad avec $r_t^2 = (1-\abar_t)/\abar_t$ \rapport{VII.6.1}
+\end{itemize}
+
+\textbf{Appels suivants} ($t < T{-}1$, warm start active) :
+\begin{itemize}[nosep]
+  \item $\mu_{\text{init}} = \mu$ du pas precedent (etat retourne par \var{state})
+  \item $\Sigma_{\text{init}} = \Sigma$ du pas precedent
+\end{itemize}
+Le warm start permet de repartir d'un bon point initial au lieu de reinitialiser depuis Tweedie a chaque pas, ce qui accelere la convergence de EMG-VBA.
+\end{remarkbox}
+
+%% ============================================================
+\section{Phase 3b : Pas reverse DDPM conditionnel}
+%% ============================================================
+
+\begin{resultbox}[Pas reverse DDPM conditionnel \rapport{45}]
+\begin{equation}
+  x_{t-1} = \frac{\sqrt{\abar_{t-1}}\,\beta_t}{1-\abar_t}\,\mupost + \frac{\sqrt{\alpha_t}(1-\abar_{t-1})}{1-\abar_t}\,x_t + \sqrt{\tilde{\beta}_t}\,z \label{eq:reverse}
+\end{equation}
+avec $z \sim \N(0, I_n)$ et $\tilde{\beta}_t = \frac{(1-\abar_{t-1})\beta_t}{1-\abar_t}$.
+\end{resultbox}
+
+\begin{algorithm}[H]
+\caption{Pas reverse DDPM --- \file{Reverse.py} $\to$ \func{reverse\_step\_ddpm}}
+\begin{algorithmic}[1]
+\Require $x_t$ (torch), $\mupost$ (torch), $t$, $\bar{\boldsymbol{\alpha}}$, $\boldsymbol{\alpha}$, $\boldsymbol{\beta}$
+\State $\abar_t \gets \bar{\boldsymbol{\alpha}}[t]$, \quad $\abar_{t-1} \gets \bar{\boldsymbol{\alpha}}[t{-}1]$, \quad $\beta_t \gets \boldsymbol{\beta}[t]$, \quad $\alpha_t \gets \boldsymbol{\alpha}[t]$
+\State $\text{coef}_{x_0} \gets \sqrt{\abar_{t-1}} \cdot \beta_t \,/\, (1-\abar_t)$
+\State $\text{coef}_{x_t} \gets \sqrt{\alpha_t} \cdot (1-\abar_{t-1}) \,/\, (1-\abar_t)$
+\State $\mu \gets \text{coef}_{x_0} \cdot \mupost + \text{coef}_{x_t} \cdot x_t$
+\State $\tilde{\beta}_t \gets (1-\abar_{t-1}) \cdot \beta_t \,/\, (1-\abar_t)$
+\State $z \gets \text{torch.randn\_like}(x_t)$
+\Ensure $\mu + \sqrt{\tilde{\beta}_t} \cdot z$
+\end{algorithmic}
+\end{algorithm}
+
+%% ============================================================
+\section{Phase 3c : Boucle reverse complete}
+%% ============================================================
+
+\begin{algorithm}[H]
+\caption{Echantillonnage conditionnel complet --- \file{Reverse.py} $\to$ \func{sample\_conditional}}
+\begin{algorithmic}[1]
+\Require reseau $\varepsilon_\theta$ (torch, GPU), schedule, $y$ (numpy, CPU), $A$ (numpy), $(C,H,W)$, $N_s$ samples
+\Require parametres EMG : $K$, $t_{\text{skip}}$, $(a_0, b_0, c_0, d_0)$, precalculs $A^TA$, $A^Ty$, $(A^TA)_{\text{diag}}$
+\State
+\State $x_T \gets \text{torch.randn}(N_s, C, H, W)$ \Comment{$x_T \sim \N(0,I)$, GPU}
+\State warm\_starts $\gets [\text{None}] \times N_s$ \Comment{un etat par sample}
+\State
+\For{$t = T{-}1, T{-}2, \ldots, 0$} \Comment{boucle reverse}
+  \State
+  \State \textcolor{gray}{// -- Etape 1 : Tweedie (GPU, torch) --}
+  \State $\varepsilon_{\text{pred}} \gets \varepsilon_\theta(x_t, t)$ \Comment{passe forward du UNet}
+  \State $\xhat \gets \func{tweedie\_estimate}(x_t, \varepsilon_{\text{pred}}, t)$ \Comment{eq.~\eqref{eq:tweedie}}
+  \State
+  \State \textcolor{gray}{// -- Etape 2 : EMG-VBA (CPU, numpy) --}
+  \If{$t \geq t_{\text{skip}}$} \Comment{correction activee}
+    \For{$b = 0, \ldots, N_s - 1$}
+      \State $x_t^{(\text{np})} \gets x_t[b].\text{cpu().numpy().ravel()}$ \Comment{torch $\to$ numpy}
+      \State $\xhat^{(\text{np})} \gets \xhat[b].\text{cpu().numpy().ravel()}$
+      \State
+      \State $\mupost^{(b)}, \text{state} \gets \func{emg\_vba\_correction}($
+      \State \qquad $x_t^{(\text{np})}, \xhat^{(\text{np})}, \abar_t, y, A, K, \ldots,$ warm\_start=warm\_starts$[b])$
+      \State
+      \State warm\_starts$[b] \gets \text{state}$ \Comment{warm start pour le pas $t-1$}
+      \State $\mupost^{(b)} \gets \text{torch}(\mupost^{(b)}.\text{reshape}(C,H,W))$ \Comment{numpy $\to$ torch}
+    \EndFor
+    \State $\mupost \gets \text{torch.stack}([\mupost^{(0)}, \ldots]).\text{to(GPU)}$
+  \Else
+    \State $\mupost \gets \xhat$ \Comment{pas de correction apres $t_{\text{skip}}$}
+  \EndIf
+  \State
+  \State \textcolor{gray}{// -- Etape 3 : Pas reverse (GPU, torch) --}
+  \If{$t = 0$}
+    \State $x_t \gets \mupost$ \Comment{pas de bruit au dernier pas}
+  \Else
+    \State $x_t \gets \func{reverse\_step\_ddpm}(x_t, \mupost, t)$ \Comment{eq.~\eqref{eq:reverse}}
+  \EndIf
+\EndFor
+\State
+\State \textcolor{gray}{// -- Reconversion $[-1,1] \to [0,1]$ --}
+\State $x_{\text{rec}} \gets (\text{clamp}(x_t, -1, 1) + 1) / 2$
+\Ensure $x_{\text{rec}}$, diagnostics
+\end{algorithmic}
+\end{algorithm}
+
+\begin{remarkbox}[Subtilites d'implementation]
+\begin{enumerate}[nosep]
+  \item \textbf{Transferts torch $\leftrightarrow$ numpy.} Le reseau $\varepsilon_\theta$ fonctionne sur GPU (torch), tandis que EMG-VBA fonctionne sur CPU (numpy) pour l'algebre lineaire dense ($A^TA$, produits matrice-vecteur). A chaque pas $t$, il y a donc un aller-retour GPU$\to$CPU$\to$GPU.
+  \item \textbf{Warm start inter-pas.} L'etat $(\mu, \Sigma, \tau_r, \tau_b)$ est propage du pas $t$ au pas $t-1$ via le dictionnaire \var{state}. Cela evite de repartir de zero et permet a EMG-VBA de converger en peu d'iterations ($K \approx 10$).
+\end{enumerate}
+\end{remarkbox}
+
+%% ============================================================
+\section{Phase 4 : Orchestration}
+%% ============================================================
+
+\begin{algorithm}[H]
+\caption{Pipeline complete --- \file{main.py} $\to$ \func{main}}
+\begin{algorithmic}[1]
+\State \textcolor{gray}{// -- 1. Degradation --}
+\State $x_0 \gets \func{load\_and\_resize}(\text{image}, H)$ \Comment{$[0,1]$}
+\State $y \gets \func{blur}(x_0, \sigma_{\text{blur}})$ \Comment{$[0,1]$}
+\State $x_0 \gets 2x_0 - 1$, \quad $y \gets 2y - 1$ \Comment{$\to [-1,1]$}
+\State
+\State \textcolor{gray}{// -- 2. Precalculs (une seule fois) --}
+\State $A \gets \func{build\_A}(\sigma_{\text{blur}}, H)$ \Comment{$\R^{n \times n}$}
+\State $A^TA,\; A^Ty,\; (A^TA)_{\text{diag}} \gets$ precalculs \Comment{\S\ref{sec:precalculs}}
+\State
+\State \textcolor{gray}{// -- 3. Chargement modele --}
+\State $\varepsilon_\theta \gets \func{load\_net}(\text{ckpt\_dir})$ \Comment{poids EMA}
+\State schedule $\gets \func{DDPMSchedule}(T, \beta_{\min}, \beta_{\max})$
+\State
+\State \textcolor{gray}{// -- 4. Reconstruction --}
+\State $x_{\text{rec}} \gets \func{sample\_conditional}(\varepsilon_\theta, \text{schedule}, y, A, \ldots)$
+\State
+\State \textcolor{gray}{// -- 5. Sauvegarde et affichage --}
+\State Sauvegarder $x_{\text{rec}}$ en PNG et NPY
+\State Afficher triplet (originale, floutee, reconstruite)
+\State Afficher courbes $\mathcal{F}(q)$ vs $k$ pour les pas $t$ monitores
+\end{algorithmic}
+\end{algorithm}
+
+%% ============================================================
+\section{Recapitulatif des equations}
+%% ============================================================
+
+\begin{center}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{Eq.} & \textbf{Nom} & \textbf{Rapport} & \textbf{Code} \\
+\midrule
+\eqref{eq:beta}--\eqref{eq:sigma} & Schedule DDPM & Def.~III.3.1 & \file{Schedules.py} \\
+\eqref{eq:forward} & Forward process & Res.~III.3.1 & \file{Forward.py}:\func{forward\_process} \\
+\eqref{eq:tweedie} & Tweedie & Eq.~(12) & \file{Forward.py}:\func{tweedie\_estimate} \\
+\eqref{eq:loss} & Loss DSM & Eq.~(15) & \file{Training.py}:\func{train} \\
+\eqref{eq:obs} & Modele d'observation & Hyp.~(H2) & \file{degrade.py} \\
+\eqref{eq:score_cond} & Score conditionnel & Res.~X.4.1 (44) & implicite via $\mupost$ \\
+\eqref{eq:mupost} & $\mupost$ & Res.~X.3.1 (41) & \file{emg\_vba\_1\_dim.py} \\
+\eqref{eq:M1}--\eqref{eq:M5} & Modele hierarchique & Hyp.~XI.2.1 & \file{emg\_vba\_1\_dim.py} \\
+\eqref{eq:MF} & Champ moyen & Hyp.~XII.3.1 & \file{emg\_vba\_1\_dim.py} \\
+\eqref{eq:elbo} & ELBO & Res.~XII.2.1 (58) & \func{calculer\_energie\_libre\_negative} \\
+\eqref{eq:logjointe} & Log-jointe & Res.~XI.4.1 (55) & \func{calculer\_energie\_libre\_negative} \\
+\eqref{eq:atilde_b}--\eqref{eq:tau_b} & Ref.~$\tau_b$ & Prop.~XIII.8.1 (83--85) & \func{mise\_a\_jour\_taur\_taub} \\
+\eqref{eq:atilde_r}--\eqref{eq:tau_r} & Ref.~$\tau_r$ & Prop.~XIII.8.2 (92--94) & \func{mise\_a\_jour\_taur\_taub} \\
+\eqref{eq:Sigmar_inv}--\eqref{eq:mur} & Ref.~$x_{0,i}$ & Prop.~XIII.8.3 (102--104) & \func{calculer\_distributions\_reference\_x0} \\
+\eqref{eq:Sigma_update}--\eqref{eq:mu_update} & Maj.~$q(x_0)$ & Prop.~XIII.8.4 (115--116) & \func{mise\_a\_jour\_x0} \\
+\eqref{eq:G}--\eqref{eq:s1} & Pas sous-optimal & Res.~XIII.9.1 (139--147) & \func{calculer\_pas\_sousopt} \\
+\eqref{eq:energy} & Energie libre & Eq.~(59), (113--114) & \func{calculer\_energie\_libre\_negative} \\
+\eqref{eq:reverse} & Reverse DDPM & Res.~X.5.1 (45) & \func{reverse\_step\_ddpm} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%% ============================================================
+\section{Hyperparametres}
+%% ============================================================
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{Parametre} & \textbf{Valeur} & \textbf{Role} & \textbf{Fichier} \\
+\midrule
+$T$ & 1000 & Nombre de pas de diffusion & \file{main.py} \\
+$\beta_{\min}, \beta_{\max}$ & $10^{-4}, 0.02$ & Bornes du schedule lineaire & \file{main.py} \\
+$\sigma_{\text{blur}}$ & 1.5 & Ecart-type du flou gaussien & \file{main.py} \\
+Taille image & $64 \times 64$ & Resolution de travail & \file{main.py} \\
+$K$ (EMG) & 10 & Iterations EMG-VBA par pas $t$ & \file{main.py} \\
+$t_{\text{skip}}$ & 0 & Desactivation EMG apres ce pas & \file{main.py} \\
+$a_0, b_0, c_0, d_0$ & $10^{-3}$ & A prioris vagues (Gamma) & \file{main.py} \\
+$\lambda_{\text{EMA}}$ & 0.9999 & Decay EMA & \file{Training.py} \\
+$\gamma_{\text{clip}}$ & 1.0 & Gradient clipping & \file{Training.py} \\
+lr & $2 \times 10^{-4}$ & Learning rate & \file{Training.py} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

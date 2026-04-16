@@ -42,7 +42,7 @@ def emg_vba_correction(x_t_np, xhat0_np, alpha_bar_t, y_np, A_matrix,
     
     n = len(x_t_np)
 
-    # --- Initialisation ---
+    ## Init
     if warm_start is not None:
         mu_init    = warm_start['mu']
         Sigma_init = warm_start['Sigma']
@@ -51,7 +51,7 @@ def emg_vba_correction(x_t_np, xhat0_np, alpha_bar_t, y_np, A_matrix,
         r2_t       = (1.0 - alpha_bar_t) / max(alpha_bar_t, 1e-8)  # r^2_t = (1-alpha_bar_t)/alpha_bar_t — Hypothèses VII.6.1
         Sigma_init = np.full(n, r2_t)
 
-    # --- EMG-VBA ---
+    ## EMG-VBA
     emg = EMG_VBA(
         A=A_matrix, y=y_np,
         alpha_bar_t=alpha_bar_t,
@@ -80,13 +80,13 @@ def emg_vba_correction(x_t_np, xhat0_np, alpha_bar_t, y_np, A_matrix,
 
 
 # =====================================================================
-#   Pour chaque pas t = T, ..., 1 :
-#     1. Tweedie (12)
-#     2. EMG-VBA :  mu_post approx E[X_0|X_t, Y] (27)
-#                   (estime tau_r, tau_b en interne  (75)/(85))
-#     3. Reverse :  x_{t-1} approx q(.|x_t, mu_post) - Section VI.2
+# Pour chaque pas t = T, ..., 1 :
+# 1. Tweedie (12)
+# 2. EMG-VBA :  mu_post approx E[X_0|X_t, Y] (27)
+# (estime tau_r, tau_b en interne  (75)/(85))
+# 3. Reverse :  x_{t-1} approx q(.|x_t, mu_post) - Section VI.2
 #
-#   Remplacer x_0 chapeau par mu_post <=> score conditionnel  (36) RÉDIGER preuve un jour
+# Remplacer x_0 chapeau par mu_post <=> score conditionnel  (36) RÉDIGER preuve un jour
 # =====================================================================
 
 @torch.no_grad()
@@ -113,11 +113,11 @@ def sample_conditional(net, schedule, y_np, A_matrix, shape,
         t_batch     = torch.full((n_samples,), t_val, device=device, dtype=torch.long)
         alpha_bar_t = alphas_bar[t_val].item()
 
-        # --- Étape 1 : Tweedie ---
+        # Étape 1 : Tweedie
         eps_pred = net(x_t, t_batch)
         xhat0    = tweedie_estimate(x_t, eps_pred, t_batch, alphas_bar, sigmas)
 
-        # --- Étape 2 : EMG-VBA -> mu_post ---
+        # Étape 2 : EMG-VBA -> mu_post
         if t_val >= emg_skip_after:
             mu_post_list = []
             for b in range(n_samples):
@@ -142,7 +142,7 @@ def sample_conditional(net, schedule, y_np, A_matrix, shape,
         else:
             mu_post_tensor = xhat0  # pas de correction, mu_post = x_0 chapeau
 
-        # --- Étape 3 : Pas reverse ---
+        # Étape 3 : Pas reverse
         if t_val == 0:
             x_t = mu_post_tensor
         elif schedule.variant in ('ddpm', 'vpou'):

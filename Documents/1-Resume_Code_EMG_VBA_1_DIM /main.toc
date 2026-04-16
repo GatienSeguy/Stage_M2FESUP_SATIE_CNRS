@@ -1,0 +1,30 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {I}Vue d'ensemble de la pipeline}{3}{section.1}%
+\contentsline {section}{\numberline {II}Phase 1 : Entrainement du reseau $\varepsilon _\theta $}{4}{section.2}%
+\contentsline {subsection}{\numberline {II.1}Schedule DDPM}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {II.2}Processus forward}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {II.3}Formule de Tweedie}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {II.4}Objectif d'entrainement}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {III}Phase 2 : Degradation de l'image}{6}{section.3}%
+\contentsline {subsection}{\numberline {III.1}Modele d'observation}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {III.2}Construction de l'operateur $A$}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {III.3}Precalculs pour EMG-VBA}{6}{subsection.3.3}%
+\contentsline {section}{\numberline {IV}Phase 3 : Inference conditionnelle (boucle reverse)}{7}{section.4}%
+\contentsline {subsection}{\numberline {IV.1}Architecture globale}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {IV.2}Score conditionnel et $\mu _{\mathrm {post}}$}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {IV.3}Modele hierarchique bayesien}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {IV.4}Approximation variationnelle}{8}{subsection.4.4}%
+\contentsline {subsection}{\numberline {IV.5}Log-vraisemblance jointe}{8}{subsection.4.5}%
+\contentsline {section}{\numberline {V}Phase 3a : Algorithme EMG-VBA (detail)}{8}{section.5}%
+\contentsline {subsection}{\numberline {V.1}Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {V.2}Etape 2 : Distribution de reference $q_i^r(x_{0,i})$}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {V.3}Etape 3 : Pas sous-optimal}{10}{subsection.5.3}%
+\contentsline {subsection}{\numberline {V.4}Etape 4 : Mise a jour de $q(x_0)$}{12}{subsection.5.4}%
+\contentsline {subsection}{\numberline {V.5}Energie libre negative (diagnostic)}{13}{subsection.5.5}%
+\contentsline {subsection}{\numberline {V.6}Synthese : boucle EMG-VBA interne}{13}{subsection.5.6}%
+\contentsline {subsection}{\numberline {V.7}Initialisation de EMG-VBA}{13}{subsection.5.7}%
+\contentsline {section}{\numberline {VI}Phase 3b : Pas reverse DDPM conditionnel}{14}{section.6}%
+\contentsline {section}{\numberline {VII}Phase 3c : Boucle reverse complete}{15}{section.7}%
+\contentsline {section}{\numberline {VIII}Phase 4 : Orchestration}{16}{section.8}%
+\contentsline {section}{\numberline {IX}Recapitulatif des equations}{16}{section.9}%
+\contentsline {section}{\numberline {X}Hyperparametres}{17}{section.10}%

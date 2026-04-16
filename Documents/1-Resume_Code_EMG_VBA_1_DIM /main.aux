@@ -1,0 +1,103 @@
+\relax 
+\providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
+\@nameuse{bbl@beforestart}
+\catcode `:\active 
+\catcode `;\active 
+\catcode `!\active 
+\catcode `?\active 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\babel@aux{french}{}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Vue d'ensemble de la pipeline}{3}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Phase 1 : Entrainement du reseau $\varepsilon _\theta $}{4}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.1}Schedule DDPM}{4}{subsection.2.1}\protected@file@percent }
+\newlabel{sec:schedule}{{II.1}{4}{Schedule DDPM}{subsection.2.1}{}}
+\newlabel{eq:beta}{{1}{4}{Schedule DDPM}{equation.1}{}}
+\newlabel{eq:alpha}{{2}{4}{Schedule DDPM}{equation.2}{}}
+\newlabel{eq:alphabar}{{3}{4}{Schedule DDPM}{equation.3}{}}
+\newlabel{eq:sigma}{{4}{4}{Schedule DDPM}{equation.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Initialisation du schedule DDPM --- \texttt  {\color  {codeblue}Schedules.py} $\to $ \texttt  {\color  {codered}DDPMSchedule.\_\_init\_\_}}}{4}{algorithm.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.2}Processus forward}{4}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:forward}{{II.2}{4}{Processus forward}{subsection.2.2}{}}
+\newlabel{eq:forward}{{5}{4}{Processus forward}{equation.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Processus forward --- \texttt  {\color  {codeblue}Forward.py} $\to $ \texttt  {\color  {codered}forward\_process}}}{4}{algorithm.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.3}Formule de Tweedie}{5}{subsection.2.3}\protected@file@percent }
+\newlabel{sec:tweedie}{{II.3}{5}{Formule de Tweedie}{subsection.2.3}{}}
+\newlabel{eq:tweedie}{{6}{5}{Formule de Tweedie}{equation.6}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Estimateur de Tweedie --- \texttt  {\color  {codeblue}Forward.py} $\to $ \texttt  {\color  {codered}tweedie\_estimate}}}{5}{algorithm.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.4}Objectif d'entrainement}{5}{subsection.2.4}\protected@file@percent }
+\newlabel{eq:loss}{{7}{5}{Objectif d'entrainement}{equation.7}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Boucle d'entrainement --- \texttt  {\color  {codeblue}Training.py} $\to $ \texttt  {\color  {codered}train}}}{5}{algorithm.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Phase 2 : Degradation de l'image}{6}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III.1}Modele d'observation}{6}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:obs}{{8}{6}{Modele d'observation}{equation.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III.2}Construction de l'operateur $A$}{6}{subsection.3.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Construction de la matrice $A$ --- \texttt  {\color  {codeblue}degrade.py} $\to $ \texttt  {\color  {codered}build\_A}}}{6}{algorithm.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III.3}Precalculs pour EMG-VBA}{6}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:precalculs}{{III.3}{6}{Precalculs pour EMG-VBA}{subsection.3.3}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces Precalculs --- \texttt  {\color  {codeblue}main.py}}}{7}{algorithm.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Phase 3 : Inference conditionnelle (boucle reverse)}{7}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.1}Architecture globale}{7}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.2}Score conditionnel et $\mu _{\mathrm  {post}}$}{7}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:score}{{IV.2}{7}{Score conditionnel et $\mupost $}{subsection.4.2}{}}
+\newlabel{eq:score_cond}{{9}{7}{Score conditionnel et $\mupost $}{equation.9}{}}
+\newlabel{eq:Sigmapost}{{10}{7}{Score conditionnel et $\mupost $}{equation.10}{}}
+\newlabel{eq:mupost}{{11}{7}{Score conditionnel et $\mupost $}{equation.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.3}Modele hierarchique bayesien}{7}{subsection.4.3}\protected@file@percent }
+\newlabel{eq:M1}{{12}{8}{Modele hierarchique bayesien}{equation.12}{}}
+\newlabel{eq:M2}{{13}{8}{Modele hierarchique bayesien}{equation.13}{}}
+\newlabel{eq:M3}{{14}{8}{Modele hierarchique bayesien}{equation.14}{}}
+\newlabel{eq:M4}{{15}{8}{Modele hierarchique bayesien}{equation.15}{}}
+\newlabel{eq:M5}{{16}{8}{Modele hierarchique bayesien}{equation.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.4}Approximation variationnelle}{8}{subsection.4.4}\protected@file@percent }
+\newlabel{eq:MF}{{17}{8}{Approximation variationnelle}{equation.17}{}}
+\newlabel{eq:elbo}{{18}{8}{Approximation variationnelle}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.5}Log-vraisemblance jointe}{8}{subsection.4.5}\protected@file@percent }
+\newlabel{eq:logjointe}{{19}{8}{Log-vraisemblance jointe}{equation.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Phase 3a : Algorithme EMG-VBA (detail)}{8}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.1}Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{9}{subsection.5.1}\protected@file@percent }
+\newlabel{eq:atilde_b}{{20}{9}{Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{equation.20}{}}
+\newlabel{eq:btilde_b}{{21}{9}{Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{equation.21}{}}
+\newlabel{eq:tau_b}{{22}{9}{Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{equation.22}{}}
+\newlabel{eq:atilde_r}{{23}{9}{Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{equation.23}{}}
+\newlabel{eq:btilde_r}{{24}{9}{Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{equation.24}{}}
+\newlabel{eq:tau_r}{{25}{9}{Etape 1 : Mise a jour de $\langle \tau _b\rangle $ et $\langle \tau _r\rangle $}{equation.25}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces Mise a jour $\tau _r, \tau _b$ --- \texttt  {\color  {codeblue}emg\_vba\_1\_dim.py} $\to $ \texttt  {\color  {codered}mise\_a\_jour\_taur\_taub}}}{9}{algorithm.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.2}Etape 2 : Distribution de reference $q_i^r(x_{0,i})$}{9}{subsection.5.2}\protected@file@percent }
+\newlabel{eq:Sigmar_inv}{{26}{10}{Etape 2 : Distribution de reference $q_i^r(x_{0,i})$}{equation.26}{}}
+\newlabel{eq:mur}{{27}{10}{Etape 2 : Distribution de reference $q_i^r(x_{0,i})$}{equation.27}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces Distribution de reference --- \texttt  {\color  {codeblue}emg\_vba\_1\_dim.py} $\to $ \texttt  {\color  {codered}calculer\_distributions\_reference\_x0}}}{10}{algorithm.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.3}Etape 3 : Pas sous-optimal}{10}{subsection.5.3}\protected@file@percent }
+\newlabel{eq:maj_multi}{{28}{10}{Etape 3 : Pas sous-optimal}{equation.28}{}}
+\newlabel{eq:Sigma_update}{{29}{10}{Etape 3 : Pas sous-optimal}{equation.29}{}}
+\newlabel{eq:mu_update}{{30}{10}{Etape 3 : Pas sous-optimal}{equation.30}{}}
+\newlabel{eq:G}{{31}{10}{Etape 3 : Pas sous-optimal}{equation.31}{}}
+\newlabel{eq:d1Sigma}{{32}{11}{Etape 3 : Pas sous-optimal}{equation.32}{}}
+\newlabel{eq:d1mu}{{33}{11}{Etape 3 : Pas sous-optimal}{equation.33}{}}
+\newlabel{eq:grad}{{34}{11}{Etape 3 : Pas sous-optimal}{equation.34}{}}
+\newlabel{eq:d11Sigma}{{35}{11}{Etape 3 : Pas sous-optimal}{equation.35}{}}
+\newlabel{eq:d11mu}{{36}{11}{Etape 3 : Pas sous-optimal}{equation.36}{}}
+\newlabel{eq:hess}{{37}{11}{Etape 3 : Pas sous-optimal}{equation.37}{}}
+\newlabel{eq:M}{{38}{11}{Etape 3 : Pas sous-optimal}{equation.38}{}}
+\newlabel{eq:D}{{39}{11}{Etape 3 : Pas sous-optimal}{equation.39}{}}
+\newlabel{eq:s1}{{40}{11}{Etape 3 : Pas sous-optimal}{equation.40}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {9}{\ignorespaces Pas sous-optimal --- \texttt  {\color  {codeblue}emg\_vba\_1\_dim.py} $\to $ \texttt  {\color  {codered}calculer\_pas\_sousopt}}}{12}{algorithm.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.4}Etape 4 : Mise a jour de $q(x_0)$}{12}{subsection.5.4}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {10}{\ignorespaces Mise a jour de $\mu $ et $\Sigma $ --- \texttt  {\color  {codeblue}emg\_vba\_1\_dim.py} $\to $ \texttt  {\color  {codered}mise\_a\_jour\_x0}}}{12}{algorithm.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.5}Energie libre negative (diagnostic)}{13}{subsection.5.5}\protected@file@percent }
+\newlabel{eq:energy}{{41}{13}{Energie libre negative (diagnostic)}{equation.41}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.6}Synthese : boucle EMG-VBA interne}{13}{subsection.5.6}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {11}{\ignorespaces EMG-VBA complet a $t$ fixe --- \texttt  {\color  {codeblue}emg\_vba\_1\_dim.py} $\to $ \texttt  {\color  {codered}executer}}}{13}{algorithm.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V.7}Initialisation de EMG-VBA}{13}{subsection.5.7}\protected@file@percent }
+\newlabel{sec:init}{{V.7}{13}{Initialisation de EMG-VBA}{subsection.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Phase 3b : Pas reverse DDPM conditionnel}{14}{section.6}\protected@file@percent }
+\newlabel{eq:reverse}{{42}{14}{Phase 3b : Pas reverse DDPM conditionnel}{equation.42}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {12}{\ignorespaces Pas reverse DDPM --- \texttt  {\color  {codeblue}Reverse.py} $\to $ \texttt  {\color  {codered}reverse\_step\_ddpm}}}{14}{algorithm.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Phase 3c : Boucle reverse complete}{15}{section.7}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {13}{\ignorespaces Echantillonnage conditionnel complet --- \texttt  {\color  {codeblue}Reverse.py} $\to $ \texttt  {\color  {codered}sample\_conditional}}}{15}{algorithm.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Phase 4 : Orchestration}{16}{section.8}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {14}{\ignorespaces Pipeline complete --- \texttt  {\color  {codeblue}main.py} $\to $ \texttt  {\color  {codered}main}}}{16}{algorithm.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Recapitulatif des equations}{16}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {X}Hyperparametres}{17}{section.10}\protected@file@percent }
+\gdef \@abspage@last{17}

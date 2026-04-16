@@ -1,6 +1,3 @@
-"""
-Pipeline : dégrade une image puis applique le reverse diffusion avec correction EMG-VBA.
-"""
 import os
 import glob
 import numpy as np
@@ -13,12 +10,11 @@ from model import UNet
 from diffusion.Schedules import DDPMSchedule
 from diffusion.Reverse import sample_conditional
 
-
-# =====================================================================
-#                           HYPERPARAMÈTRES
-# =====================================================================
+# ==================
+# HYPERPARAMÈTRES
+# ===================
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
-IMAGE_DIR      = os.path.join(BASE_DIR, 'observations/saturn.jpg')
+IMAGE_DIR      = os.path.join(BASE_DIR, 'observations/tete.png')
 SIGMA_BLUR     = 1.5
 IMG_SIZE       = 64
 OUTPUT_DIR     = os.path.join(BASE_DIR, 'resultats')
@@ -41,7 +37,7 @@ D_0            = 1e-3
 N_SAMPLES      = 1
 
 MONITOR_STEPS = [999, 900, 800, 700, 600, 500, 400, 300, 200, 100]
-# =====================================================================
+# ==============
 
 
 def degrade_image(image_path, sigma_blur, img_size, output_dir):
@@ -60,26 +56,36 @@ def degrade_image(image_path, sigma_blur, img_size, output_dir):
          .save(os.path.join(output_dir, f"{name}_blur.png"))
 
     print(f"[Dégradation] {img_size}x{img_size}, sigma_blur = {sigma_blur}")
+
     return(name, x0_11, y_11)
 
 
 def load_net(ckpt_dir, device):
+
     ckpts = sorted(glob.glob(os.path.join(ckpt_dir, "*.pt")))
+
     if not ckpts:
         raise FileNotFoundError(f"Aucun checkpoint dans {ckpt_dir}")
+    
     ckpt_path = ckpts[-1]
+
     ckpt = torch.load(ckpt_path, map_location=device, weights_only=True)
 
     net = UNet(in_ch=1).to(device)
+
     state = ckpt.get('ema_state_dict', ckpt['model_state_dict'])
+
     net.load_state_dict(state)
+
     net.eval()
+
     print(f"[Modèle] Chargé : {ckpt_path}")
-    return net, ckpt.get('hyperparams', {})
+    return( net, ckpt.get('hyperparams', {}))
 
 
 def main():
     device = DEVICE
+    
     if device == 'mps' and not torch.backends.mps.is_available():
         device = 'cpu'
 
