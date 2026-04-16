@@ -11,7 +11,7 @@ from .Forward import forward_process
 def train(net, schedule, dataloader, epochs, lr=2e-4, ema_decay=0.9999, grad_clip=1.0, ckpt_dir='checkpoints', device='mps'):
     """
     Args :
-        net        : nn.Module — réseau ε_θ(x_t, t)
+        net        : nn.Module — réseau esp_theta(x_t, t)
         schedule   : NoiseSchedule
         dataloader : itère des batches (B, C, H, W) dans [-1, 1]
         epochs     : nombre total d'époques
@@ -89,4 +89,4 @@ def train(net, schedule, dataloader, epochs, lr=2e-4, ema_decay=0.9999, grad_cli
             'losses': losses,
         }, os.path.join(ckpt_dir, f"epoch{epoch+1:03d}.pt"))
 
-    return net, ema_net, losses
+    return(net, ema_net, losses)
