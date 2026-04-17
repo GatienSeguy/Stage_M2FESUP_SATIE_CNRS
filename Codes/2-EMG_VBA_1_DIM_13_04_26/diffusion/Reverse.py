@@ -80,13 +80,12 @@ def emg_vba_correction(x_t_np, xhat0_np, alpha_bar_t, y_np, A_matrix,
 
 
 # =====================================================================
-# Pour chaque pas t = T, ..., 1 :
+# Pour chaque pas t = T, ..., 0 :
 # 1. Tweedie (12)
 # 2. EMG-VBA :  mu_post approx E[X_0|X_t, Y] (27)
 # (estime tau_r, tau_b en interne  (75)/(85))
 # 3. Reverse :  x_{t-1} approx q(.|x_t, mu_post) - Section VI.2
-#
-# Remplacer x_0 chapeau par mu_post <=> score conditionnel  (36) RÉDIGER preuve un jour
+# Remplacer x_0 chapeau par mu_post <=> score conditionnel  (36) RÉDIGER preuve clean un jour
 # =====================================================================
 
 @torch.no_grad()
@@ -107,7 +106,7 @@ def sample_conditional(net, schedule, y_np, A_matrix, shape,
     warm_starts = [None] * n_samples
 
     monitor_set = set(monitor_steps) if monitor_steps is not None else set()
-    diagnostics = {'energie_par_step': {}}
+    diagnostics = {'energie_par_step': {}, 'tau_b_final': {}, 'tau_r_final': {},}
 
     for t_val in tqdm(reversed(range(schedule.T)), total=schedule.T, desc="Sampling conditionnel"):
         t_batch     = torch.full((n_samples,), t_val, device=device, dtype=torch.long)
@@ -136,6 +135,9 @@ def sample_conditional(net, schedule, y_np, A_matrix, shape,
                     diagnostics['energie_par_step'][t_val] = list(
                         state['historique']['energie_libre']
                     )
+                if b == 0:
+                    diagnostics['tau_b_final'][t_val] = state['tau_b']
+                    diagnostics['tau_r_final'][t_val] = state['tau_r']
                 mu_post_list.append(torch.from_numpy(mu_post.reshape(C, H, W)).float())
 
             mu_post_tensor = torch.stack(mu_post_list, dim=0).to(device)

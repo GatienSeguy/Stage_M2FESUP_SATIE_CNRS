@@ -3,7 +3,7 @@
 \contentsline {section}{\numberline {I}Introduction}{5}{section.1}%
 \contentsline {section}{\numberline {II}Processus de Diffusion Forward}{5}{section.2}%
 \contentsline {subsection}{\numberline {II.1}Le mouvement Brownien}{5}{subsection.2.1}%
-\contentsline {subsection}{\numberline {II.2}Formulation SDE (Stochastic Differential Equation)}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {II.2}Formulation SDE (Stochastic Diffexrential Equation)}{6}{subsection.2.2}%
 \contentsline {subsection}{\numberline {II.3}Outils de calcul stochastique}{6}{subsection.2.3}%
 \contentsline {section}{\numberline {III}Résolution de la SDE : trois variantes}{8}{section.3}%
 \contentsline {subsection}{\numberline {III.1}Variance Exploding (VE)}{8}{subsection.3.1}%

@@ -80,12 +80,12 @@ class EMG_VBA:
     def calculer_pas_sousopt(self):
         abar = self.alpha_bar_t
 
-        # G_{mu,i}  et  G_{sigma,i} - (123)
+        # G_{mu,i}  et  G_{sigma,i} - (128 / 129)
         G_mu    = (self.mu_r - self.mu) / self.Sigma_r
 
         G_Sigma = 0.5 * (1.0 / self.Sigma - 1.0 / self.Sigma_r)
 
-        # Dérivées d'ordre 1 par rapport à s1 - (115)
+        # Dérivées d'ordre 1 par rapport à s1 - (124)
         d1_Sigma = self.Sigma - self.Sigma**2 / self.Sigma_r
 
         d1_mu = (self.Sigma / self.Sigma_r) * (self.mu_r - self.mu)
@@ -102,7 +102,7 @@ class EMG_VBA:
         #METTRE GRADIENT PAR RAPPORT A S2 APRÈS 
         ##############
 
-        # Dérivées d'ordre 2 par rapport a s1 - (116)
+        # Dérivées d'ordre 2 par rapport a s1 - (125)
         d11_Sigma = 2.0 * d1_Sigma**2 / self.Sigma
 
         d11_mu = 2.0 * d1_Sigma * d1_mu / self.Sigma
@@ -111,13 +111,13 @@ class EMG_VBA:
         #METTRE DERIVEES ORDRE 2 PAR RAPPORT A S1 et S2 APRÈS 
         ##############
 
-        ## Hessienne - (129)
+        ## Hessienne - (138)
         # Terme M
         coeff = abar / (1.0 - abar) + self.tau_r_moy
 
         A_d1_mu = self.A @ d1_mu
         
-        terme_M = (coeff * np.dot(d1_mu, d1_mu) + self.tau_b_moy * np.dot(A_d1_mu, A_d1_mu)) #(138)
+        terme_M = (coeff * np.dot(d1_mu, d1_mu) + self.tau_b_moy * np.dot(A_d1_mu, A_d1_mu))
         
         # Terme D
         terme_D = 0.5 * np.sum(d1_Sigma**2 / self.Sigma**2)
@@ -138,11 +138,11 @@ class EMG_VBA:
 
         self.Sigma_k_1 = self.Sigma.copy()
 
-        Sigma_new_inv = (1 - s1)/self.Sigma + s1/ self.Sigma_r
+        Sigma_new_inv = (1 - s1)/self.Sigma + s1/ self.Sigma_r #(115)
 
-        Sigma_new = 1/ Sigma_new_inv #(106)
+        Sigma_new = 1/ Sigma_new_inv
 
-        mu_new = Sigma_new * (( 1 - s1 )*self.mu / self.Sigma + s1 * self.mu_r/self.Sigma_r) #(107)
+        mu_new = Sigma_new * (( 1 - s1 )*self.mu / self.Sigma + s1 * self.mu_r/self.Sigma_r) #(116)
 
         self.mu    = mu_new
 
@@ -160,17 +160,17 @@ class EMG_VBA:
 
         log_tau_b = digamma(self.a_tilde_b) - np.log(self.b_tilde_b)
 
-        ## Entropie - (113)  E_q[log q]
+        ## Entropie - (122)  E_q[log q]
         Entropie = -0.5 * np.sum(np.log(self.Sigma)) - 0.5 * self.n * (1.0 + np.log(2.0 * np.pi))  
 
         
         ## Terme log jointe
-        # Forward - (114)
+        # Forward - (123)
         forward_diff = self.xt - np.sqrt(abar)*self.mu
 
         Forward = -0.5/(1 - abar) * (np.dot(forward_diff,forward_diff) + abar*np.sum(self.Sigma)) 
 
-        ## Mesure - (114)
+        ## Mesure - (123)
         mesure_diff = self.y - self.A @ self.mu
 
         Mesure = ((self.m / 2.0 + self.c_0 - 1.0) * log_tau_b - (self.d_0 + 0.5 * (np.dot(mesure_diff, mesure_diff) + np.dot(self.AtA_diag, self.Sigma))) * tau_b)

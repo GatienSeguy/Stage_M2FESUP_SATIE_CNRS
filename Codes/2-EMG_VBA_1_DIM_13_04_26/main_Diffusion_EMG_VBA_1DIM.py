@@ -14,7 +14,7 @@ from diffusion.Reverse import sample_conditional
 # HYPERPARAMÈTRES
 # ===================
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
-IMAGE_DIR      = os.path.join(BASE_DIR, 'observations/tete.png')
+IMAGE_DIR      = os.path.join(BASE_DIR, 'observations/lune.jpg')
 SIGMA_BLUR     = 1.5
 IMG_SIZE       = 64
 OUTPUT_DIR     = os.path.join(BASE_DIR, 'resultats')
@@ -27,7 +27,7 @@ BETA_START     = 1e-4
 BETA_END       = 0.02
 
 # EMG-VBA
-EMG_N_ITER     = 10    
+EMG_N_ITER     = 100
 EMG_SKIP_AFTER = 0
 A_0            = 1e-3
 B_0            = 1e-3
@@ -147,6 +147,29 @@ def main():
     fig.suptitle("F(q) doit croître à t fixé (Résultat XII.2.1)")
     plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, f"{name}_energie_emgvba_SigmaBlur_{SIGMA_BLUR}.png"), dpi=150)
+    plt.show()
+
+    #7. Affichage de sigma_b² et sigma_r² au cours du processus de débruitage (tout t)
+    tau_b_final = diagnostics['tau_b_final']  # dict {t: tau_b final} ou liste indexée par t
+    tau_r_final = diagnostics['tau_r_final']
+
+    # Tri par t décroissant (T -> 0, sens du reverse)
+    ts = sorted(tau_b_final.keys(), reverse=True)
+    sigma2_b = np.array([1.0 / tau_b_final[t] for t in ts])
+    sigma2_r = np.array([1.0 / tau_r_final[t] for t in ts])
+
+    fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+    ax.plot(ts, 1/sigma2_b, '-', label=r'$\sigma_b^2$ (bruit mesure)', color='tab:blue')
+    ax.plot(ts, 1/sigma2_r, '-', label=r'$\sigma_r^2$ (a priori)',     color='tab:red')
+    ax.set_xlabel("t (pas de diffusion)")
+    ax.set_ylabel("Variance")
+    ax.set_yscale('log')
+    ax.invert_xaxis()  # t décroît de T à 0 dans le sens du reverse
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    ax.set_title(r"Évolution de $\sigma_b^2$ et $\sigma_r^2$ au cours du reverse diffusion")
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, f"{name}_variances_SigmaBlur_{SIGMA_BLUR}.png"), dpi=150)
     plt.show()
 
 if __name__ == "__main__":
