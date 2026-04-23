@@ -15,7 +15,9 @@ from diffusion.Reverse import sample_conditional
 # ===================
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
 IMAGE_DIR      = os.path.join(BASE_DIR, 'observations/lune.jpg')
-SIGMA_BLUR     = 1.5
+
+SIGMA_BLUR     = 1.
+
 IMG_SIZE       = 64
 OUTPUT_DIR     = os.path.join(BASE_DIR, 'resultats')
 CKPT_DIR       = os.path.join(BASE_DIR, 'checkpoints')

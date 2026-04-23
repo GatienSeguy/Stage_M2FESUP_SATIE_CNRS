@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.25)  16 APR 2026 14:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.25)  21 APR 2026 11:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -669,7 +669,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \c@cthm=\count344
 \c@chyp=\count345
 \c@cres=\count346
-Package hyperref Info: Option `colorlinks' set `true' on input line 168.
+Package hyperref Info: Option `colorlinks' set `true' on input line 169.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count347
@@ -684,32 +684,32 @@ LaTeX Warning: Label `eq:subopt_step' multiply defined.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 188.
-LaTeX Font Info:    ... okay on input line 188.
-LaTeX Info: Redefining \degres on input line 188.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Info: Redefining \degres on input line 189.
 Package french.ldf Info: Setting StandardItemizeEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 188.
+(french.ldf)             reported on input line 189.
 Package french.ldf Info: Setting StandardEnumerateEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 188.
-LaTeX Info: Redefining \up on input line 188.
+(french.ldf)             reported on input line 189.
+LaTeX Info: Redefining \up on input line 189.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count348
@@ -763,7 +763,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 188.
+Package hyperref Info: Link coloring ON on input line 189.
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -771,30 +771,30 @@ Package hyperref Info: Link coloring ON on input line 188.
 <Logo_ENS_leger(1).jpg, id=284, 862.22125pt x 484.81125pt>
 File: Logo_ENS_leger(1).jpg Graphic file (type jpg)
 <use Logo_ENS_leger(1).jpg>
-Package pdftex.def Info: Logo_ENS_leger(1).jpg  used on input line 198.
+Package pdftex.def Info: Logo_ENS_leger(1).jpg  used on input line 199.
 (pdftex.def)             Requested size: 116.0899pt x 65.26915pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 199.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 200.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 199.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 200.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 <logo_univPS.png, id=285, 382.42876pt x 132.495pt>
 File: logo_univPS.png Graphic file (type png)
 <use logo_univPS.png>
-Package pdftex.def Info: logo_univPS.png  used on input line 201.
+Package pdftex.def Info: logo_univPS.png  used on input line 202.
 (pdftex.def)             Requested size: 116.0899pt x 40.21985pt.
 <logo_satie.png, id=286, 28.54665pt x 18.7902pt>
 File: logo_satie.png Graphic file (type png)
 <use logo_satie.png>
-Package pdftex.def Info: logo_satie.png  used on input line 204.
+Package pdftex.def Info: logo_satie.png  used on input line 205.
 (pdftex.def)             Requested size: 81.26257pt x 53.50328pt.
 <logo_cnrs.png, id=288, 963.6pt x 963.6pt>
 File: logo_cnrs.png Graphic file (type png)
 <use logo_cnrs.png>
-Package pdftex.def Info: logo_cnrs.png  used on input line 207.
+Package pdftex.def Info: logo_cnrs.png  used on input line 208.
 (pdftex.def)             Requested size: 81.26257pt x 81.25061pt.
 
 
@@ -837,11 +837,11 @@ Overfull \hbox (29.95522pt too wide) in paragraph at lines 37--37
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 270.
+Package pdftex.def Info: satie-cnrs.png  used on input line 271.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 270.
+Package pdftex.def Info: images.png  used on input line 271.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -854,11 +854,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 270.
+Package pdftex.def Info: satie-cnrs.png  used on input line 271.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 270.
+Package pdftex.def Info: images.png  used on input line 271.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -871,11 +871,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 309.
+Package pdftex.def Info: satie-cnrs.png  used on input line 310.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 309.
+Package pdftex.def Info: images.png  used on input line 310.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -888,11 +888,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 345.
+Package pdftex.def Info: satie-cnrs.png  used on input line 346.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 345.
+Package pdftex.def Info: images.png  used on input line 346.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -905,11 +905,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 399.
+Package pdftex.def Info: satie-cnrs.png  used on input line 400.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 399.
+Package pdftex.def Info: images.png  used on input line 400.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -922,11 +922,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 453.
+Package pdftex.def Info: satie-cnrs.png  used on input line 454.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 453.
+Package pdftex.def Info: images.png  used on input line 454.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -937,10 +937,10 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [8]
 
-Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 453.
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 454.
 
 
-Overfull \hbox (12.63579pt too wide) in paragraph at lines 505--506
+Overfull \hbox (12.63579pt too wide) in paragraph at lines 506--507
 []\T1/cmr/bx/n/12 Étape 5 : iden-ti-fi-ca-tion et vé-ri-fi-ca-tion. \T1/cmr/m/n/12 Par la Pro-po-si-tion [][]II.3.2[][] : $\OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 j \OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 ^^X N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e[]X[];  \OT1/cmr/m/n/12 (1 \OMS/cmsy/m/n/12 ^^@
  []
 
@@ -948,11 +948,11 @@ Overfull \hbox (12.63579pt too wide) in paragraph at lines 505--506
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 507.
+Package pdftex.def Info: satie-cnrs.png  used on input line 508.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 507.
+Package pdftex.def Info: images.png  used on input line 508.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -965,11 +965,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 570.
+Package pdftex.def Info: satie-cnrs.png  used on input line 571.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 570.
+Package pdftex.def Info: images.png  used on input line 571.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -982,11 +982,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 622.
+Package pdftex.def Info: satie-cnrs.png  used on input line 623.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 622.
+Package pdftex.def Info: images.png  used on input line 623.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -999,11 +999,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 677.
+Package pdftex.def Info: satie-cnrs.png  used on input line 678.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 677.
+Package pdftex.def Info: images.png  used on input line 678.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1014,17 +1014,17 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [12]
 
-Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 677.
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 678.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 728.
+Package pdftex.def Info: satie-cnrs.png  used on input line 729.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 728.
+Package pdftex.def Info: images.png  used on input line 729.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1037,7 +1037,7 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 <figure/Schema_Forward_MD.png, id=577, 804.00375pt x 600.2425pt>
 File: figure/Schema_Forward_MD.png Graphic file (type png)
 <use figure/Schema_Forward_MD.png>
-Package pdftex.def Info: figure/Schema_Forward_MD.png  used on input line 744.
+Package pdftex.def Info: figure/Schema_Forward_MD.png  used on input line 745.
 (pdftex.def)             Requested size: 483.69687pt x 361.10997pt.
 
 
@@ -1047,11 +1047,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 750.
+Package pdftex.def Info: satie-cnrs.png  used on input line 751.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 750.
+Package pdftex.def Info: images.png  used on input line 751.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1062,17 +1062,17 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [14]
 
-LaTeX Warning: Reference `res:dsm' on page 15 undefined on input line 765.
+LaTeX Warning: Reference `res:dsm' on page 15 undefined on input line 766.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 771.
+Package pdftex.def Info: satie-cnrs.png  used on input line 772.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 771.
+Package pdftex.def Info: images.png  used on input line 772.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1085,11 +1085,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 828.
+Package pdftex.def Info: satie-cnrs.png  used on input line 829.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 828.
+Package pdftex.def Info: images.png  used on input line 829.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1100,17 +1100,17 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [16]
 
-LaTeX Warning: Reference `res:tweedie_vp' on page 17 undefined on input line 865.
+LaTeX Warning: Reference `res:tweedie_vp' on page 17 undefined on input line 866.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 878.
+Package pdftex.def Info: satie-cnrs.png  used on input line 879.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 878.
+Package pdftex.def Info: images.png  used on input line 879.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1121,43 +1121,43 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [17]
 
-LaTeX Warning: Reference `res:tweedie_vp' on page 18 undefined on input line 899.
+LaTeX Warning: Reference `res:tweedie_vp' on page 18 undefined on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 902.
+(hyperref)                removing `math shift' on input line 903.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\epsilon' on input line 902.
+(hyperref)                removing `\epsilon' on input line 903.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 902.
+(hyperref)                removing `subscript' on input line 903.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\theta' on input line 902.
+(hyperref)                removing `\theta' on input line 903.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 902.
+(hyperref)                removing `math shift' on input line 903.
 
 
-LaTeX Warning: Citation `ho2020denoising' on page 18 undefined on input line 911.
+LaTeX Warning: Citation `ho2020denoising' on page 18 undefined on input line 912.
 
 
-LaTeX Warning: Citation `song2021denoising' on page 18 undefined on input line 915.
+LaTeX Warning: Citation `song2021denoising' on page 18 undefined on input line 916.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 918.
+Package pdftex.def Info: satie-cnrs.png  used on input line 919.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 918.
+Package pdftex.def Info: images.png  used on input line 919.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1168,17 +1168,17 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [18]
 
-LaTeX Warning: Reference `res:tweedie_vp' on page 19 undefined on input line 919.
+LaTeX Warning: Reference `res:tweedie_vp' on page 19 undefined on input line 920.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 960.
+Package pdftex.def Info: satie-cnrs.png  used on input line 961.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 960.
+Package pdftex.def Info: images.png  used on input line 961.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1191,11 +1191,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1010.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1011.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1010.
+Package pdftex.def Info: images.png  used on input line 1011.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1207,25 +1207,25 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 [20]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1060.
+(hyperref)                removing `math shift' on input line 1061.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Pi' on input line 1060.
+(hyperref)                removing `\Pi' on input line 1061.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1060.
+(hyperref)                removing `math shift' on input line 1061.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1070.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1071.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1070.
+Package pdftex.def Info: images.png  used on input line 1071.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1238,7 +1238,7 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 <figure/Schema_Reverse_MD.png, id=686, 731.73375pt x 749.80125pt>
 File: figure/Schema_Reverse_MD.png Graphic file (type png)
 <use figure/Schema_Reverse_MD.png>
-Package pdftex.def Info: figure/Schema_Reverse_MD.png  used on input line 1118.
+Package pdftex.def Info: figure/Schema_Reverse_MD.png  used on input line 1119.
 (pdftex.def)             Requested size: 469.18654pt x 480.77501pt.
 
 
@@ -1248,11 +1248,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1124.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1125.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1124.
+Package pdftex.def Info: images.png  used on input line 1125.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1265,11 +1265,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1128.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1129.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1128.
+Package pdftex.def Info: images.png  used on input line 1129.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1282,11 +1282,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1163.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1164.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1163.
+Package pdftex.def Info: images.png  used on input line 1164.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1298,22 +1298,22 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 [24]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1189.
+(hyperref)                removing `math shift' on input line 1190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1189.
+(hyperref)                removing `subscript' on input line 1190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cdot' on input line 1189.
+(hyperref)                removing `\cdot' on input line 1190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1189.
+(hyperref)                removing `math shift' on input line 1190.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1207--1209
+Underfull \hbox (badness 10000) in paragraph at lines 1208--1210
 
  []
 
@@ -1321,11 +1321,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 1207--1209
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1215.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1216.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1215.
+Package pdftex.def Info: images.png  used on input line 1216.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1338,50 +1338,50 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 pdfTeX warning (ext4): destination with the same identifier (name{equation.35}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1215 ...{x_t} p_t(x_t | x_0)}{ p_t(x_t | x_0)}\]
+l.1216 ...{x_t} p_t(x_t | x_0)}{ p_t(x_t | x_0)}\]
                                                   
 pdfTeX warning (ext4): destination with the same identifier (name{equation.35}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1215 ...{x_t} p_t(x_t | x_0)}{ p_t(x_t | x_0)}\]
+l.1216 ...{x_t} p_t(x_t | x_0)}{ p_t(x_t | x_0)}\]
                                                   ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1238.
+(hyperref)                removing `math shift' on input line 1239.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1238.
+(hyperref)                removing `subscript' on input line 1239.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1238.
+(hyperref)                removing `subscript' on input line 1239.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1238.
+(hyperref)                removing `math shift' on input line 1239.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1238.
+(hyperref)                removing `math shift' on input line 1239.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Pi' on input line 1238.
+(hyperref)                removing `\Pi' on input line 1239.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1238.
+(hyperref)                removing `math shift' on input line 1239.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1293.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1294.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1293.
+Package pdftex.def Info: images.png  used on input line 1294.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1394,11 +1394,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1343.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1344.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1343.
+Package pdftex.def Info: images.png  used on input line 1344.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1411,11 +1411,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1381.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1382.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1381.
+Package pdftex.def Info: images.png  used on input line 1382.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1426,20 +1426,20 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 [28]
 
-LaTeX Warning: Reference `res:tweedie_vp' on page 29 undefined on input line 1413.
+LaTeX Warning: Reference `res:tweedie_vp' on page 29 undefined on input line 1414.
 
 
-LaTeX Warning: Reference `sec:emgvba' on page 29 undefined on input line 1435.
+LaTeX Warning: Reference `sec:emgvba' on page 29 undefined on input line 1436.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1436.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1437.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1436.
+Package pdftex.def Info: images.png  used on input line 1437.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1451,49 +1451,49 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 [29]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1440.
+(hyperref)                removing `math shift' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1440.
+(hyperref)                removing `subscript' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1440.
+(hyperref)                removing `superscript' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1440.
+(hyperref)                removing `math shift' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1440.
+(hyperref)                removing `math shift' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sigma' on input line 1440.
+(hyperref)                removing `\sigma' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1440.
+(hyperref)                removing `subscript' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1440.
+(hyperref)                removing `superscript' on input line 1441.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1440.
+(hyperref)                removing `math shift' on input line 1441.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1446.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1447.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1446.
+Package pdftex.def Info: images.png  used on input line 1447.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1506,11 +1506,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1505.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1506.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1505.
+Package pdftex.def Info: images.png  used on input line 1506.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1523,11 +1523,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1581.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1582.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1581.
+Package pdftex.def Info: images.png  used on input line 1582.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1540,11 +1540,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1635.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1636.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1635.
+Package pdftex.def Info: images.png  used on input line 1636.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1557,11 +1557,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1684.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1685.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1684.
+Package pdftex.def Info: images.png  used on input line 1685.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1574,11 +1574,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1726.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1727.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1726.
+Package pdftex.def Info: images.png  used on input line 1727.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1591,9 +1591,9 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 pdfTeX warning (ext4): destination with the same identifier (name{equation.60}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1726     \item \textbf
+l.1727     \item \textbf
                         {positivitÃ©}]
-Overfull \hbox (6.92992pt too wide) detected at line 1745
+Overfull \hbox (6.92992pt too wide) detected at line 1746
 [][][]\OT1/cmr/m/n/12 
  = []
  []
@@ -1602,11 +1602,11 @@ Overfull \hbox (6.92992pt too wide) detected at line 1745
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1782.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1783.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1782.
+Package pdftex.def Info: images.png  used on input line 1783.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1619,11 +1619,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1837.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1838.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1837.
+Package pdftex.def Info: images.png  used on input line 1838.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1636,11 +1636,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1889.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1890.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1889.
+Package pdftex.def Info: images.png  used on input line 1890.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1653,11 +1653,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1940.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1941.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1940.
+Package pdftex.def Info: images.png  used on input line 1941.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1670,11 +1670,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 1996.
+Package pdftex.def Info: satie-cnrs.png  used on input line 1997.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 1996.
+Package pdftex.def Info: images.png  used on input line 1997.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1687,11 +1687,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2078.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2079.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2078.
+Package pdftex.def Info: images.png  used on input line 2079.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1703,29 +1703,29 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 [41]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2080.
+(hyperref)                removing `math shift' on input line 2081.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\tau' on input line 2080.
+(hyperref)                removing `\tau' on input line 2081.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 2080.
+(hyperref)                removing `subscript' on input line 2081.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2080.
+(hyperref)                removing `math shift' on input line 2081.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2117.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2118.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2117.
+Package pdftex.def Info: images.png  used on input line 2118.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1737,29 +1737,29 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 [42]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2150.
+(hyperref)                removing `math shift' on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\tau' on input line 2150.
+(hyperref)                removing `\tau' on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 2150.
+(hyperref)                removing `subscript' on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2150.
+(hyperref)                removing `math shift' on input line 2151.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2170.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2171.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2170.
+Package pdftex.def Info: images.png  used on input line 2171.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1771,25 +1771,25 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 [43]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2197.
+(hyperref)                removing `math shift' on input line 2198.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 2197.
+(hyperref)                removing `subscript' on input line 2198.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2197.
+(hyperref)                removing `math shift' on input line 2198.
 
 
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2220.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2221.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2220.
+Package pdftex.def Info: images.png  used on input line 2221.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1802,11 +1802,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2262.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2263.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2262.
+Package pdftex.def Info: images.png  used on input line 2263.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1819,11 +1819,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2310.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2311.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2310.
+Package pdftex.def Info: images.png  used on input line 2311.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1836,11 +1836,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2365.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2366.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2365.
+Package pdftex.def Info: images.png  used on input line 2366.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1853,11 +1853,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2406.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2407.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2406.
+Package pdftex.def Info: images.png  used on input line 2407.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1870,11 +1870,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2452.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2453.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2452.
+Package pdftex.def Info: images.png  used on input line 2453.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1887,11 +1887,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2487.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2488.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2487.
+Package pdftex.def Info: images.png  used on input line 2488.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1904,11 +1904,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2530.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2531.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2530.
+Package pdftex.def Info: images.png  used on input line 2531.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1918,7 +1918,7 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
 
 [51]
-Underfull \hbox (badness 10000) in paragraph at lines 2557--2559
+Underfull \hbox (badness 10000) in paragraph at lines 2558--2560
 
  []
 
@@ -1926,11 +1926,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 2557--2559
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2580.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2581.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2580.
+Package pdftex.def Info: images.png  used on input line 2581.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1940,7 +1940,7 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
 
 [52]
-Underfull \hbox (badness 10000) in paragraph at lines 2606--2608
+Underfull \hbox (badness 10000) in paragraph at lines 2607--2609
 
  []
 
@@ -1948,11 +1948,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 2606--2608
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2635.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2636.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2635.
+Package pdftex.def Info: images.png  used on input line 2636.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1965,11 +1965,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2695.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2696.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2695.
+Package pdftex.def Info: images.png  used on input line 2696.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1982,11 +1982,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2790.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2791.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2790.
+Package pdftex.def Info: images.png  used on input line 2791.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -1999,11 +1999,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2871.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2872.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2871.
+Package pdftex.def Info: images.png  used on input line 2872.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2016,11 +2016,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2927.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2928.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2927.
+Package pdftex.def Info: images.png  used on input line 2928.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2030,7 +2030,7 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
 
 [57]
-Overfull \hbox (40.68669pt too wide) detected at line 2977
+Overfull \hbox (40.68669pt too wide) detected at line 2978
 [][]\OMS/cmsy/m/n/12 ^^@[] [][][] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@[][]^^@\OT1/cmr/m/n/12 2[](\OML/cmm/m/it/12 x[]\OT1/cmr/m/n/12 )[] + 2[] \OML/cmm/m/it/12 ^^V[][] \OT1/cmr/m/n/12 = [][]\OML/cmm/m/it/12 x[] \OMS/cmsy/m/n/12 ^^@ [] \OML/cmm/b/it/12 ^^V[][][]\OML/cmm/m/it/12 :
  []
 
@@ -2038,11 +2038,11 @@ Overfull \hbox (40.68669pt too wide) detected at line 2977
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 2977.
+Package pdftex.def Info: satie-cnrs.png  used on input line 2978.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 2977.
+Package pdftex.def Info: images.png  used on input line 2978.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2055,11 +2055,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3025.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3026.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3025.
+Package pdftex.def Info: images.png  used on input line 3026.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2072,11 +2072,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3076.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3077.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3076.
+Package pdftex.def Info: images.png  used on input line 3077.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2086,12 +2086,12 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
 
 [60]
-Underfull \hbox (badness 10000) in paragraph at lines 3116--3117
+Underfull \hbox (badness 10000) in paragraph at lines 3117--3118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3118--3119
+Underfull \hbox (badness 10000) in paragraph at lines 3119--3120
 
  []
 
@@ -2099,11 +2099,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 3118--3119
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3138.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3139.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3138.
+Package pdftex.def Info: images.png  used on input line 3139.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2113,7 +2113,7 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.2852pt}.
 
 [61]
-Overfull \hbox (6.0644pt too wide) in paragraph at lines 3146--3147
+Overfull \hbox (6.0644pt too wide) in paragraph at lines 3147--3148
 []\T1/cmr/bx/n/12 Bloc (II). $ [][]\OMS/cmsy/m/n/12 h\OML/cmm/m/it/12 ^^\[]\OMS/cmsy/m/n/12 i[]\OML/cmm/m/it/12 A[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 A\OML/cmm/b/it/12 ^^V[]\OT1/cmr/m/n/12 )[][][] = \OMS/cmsy/m/n/12 h\OML/cmm/m/it/12 ^^\[]\OMS/cmsy/m/n/12 i[][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 A[]y\OT1/cmr/m/n/12 )[] \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 A[]A\OML/cmm/b/it/12 ^^V[]\OT1/cmr/m/n/12 )[][] = \OMS/cmsy/m/n/12 ^^@h\OML/cmm/m/it/12 ^^\[]\OMS/cmsy/m/n/12 i\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 A[]A\OT1/cmr/m/n/12 )[]$\T1/cmr/m/n/12 ,
  []
 
@@ -2121,11 +2121,11 @@ Overfull \hbox (6.0644pt too wide) in paragraph at lines 3146--3147
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3200.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3201.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3200.
+Package pdftex.def Info: images.png  used on input line 3201.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2138,11 +2138,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3294.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3295.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3294.
+Package pdftex.def Info: images.png  used on input line 3295.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2155,11 +2155,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3310.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3311.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3310.
+Package pdftex.def Info: images.png  used on input line 3311.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
@@ -2172,11 +2172,11 @@ Package fancyhdr Warning: \headheight is too small (36.0976pt):
 
 File: satie-cnrs.png Graphic file (type png)
 <use satie-cnrs.png>
-Package pdftex.def Info: satie-cnrs.png  used on input line 3349.
+Package pdftex.def Info: satie-cnrs.png  used on input line 3350.
 (pdftex.def)             Requested size: 93.89418pt x 38.03276pt.
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 3349.
+Package pdftex.def Info: images.png  used on input line 3350.
 (pdftex.def)             Requested size: 71.13188pt x 31.74756pt.
 
 Package fancyhdr Warning: \headheight is too small (36.0976pt): 
