@@ -1,0 +1,360 @@
+\documentclass[12pt]{article}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{{./resultats/}}
+\usepackage{amsmath, amssymb, amsthm, mathtools, bm}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{subcaption}
+
+\newcommand{\w}{\boldsymbol{w}}
+\newcommand{\y}{\boldsymbol{y}}
+\newcommand{\x}{\boldsymbol{x}}
+\newcommand{\alt}{\bar\alpha_t}
+\newcommand{\op}{\mathcal{A}}
+
+\title{\textbf{Rapport d'avancement -- Implémentation EMG-VBA\\pour la résolution de problèmes inverses\\par modèles de diffusion}}
+\author{Gatien Music Music Seguy \\ M2 FESup/SIEN -- ENS Paris-Saclay \\ Encadrant : Thomas Rodet (SATIE/CNRS)}
+\date{Avril 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%% ============================================================
+\section{Introduction}
+%% ============================================================
+
+Ce rapport présente l'implémentation et les premiers résultats expérimentaux de l'algorithme EMG-VBA (Expected Maximization Gradient -- Variational Bayesian Approximation) appliqué à la résolution de problèmes inverses en imagerie, couplé à un modèle de diffusion DDPM comme a priori génératif. L'ensemble de la théorie (modèle probabiliste, dérivation des mises à jour, calcul du pas sous-optimal, énergie libre) est détaillé dans le rapport théorique \cite{rapport_theorique}. Le présent document se concentre sur l'architecture logicielle, les choix d'implémentation, les résultats obtenus, et la comparaison avec les méthodes de l'état de l'art (DPS, $\Pi$GDM).
+
+Le problème inverse considéré est :
+\begin{equation}
+    \y = \op \x_0^* + \sigma_b \boldsymbol{\varepsilon}, \qquad \boldsymbol{\varepsilon} \sim \mathcal{N}(0, I_m)
+    \label{eq:forward}
+\end{equation}
+où $\op$ est un opérateur linéaire de dégradation (flou, sous-échantillonnage, etc.), $\sigma_b$ est l'écart-type du bruit de mesure (inconnu en pratique), et $\x_0^*$ est l'image à reconstruire.
+
+%% ============================================================
+\section{Architecture du projet}
+%% ============================================================
+
+\subsection{Structure modulaire}
+
+Le projet est organisé de manière à séparer clairement les composants :
+
+\begin{itemize}
+    \item \texttt{operators\_torch.py} -- Classe abstraite \texttt{LinearOperator} et implémentation \texttt{GaussianBlurOperator}. L'utilisateur fournit uniquement \texttt{forward(x)} ($\op \x$) et \texttt{adjoint(y)} ($\op^T \y$). Aucune matrice n'est jamais construite ni stockée.
+    \item \texttt{emg\_vba\_1\_dim\_torch.py} -- Algorithme EMG-VBA complet (mises à jour de $\tau_b$, $\tau_r$, distribution de référence, pas sous-optimal, énergie libre négative).
+    \item \texttt{diffusion/Reverse.py} -- Processus reverse conditionnel : boucle sur $t = T, \ldots, 0$ avec estimation Tweedie, correction EMG-VBA, et pas reverse DDPM.
+    \item \texttt{diffusion/Forward.py} -- Processus forward et estimateur de Tweedie.
+    \item \texttt{diffusion/Schedules.py} -- Schedules de bruit (DDPM, compatible diffusers).
+    \item \texttt{main\_Diffusion\_EMG\_VBA\_1DIM\_generique.py} -- Script principal générique : l'opérateur, le modèle et les dimensions sont des hyperparamètres en haut du fichier.
+\end{itemize}
+
+\subsection{Interface opérateur générique}
+
+L'opérateur de dégradation est défini par une classe abstraite :
+\begin{lstlisting}[language=Python, basicstyle=\small\ttfamily]
+class LinearOperator(ABC):
+    def forward(self, x): ...   # A x
+    def adjoint(self, y): ...   # A^T y
+    def input_dim(self): ...
+    def output_dim(self): ...
+    def compute_AtA_diag(self): # diag(A^T A)
+\end{lstlisting}
+Pour changer d'opérateur de dégradation (flou, inpainting, super-résolution), il suffit d'implémenter \texttt{forward} et \texttt{adjoint}. Le reste du code (EMG-VBA, reverse, benchmark) est entièrement agnostique.
+
+La méthode \texttt{compute\_AtA\_diag()} calcule $\text{diag}(\op^T\op)$ de manière générique via $n$ appels forward + adjoint :
+\begin{equation}
+    [\op^T\op]_{ii} = (\op^T(\op \boldsymbol{e}_i))_i
+\end{equation}
+Un opérateur spécifique (par ex. le flou circulant) peut surcharger cette méthode pour exploiter sa structure (FFT).
+
+\subsection{Compatibilité multi-modèles}
+
+Le script principal détecte automatiquement le type de checkpoint :
+\begin{itemize}
+    \item \textbf{Modèle diffusers} (ex: \texttt{google/ddpm-ema-celebahq-256}) : clés \texttt{config} + \texttt{alphas\_cumprod} dans le \texttt{.pt}. Le schedule est reconstruit depuis les $\bar\alpha_t$ sauvegardés.
+    \item \textbf{Modèle perso} (UNet maison) : clés \texttt{model\_state\_dict} ou \texttt{ema\_state\_dict}. Le schedule est reconstruit depuis les hyperparamètres $T$, $\beta_{\text{start}}$, $\beta_{\text{end}}$.
+\end{itemize}
+L'appel réseau est unifié : \texttt{output.sample if hasattr(output, 'sample') else output}.
+
+%% ============================================================
+\section{Passage CPU $\to$ GPU}
+%% ============================================================
+
+\subsection{Motivation}
+
+En passant de 64$\times$64 niveaux de gris ($n = 4\,096$) à 256$\times$256 RGB ($n = 196\,608$), le temps de calcul par itération EMG-VBA augmente d'un facteur $\sim$48. Sur CPU (numpy, float64), une reconstruction complète prend $\sim$30 minutes. Le passage en PyTorch sur GPU (MPS / Apple Silicon) réduit ce temps à $\sim$5 minutes.
+
+\subsection{Difficultés rencontrées}
+
+\begin{enumerate}
+    \item \textbf{Précision numérique.} MPS ne supporte pas \texttt{float64}. EMG-VBA en \texttt{float32} présentait des oscillations de l'énergie libre causées par un bug de cache (voir ci-dessous), initialement attribuées à tort à la précision numérique.
+    
+    \item \textbf{Bug du cache \texttt{\_A\_mu}.} L'optimisation consistant à cacher $\op\boldsymbol{\mu}$ (calculé dans \texttt{mise\_a\_jour\_taur\_taub}) pour le réutiliser dans \texttt{calculer\_energie\_libre\_negative} introduisait une incohérence : après \texttt{mise\_a\_jour\_x0}, $\boldsymbol{\mu}$ avait changé mais \texttt{\_A\_mu} n'était pas rafraîchi. L'énergie libre était évaluée avec un $\op\boldsymbol{\mu}$ périmé, causant des oscillations. Le fix : recalculer \texttt{\_A\_mu = op.forward(mu)} à la fin de \texttt{mise\_a\_jour\_x0}.
+    
+    \item \textbf{Conversions CPU $\leftrightarrow$ GPU.} La version initiale convertissait les tenseurs en numpy à chaque pas $t$ pour EMG-VBA, puis reconvertissait en torch. La version finale garde tout en torch sur le device cible.
+\end{enumerate}
+
+%% ============================================================
+\section{Pseudo-code de l'algorithme}
+%% ============================================================
+
+\begin{algorithm}[H]
+\caption{Reverse conditionnel avec correction EMG-VBA}
+\label{alg:reverse}
+\begin{algorithmic}[1]
+\Require Réseau $\epsilon_\theta$, schedule $(\bar\alpha_t)_{t=0}^T$, observation $\y$, opérateur $\op$
+\Require Précalculs : $\op^T\y$, $\text{diag}(\op^T\op)$
+\State $\x_T \sim \mathcal{N}(0, I)$
+\For{$t = T-1, \ldots, 0$}
+    \State \textbf{Tweedie :} $\hat\x_0 \gets (\x_t - \sigma_t \epsilon_\theta(\x_t, t)) / \sqrt{\alt}$
+    \State \textbf{EMG-VBA :} $\boldsymbol{\mu}_{\text{post}} \gets \text{EMG-VBA}(\x_t, \hat\x_0, \alt, \y, \op)$
+    \State \textbf{Reverse :} $\x_{t-1} \sim q(\cdot | \x_t, \boldsymbol{\mu}_{\text{post}})$
+\EndFor
+\State \Return $\x_0$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{EMG-VBA à $t$ fixé}
+\label{alg:emgvba}
+\begin{algorithmic}[1]
+\Require $\x_t$, $\hat\x_0$, $\alt$, $\y$, $\op$, hyperpriors $(a_0, b_0, c_0, d_0)$
+\State Initialiser $\boldsymbol{\mu}^{(0)} = \hat\x_0$, $\boldsymbol{\Sigma}^{(0)} = r_t^2 \cdot \mathbf{1}$ avec $r_t^2 = (1-\alt)/\alt$
+\For{$k = 1, \ldots, K_{\max}$}
+    \State Mettre à jour $\langle\tau_b\rangle$, $\langle\tau_r\rangle$ \hfill (éq.~75--85 de \cite{rapport_theorique})
+    \State Calculer $\boldsymbol{\mu}^{r,k}$, $\boldsymbol{\Sigma}^{r,k}$ (distribution de référence) \hfill (éq.~94--95)
+    \State Calculer $s_1^* = -(\nabla g)_1 / H_{11}$, clipper à $[0, 1]$ \hfill (éq.~124--138)
+    \State $\boldsymbol{\mu}^{(k)} \gets$ interpolation$(s_1^*, \boldsymbol{\mu}^{(k-1)}, \boldsymbol{\mu}^{r,k})$ \hfill (éq.~115--116)
+    \State $\boldsymbol{\Sigma}^{(k)} \gets$ interpolation$(s_1^*, \boldsymbol{\Sigma}^{(k-1)}, \boldsymbol{\Sigma}^{r,k})$
+    \State Rafraîchir $\op\boldsymbol{\mu}^{(k)}$ (cache)
+    \State Calculer $\mathcal{F}(q^{(k)})$ \hfill (éq.~121--123)
+    \If{$|\mathcal{F}(q^{(k)}) - \mathcal{F}(q^{(k-1)})| / |\mathcal{F}(q^{(k-1)})| < \varepsilon$}
+        \State \textbf{break} (critère d'arrêt adaptatif)
+    \EndIf
+\EndFor
+\State \Return $\boldsymbol{\mu}^{(K)}$, $\boldsymbol{\Sigma}^{(K)}$, $\langle\tau_b\rangle$, $\langle\tau_r\rangle$
+\end{algorithmic}
+\end{algorithm}
+
+%% ============================================================
+\section{Équations clés}
+%% ============================================================
+
+Nous rappelons ici les équations essentielles implémentées dans le code. Toutes les démonstrations sont dans \cite{rapport_theorique}.
+
+\subsection{Mise à jour des précisions (éq.~75--85)}
+\begin{align}
+    \tilde{a}_b &= m/2 + c_0, & \tilde{b}_b &= d_0 + \tfrac{1}{2}\bigl(\|\y - \op\boldsymbol{\mu}\|^2 + \text{diag}(\op^T\op)^T \boldsymbol{\Sigma}\bigr) \\
+    \tilde{a}_r &= n/2 + a_0, & \tilde{b}_r &= b_0 + \tfrac{1}{2}\bigl(\|\boldsymbol{\mu} - \hat\x_0\|^2 + \mathbf{1}^T\boldsymbol{\Sigma}\bigr)
+\end{align}
+avec $\langle\tau_b\rangle = \tilde{a}_b / \tilde{b}_b$ et $\langle\tau_r\rangle = \tilde{a}_r / \tilde{b}_r$.
+
+\subsection{Distribution de référence (éq.~94--95)}
+\begin{align}
+    (\Sigma_i^{r})^{-1} &= \frac{\alt}{1-\alt} + \langle\tau_b\rangle [\op^T\op]_{ii} + \langle\tau_r\rangle \\
+    \mu_i^r &= \Sigma_i^r \left(\frac{\sqrt{\alt}}{1-\alt} (x_t)_i + \langle\tau_b\rangle [\op^T\y - \op^T\op\boldsymbol{\mu} + [\op^T\op]_{ii}\mu_i]_i + \langle\tau_r\rangle (\hat{x}_0)_i\right)
+\end{align}
+
+\subsection{Mise à jour de $q(x_0)$ (éq.~115--116, cas $s_2 = 0$)}
+\begin{align}
+    (\Sigma_i^{k+1})^{-1} &= \frac{1 - s_1}{\Sigma_i^k} + \frac{s_1}{\Sigma_i^{r,k}} \\
+    \mu_i^{k+1} &= \Sigma_i^{k+1} \left(\frac{(1-s_1)\mu_i^k}{\Sigma_i^k} + \frac{s_1 \mu_i^{r,k}}{\Sigma_i^{r,k}}\right)
+\end{align}
+
+\subsection{Énergie libre négative (éq.~121--123)}
+\begin{equation}
+    \mathcal{F}(q) = \underbrace{\mathbb{E}_q[\log p(\w, \y)]}_{\text{log-jointe}} - \underbrace{\mathbb{E}_q[\log q(\w)]}_{\text{entropie croisée}}
+\end{equation}
+$\mathcal{F}(q)$ est monotone croissante au cours des itérations EMG-VBA (Résultat XII.2.1 de \cite{rapport_theorique}). C'est une borne inférieure de la log-evidence marginale.
+
+%% ============================================================
+\section{Premiers résultats (EMG-VBA seul)}
+%% ============================================================
+
+\subsection{Configuration expérimentale}
+
+Modèle pré-entraîné : \texttt{google/ddpm-ema-celebahq-256} (DDPM EMA, CelebA-HQ, 256$\times$256, RGB, $T = 1000$). Opérateur : flou gaussien circulaire ($\sigma_{\text{blur}} \in \{1, 2.5\}$, noyau $9\times 9$). Bruit : $\sigma_b = \sigma_{\text{blur}} / 100$. Hyperpriors vagues : $a_0 = b_0 = c_0 = d_0 = 10^{-3}$. Nombre maximal d'itérations EMG-VBA : $K_{\max} = 100$ avec critère d'arrêt adaptatif.
+
+\subsection{Reconstruction}
+
+Les résultats montrent une reconstruction fidèle pour différentes images (visage, chat, lune) et niveaux de flou. Pour $\sigma_{\text{blur}} = 1$ (flou léger), la reconstruction est quasi indiscernable de l'original (PSNR $\approx$ 28 dB). Pour $\sigma_{\text{blur}} = 2.5$ (flou fort), les détails structurels sont bien récupérés (lunettes, barbe, texture) mais le fond diffère --- le modèle génère un fond plausible compatible avec l'observation.
+
+% Inclure ici les figures de comparaison (originale / dégradée / reconstruite)
+
+\subsection{Convergence de l'énergie libre}
+
+L'énergie libre $\mathcal{F}(q)$ est strictement croissante à $t$ fixé, conformément à la théorie. Le critère d'arrêt adaptatif coupe efficacement : $\sim$100 itérations à $t = 999$ (premier pas, initialisation froide), $\sim$7--15 itérations au milieu du reverse (warm start efficace), $\sim$15--20 itérations en fin de reverse.
+
+\subsection{Estimation automatique des variances}
+
+$\sigma_b^2$ estimé ($= 1/\langle\tau_b\rangle$) converge vers l'ordre de grandeur du vrai $\sigma_b^2$ : pour $\sigma_{\text{noise}} = 0.01$ ($\sigma_b^2 = 10^{-4}$), l'estimation se stabilise autour de $5 \times 10^{-4}$.
+
+$\sigma_r^2$ ($= 1/\langle\tau_r\rangle$) décroît régulièrement au cours du reverse : grand aux premiers pas (faible confiance dans l'a priori Tweedie car $\x_t$ est très bruité), puis décroît progressivement, et chute vers 0 en fin de reverse (Tweedie quasi exact, l'algorithme s'y colle).
+
+%% ============================================================
+\section{Protocole expérimental de comparaison}
+%% ============================================================
+
+Nous comparons EMG-VBA à deux méthodes de l'état de l'art pour la résolution de problèmes inverses par diffusion :
+
+\subsection{Méthodes comparées}
+
+\paragraph{DPS \cite{chung2023dps}.} Diffusion Posterior Sampling. Correction de $\hat\x_0$ par un gradient de vraisemblance :
+\begin{equation}
+    \boldsymbol{\mu}_{\text{post}} = \hat\x_0 - \zeta \cdot \op^T(\op\hat\x_0 - \y)
+\end{equation}
+Hyperparamètre : $\zeta$ (step size, à tuner manuellement).
+
+\paragraph{$\Pi$GDM \cite{song2023pigdm}.} Pseudo-Inverse Guided Diffusion Model. Correction par un gradient pondéré :
+\begin{equation}
+    \boldsymbol{\mu}_{\text{post}} = \hat\x_0 + \eta \cdot \frac{\sqrt{\alt}}{\sigma_b^2} \op^T(\y - \op\hat\x_0)
+\end{equation}
+Hyperparamètres : $\eta$ (step size) et $\sigma_b^2$ (variance du bruit de mesure, fixée à la vraie valeur).
+
+\paragraph{EMG-VBA (notre méthode).} Aucun hyperparamètre. $\sigma_b^2$ et $r_t^2$ sont estimés automatiquement par inférence variationnelle.
+
+\subsection{Protocole}
+
+\begin{enumerate}
+    \item \textbf{Image et dégradation.} Une image de test (256$\times$256, RGB) est dégradée par $\y = \op\x_0 + \sigma_b \boldsymbol{\varepsilon}$ avec $\sigma_{\text{blur}} = 2.0$, $\sigma_b = 0.02$.
+    \item \textbf{Grille d'hyperparamètres.} DPS : $\zeta \in \{0.1, 0.2, 0.5, 1, 2, 5, 10\}$. $\Pi$GDM : $\eta \in \{0.0005, 0.001, 0.002, 0.003, 0.005\}$ avec $\sigma_b^2 = \sigma_{\text{noise}}^2$ (valeur exacte).
+    \item \textbf{Métriques.} PSNR (dB, $\uparrow$), SSIM ($\uparrow$), cohérence $\|\op\x_{\text{rec}} - \y\| / \|\y\|$ ($\downarrow$), temps d'exécution.
+    \item \textbf{Même modèle, même observation.} Les trois méthodes utilisent le même réseau pré-entraîné, le même schedule, et la même observation $\y$.
+\end{enumerate}
+
+\textbf{Remarque importante :} DPS et $\Pi$GDM bénéficient d'un avantage non réaliste : leurs hyperparamètres sont tunés sur le ground truth (impossible en pratique), et $\Pi$GDM utilise la vraie valeur de $\sigma_b^2$. EMG-VBA ne dispose d'aucune de ces informations.
+
+%% ============================================================
+\section{Résultats du benchmark}
+%% ============================================================
+
+\subsection{Tableau récapitulatif}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{llcccc}
+\toprule
+Méthode & Hyperparam. & PSNR (dB) $\uparrow$ & SSIM $\uparrow$ & Cohérence $\downarrow$ & Temps (s) \\
+\midrule
+\textbf{EMG-VBA} & \textbf{aucun} & \textbf{28.30} & \textbf{0.759} & \textbf{0.043} & 336 \\
+\midrule
+DPS & $\zeta = 0.1$ & 21.32 & 0.552 & 0.261 & 225 \\
+DPS & $\zeta = 0.5$ & 28.24 & 0.833 & 0.050 & 224 \\
+DPS & $\zeta = 1.0$ & 29.09 & 0.853 & 0.042 & 225 \\
+DPS & $\zeta = 2.0$ & 29.27 & 0.861 & 0.040 & 225 \\
+DPS & $\zeta = 5.0$ & \underline{29.79} & \underline{0.862} & \underline{0.040} & 225 \\
+DPS & $\zeta = 10$ & 12.74 & 0.312 & 0.865 & 226 \\
+\midrule
+$\Pi$GDM & $\eta = 0.001$ & 29.34 & 0.860 & 0.039 & 225 \\
+$\Pi$GDM & $\eta = 0.005$ & 14.85 & 0.371 & 0.673 & 225 \\
+$\Pi$GDM & $\eta \geq 0.01$ & $< 5$ & $< 0.2$ & $> 2.0$ & 225 \\
+\bottomrule
+\end{tabular}
+\caption{Comparaison EMG-VBA / DPS / $\Pi$GDM. Les meilleures valeurs (hors EMG-VBA) sont soulignées. EMG-VBA est en gras.}
+\label{tab:benchmark}
+\end{table}
+
+\subsection{Analyse}
+
+\paragraph{DPS.} Le meilleur $\zeta$ (5.0) dépasse légèrement EMG-VBA en PSNR (+1.5 dB) et SSIM. Mais la fenêtre de bon fonctionnement est étroite : $\zeta = 10$ diverge complètement (PSNR = 12.7 dB, artefacts psychédéliques). Le $\zeta$ optimal dépend du niveau de bruit et du type d'opérateur --- il doit être re-tuné pour chaque configuration expérimentale.
+
+\paragraph{$\Pi$GDM.} Encore plus fragile : seule une valeur de $\eta$ sur 5 donne un résultat correct ($\eta = 0.001$). Un facteur 5 ($\eta = 0.005$) suffit à produire des artefacts colorés massifs. La méthode est inutilisable sans connaissance précise du bon $\eta$.
+
+\paragraph{EMG-VBA.} Sans aucun tuning et sans connaissance de $\sigma_b$, obtient PSNR = 28.3 dB et cohérence = 0.043, ce qui est comparable au meilleur DPS/\!\!$\Pi$GDM tunés sur le ground truth. Le surcoût en temps ($\times 1.5$) est modeste grâce au critère d'arrêt adaptatif.
+
+\paragraph{Conclusion.} Le scatter plot PSNR vs cohérence (Figure~\ref{fig:scatter}) résume l'argument : DPS et $\Pi$GDM forment des courbes (compromis qualité/cohérence dépendant du tuning), tandis qu'EMG-VBA est un point unique en haut à gauche --- au bon compromis, automatiquement.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{benchmark/benchmark_psnr_vs_coherence.png}
+%     \caption{PSNR vs Cohérence. L'étoile rouge (EMG-VBA) est au bon compromis sans tuning.}
+%     \label{fig:scatter}
+% \end{figure}
+
+%% ============================================================
+\section{Perspectives et idées}
+%% ============================================================
+
+\subsection{Transport optimal pour l'initialisation inter-pas}
+
+Entre deux pas $t$ et $t-1$ du reverse, la loi a posteriori $p_t(x_0 | x_t, y)$ se déplace car $\alt$, $\x_t$ et $\hat\x_0$ changent. L'initialisation actuelle (warm start naïf : reprendre $\boldsymbol{\mu}^*_t$, $\boldsymbol{\Sigma}^*_t$) ne suit pas ce déplacement.
+
+\textbf{Idée :} estimer le mouvement de la loi a posteriori entre $t$ et $t-1$ via le déplacement de la distribution de référence $q_r$, puis transporter l'initialisation en conséquence. Pour une distribution gaussienne diagonale, le transport optimal de Wasserstein-2 a une forme fermée coordonnée par coordonnée :
+\begin{align}
+    \boldsymbol{\mu}^{(0)}_{t-1} &= \boldsymbol{\mu}^*_t + (\boldsymbol{\mu}_r^{t-1} - \boldsymbol{\mu}_r^{t}) \\
+    \boldsymbol{\Sigma}^{(0)}_{t-1} &= \boldsymbol{\Sigma}^*_t \cdot \frac{\boldsymbol{\Sigma}_r^{t-1}}{\boldsymbol{\Sigma}_r^{t}}
+\end{align}
+Coût : un seul appel forward + adjoint pour la nouvelle $q_r$. Gain espéré : réduire le nombre d'itérations d'un facteur 10--20.
+
+\subsection{Sous-espace de dimension 2}
+
+L'implémentation actuelle utilise $s_2 = 0$ (pas de mémoire du gradient précédent). Le rapport théorique \cite{rapport_theorique} dérive le cas $s_2 \neq 0$ avec la hessienne $2 \times 2$ complète (Résultat XII.5.1). L'ajout de la direction de mémoire devrait atténuer les oscillations de $s_1$ et accélérer la convergence.
+
+\subsection{Preuves de convergence}
+
+\begin{enumerate}
+    \item \textbf{Monotonie.} $\mathcal{F}(q^{(k+1)}) \geq \mathcal{F}(q^{(k)})$ par construction (le pas $s_1$ maximise dans un sous-espace).
+    \item \textbf{Bornitude.} $\mathcal{F}(q) \leq \log p(\x_t, \y) < \infty$, donc la suite converge.
+    \item \textbf{Convergence des paramètres.} À montrer : si $\mathcal{F}(q^{(k)}) - \mathcal{F}(q^{(k-1)}) \to 0$, alors $\|\boldsymbol{\mu}^{(k)} - \boldsymbol{\mu}^{(k-1)}\| \to 0$.
+    \item \textbf{Lien EM.} EMG-VBA est une extension de l'algorithme EM, dont la convergence vers un point stationnaire est établie (Wu, 1983).
+    \item \textbf{Vitesse.} Caractériser le taux de convergence linéaire en fonction de $\alt$ (fraction d'information manquante).
+\end{enumerate}
+
+\subsection{Autres opérateurs de dégradation}
+
+Tester la généricité sur : inpainting (masque aléatoire), super-résolution ($\times 4$), et bruit multiplicatif. Seul l'opérateur change --- le reste du code est identique.
+
+\subsection{Robustesse au niveau de bruit}
+
+Varier $\sigma_b$ sur une large gamme et montrer que EMG-VBA s'adapte automatiquement ($\sigma_b^2$ estimé $\approx$ vrai $\sigma_b^2$) sans rien changer, alors que DPS/$\Pi$GDM doivent être re-tunés.
+
+\subsection{Module Python}
+
+Objectif à terme : un package installable (\texttt{pip install emgvba-diffusion}) permettant à un utilisateur de résoudre un problème inverse en fournissant uniquement un opérateur (forward/adjoint) et un modèle de diffusion pré-entraîné.
+
+%% ============================================================
+\newpage
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{rapport_theorique}
+G. Seguy.
+\newblock Rapport théorique -- EMG-VBA pour les problèmes inverses par modèles de diffusion.
+\newblock M2 FESup/SIEN, ENS Paris-Saclay, 2026.
+
+\bibitem{chung2023dps}
+H. Chung, J. Kim, M. T. McCann, M. L. Klasky, and J. C. Ye.
+\newblock Diffusion posterior sampling for general noisy inverse problems.
+\newblock In \textit{ICLR}, 2023.
+
+\bibitem{song2023pigdm}
+J. Song, A. Vahdat, M. Mardani, and J. Kautz.
+\newblock Pseudoinverse-guided diffusion models for inverse problems.
+\newblock In \textit{ICLR}, 2023.
+
+\bibitem{feng2023scorebased}
+B. T. Feng, J. Smith, M. Rubinstein, H. Chang, K. L. Bouman, and W. T. Freeman.
+\newblock Score-based diffusion models as principled priors for inverse imaging.
+\newblock In \textit{ICCV}, 2023.
+
+\bibitem{rodet2014emgvba}
+Y. Zheng, A. Fraysse, and T. Rodet.
+\newblock Efficient variational Bayesian approximation method based on subspace optimization.
+\newblock In \textit{IEEE Trans. Image Processing}, 2014.
+
+\end{thebibliography}
+
+\end{document}

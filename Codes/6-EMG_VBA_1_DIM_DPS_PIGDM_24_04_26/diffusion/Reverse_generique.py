@@ -76,7 +76,9 @@ def sample_conditional(net, schedule, y_flat, op, shape,
         'energie_par_step': {},
         'tau_b_final': {},
         'tau_r_final': {},
+        'snapshots': {},
     }
+    snapshot_steps = {999, 900, 800, 700, 600, 500, 400, 300, 200, 100, 50, 20, 5, 0}
 
     for t_val in tqdm(reversed(range(schedule.T)), total=schedule.T, desc="Sampling conditionnel"):
         t_batch     = torch.full((n_samples,), t_val, device=device, dtype=torch.long)
@@ -117,6 +119,11 @@ def sample_conditional(net, schedule, y_flat, op, shape,
                 mu_post_list.append(mu_post.reshape(C, H, W).float().to(device))
 
             mu_post_tensor = torch.stack(mu_post_list, dim=0)
+            
+
+            if t_val in snapshot_steps:
+                snap = (mu_post_tensor[0].clamp(-1, 1) + 1) / 2
+                diagnostics['snapshots'][t_val] = snap.cpu().numpy()
         else:
             mu_post_tensor = xhat0
 
@@ -126,5 +133,6 @@ def sample_conditional(net, schedule, y_flat, op, shape,
         elif schedule.variant in ('ddpm', 'vpou'):
             x_t = reverse_step_ddpm(x_t, mu_post_tensor, t_val, alphas_bar,
                                      schedule.alphas.to(device), schedule.betas.to(device))
+        
 
     return (x_t.clamp(-1, 1) + 1) / 2, diagnostics 

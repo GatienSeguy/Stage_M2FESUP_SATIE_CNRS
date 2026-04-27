@@ -102,7 +102,13 @@ def sample_conditional(net, schedule, y_flat, op, shape,
     warm_starts = [None] * n_samples
 
     monitor_set = set(monitor_steps) if monitor_steps is not None else set()
-    diagnostics = {'energie_par_step': {}, 'tau_b_final': {}, 'tau_r_final': {},}
+    diagnostics = {
+        'energie_par_step': {},
+        'tau_b_final': {},
+        'tau_r_final': {},
+        'snapshots': {},
+    }
+    snapshot_steps = {999, 900, 800, 700, 600, 500, 400, 300, 200, 100, 50, 20, 5, 0}
 
     for t_val in tqdm(reversed(range(schedule.T)), total=schedule.T, desc="Sampling conditionnel"):
         t_batch     = torch.full((n_samples,), t_val, device=device, dtype=torch.long)
@@ -140,6 +146,10 @@ def sample_conditional(net, schedule, y_flat, op, shape,
             mu_post_tensor = torch.stack(mu_post_list, dim=0)
         else:
             mu_post_tensor = xhat0  # pas de correction, mu_post = x_0 chapeau
+
+        if t_val in snapshot_steps:
+            snap = (mu_post_tensor[0].clamp(-1, 1) + 1) / 2
+            diagnostics['snapshots'][t_val] = snap.cpu().numpy()
 
         # Étape 3 : Pas reverse
         if t_val == 0:

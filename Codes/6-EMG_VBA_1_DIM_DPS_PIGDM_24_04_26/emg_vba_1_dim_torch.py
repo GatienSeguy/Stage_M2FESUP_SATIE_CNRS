@@ -238,7 +238,14 @@ class EMG_VBA:
 
             # Critère d'arrêt
             E_k = result_nrj['F']
-            if E_km1 is not None and abs(E_k - E_km1) / (abs(E_km1) + 1e-12) < 1e-6:
+            print("E_k : ", E_k)
+            print("E_k-1 : ", E_km1)
+            if E_km1 is not None:
+                print("difference absolue : ", abs(E_k - E_km1) / (abs(E_km1) + 1e-12))
+            print(k)
+
+            if E_km1 is not None and abs(E_k - E_km1) / (abs(E_km1) + 1e-12) < 1e-5:
+                # print("Critère d'arrêt : ",abs(E_k - E_km1) / (abs(E_km1) + 1e-12))
                 break
             E_km1 = E_k
 
@@ -249,10 +256,10 @@ class EMG_VBA:
             plt.ylabel("Énergie libre négative")
 
         return {
-            'mu':                  self.mu.clone(),
-            'Sigma':               self.Sigma.clone(),
-            'tau_r':               self.tau_r_moy,
-            'tau_b':               self.tau_b_moy,
-            'score_conditionnel':  self.calculer_score_conditionnel(),
-            'historique':          historique,
+            'mu': self.mu.clone(),
+            'Sigma': self.Sigma.clone(),
+            'tau_r': self.tau_r_moy,
+            'tau_b': self.tau_b_moy,
+            'score_conditionnel': self.calculer_score_conditionnel(),
+            'historique': historique,
         }

@@ -38,10 +38,13 @@ DEVICE     = 'mps'
 # EMG-VBA
 EMG_N_ITER = 100
 A_0 = B_0 = C_0 = D_0 = 1e-3
+MONITOR_STEPS = [999, 800, 600, 400, 300, 200, 100, 50, 20, 5] 
 
 # Grilles d'hyperparamètres à tester
-DPS_ZETAS = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10]
-PIGDM_R2TS = [0.0005, 0.001, 0.002, 0.003, 0.005]
+# DPS_ZETAS = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10]
+DPS_ZETAS = [0.1,0.2]
+# PIGDM_SIGMA2BS = [5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2,1e-1]
+PIGDM_SIGMA2BS = [2/100,1/100]
 
 OPERATOR = GaussianBlurOperator(kernel_size=9, sigma=SIGMA_BLUR,
                                 img_size=IMG_SIZE, n_channels=IN_CH)
@@ -153,7 +156,7 @@ def main():
         n_samples=N_SAMPLES, device=device,
         emg_n_iter=EMG_N_ITER, emg_skip_after=0,
         a_0=A_0, b_0=B_0, c_0=C_0, d_0=D_0,
-        Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
+        Aty=Aty, AtA_diag=AtA_diag, monitor_steps=MONITOR_STEPS,
     )
     elapsed = time.time() - t0
 
@@ -166,9 +169,11 @@ def main():
 
     # Sauvegarder l'image
     rec_img = to_hwc(x_rec_np)
+    fname = 'emgvba.png'
     Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
                      mode='RGB' if IN_CH == 3 else 'L') \
-         .save(os.path.join(OUTPUT_DIR, 'emgvba.png'))
+         .save(os.path.join(OUTPUT_DIR, fname))
+    metrics['filename'] = fname
 
     print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
           f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
@@ -176,46 +181,49 @@ def main():
     # =========================================================
     # DPS — grid de zeta
     # =========================================================
-    # for zeta in DPS_ZETAS:
-    #     print(f"\n{'='*60}")
-    #     print(f"DPS  ζ={zeta}")
-    #     print(f"{'='*60}")
+    for zeta in DPS_ZETAS:
+        print(f"\n{'='*60}")
+        print(f"DPS  ζ={zeta}")
+        print(f"{'='*60}")
 
-    #     t0 = time.time()
-    #     x_rec, _ = sample_generic(
-    #         net, schedule, y_flat, op, shape,
-    #         correction_fn=dps_correction,
-    #         correction_kwargs={'zeta': zeta},
-    #         n_samples=N_SAMPLES, device=device,
-    #         skip_after=0,
-    #         Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
-    #     )
-    #     elapsed = time.time() - t0
+        t0 = time.time()
+        x_rec, _ = sample_generic(
+            net, schedule, y_flat, op, shape,
+            correction_fn=dps_correction,
+            correction_kwargs={'zeta': zeta},
+            n_samples=N_SAMPLES, device=device,
+            skip_after=0,
+            Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
+        )
+        elapsed = time.time() - t0
 
-    #     x_rec_np = x_rec[0].cpu().numpy()
-    #     metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
-    #     metrics['method'] = 'DPS'
-    #     metrics['hyperparam'] = f'ζ={zeta}'
-    #     metrics['time'] = elapsed
-    #     results.append(metrics)
+        x_rec_np = x_rec[0].cpu().numpy()
+        metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
+        metrics['method'] = 'DPS'
+        metrics['hyperparam'] = f'ζ={zeta}'
+        metrics['time'] = elapsed
+        results.append(metrics)
 
-    #     rec_img = to_hwc(x_rec_np)
-    #     Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
-    #                      mode='RGB' if IN_CH == 3 else 'L') \
-    #          .save(os.path.join(OUTPUT_DIR, f'dps_zeta_{zeta}.png'))
+        rec_img = to_hwc(x_rec_np)
+        fname = f'dps_zeta_{zeta}.png'
+        Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
+                         mode='RGB' if IN_CH == 3 else 'L') \
+             .save(os.path.join(OUTPUT_DIR, fname))
+        metrics['filename'] = fname
 
-    #     print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
-    #           f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
+        print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
+              f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
 
     # =========================================================
     # PiGDM — grid de sigma_b^2
     # =========================================================
-    for r2t in PIGDM_R2TS:
+    for s2b in PIGDM_SIGMA2BS:
+    
         print(f"\n{'='*60}")
-        print(f"PiGDM  sigma_b^2={r2t}")
+        print(f"PiGDM  sigma_b^2={s2b}")
         print(f"{'='*60}")
 
-        correction_kwargs={'step_size': r2t, 'sigma2_b': SIGMA_NOISE**2}
+        correction_kwargs = {'sigma2_b': s2b}
         t0 = time.time()
         x_rec, _ = sample_generic(
             net, schedule, y_flat, op, shape,
@@ -230,14 +238,16 @@ def main():
         x_rec_np = x_rec[0].cpu().numpy()
         metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
         metrics['method'] = 'PiGDM'
-        metrics['hyperparam'] = f'rt^2={r2t}'
+        metrics['hyperparam'] = f'sigma_b^2={s2b}'
         metrics['time'] = elapsed
         results.append(metrics)
 
         rec_img = to_hwc(x_rec_np)
+        fname = f'pigdm_s2b_{s2b}.png'
         Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
                          mode='RGB' if IN_CH == 3 else 'L') \
-             .save(os.path.join(OUTPUT_DIR, f'pigdm_r2t_{r2t}.png'))
+             .save(os.path.join(OUTPUT_DIR, fname))
+        metrics['filename'] = fname
 
         print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
               f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
@@ -333,15 +343,14 @@ def main():
             break
         method_name = r['method']
         hp = r['hyperparam']
-        fname = {
-            'EMG-VBA': 'emgvba.png',
-            'DPS': f"dps_zeta_{hp.replace('ζ=', '')}.png",
-            'PiGDM': f"pigdm_r2t_{hp.replace('r2t=', '')}.png",
-        }[method_name]
-        img_path = os.path.join(OUTPUT_DIR, fname)
+        img_path = os.path.join(OUTPUT_DIR, r['filename'])
         if os.path.exists(img_path):
             rec = np.array(Image.open(img_path)) / 255.0
             axes[idx + 2].imshow(np.clip(rec, 0, 1))
+        else:
+            axes[idx + 2].text(0.5, 0.5, f'fichier manquant:\n{r["filename"]}',
+                               ha='center', va='center',
+                               transform=axes[idx + 2].transAxes, fontsize=7)
         axes[idx + 2].set_title(f"{method_name}\n{hp}\nPSNR={r['psnr']:.1f}", fontsize=7)
         axes[idx + 2].axis('off')
 
@@ -350,11 +359,91 @@ def main():
     plt.savefig(os.path.join(OUTPUT_DIR, 'benchmark_galerie.png'), dpi=120)
     plt.show()
 
+
+
+
+    # 7. Énergie libre F(q) par pas monitored
+    energie = diagnostics['energie_par_step']
+    if energie:
+        fig, axes = plt.subplots(2, 5, figsize=(20, 6))
+        for idx, t_val in enumerate(sorted(energie.keys(), reverse=True)):
+            ax = axes[idx // 5][idx % 5]
+            data = energie[t_val]
+            iters = range(1, len(data['energie_libre']) + 1)
+            ax.plot(iters, data['energie_libre'], 'b-o', markersize=2, label='F(q)')
+            ax.set_title(f"t = {t_val}")
+            ax.set_xlabel("Itération k")
+            ax.grid(True, alpha=0.3)
+            if idx == 0:
+                ax.legend(fontsize=7)
+        fig.suptitle("F(q) doit croître à t fixé (Résultat XII.2.1)")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, f"emgvba_energie_sblur_{SIGMA_BLUR}_snoise_{SIGMA_NOISE}.png"), dpi=150)
+        plt.show()
+
+    # 8. Décomposition F = log_jointe - entropie
+    if energie:
+        fig, axes = plt.subplots(2, 5, figsize=(22, 8))
+        for idx, t_val in enumerate(sorted(energie.keys(), reverse=True)):
+            ax = axes[idx // 5][idx % 5]
+            data = energie[t_val]
+            iters = range(1, len(data['energie_libre']) + 1)
+            ax.plot(iters, data['energie_libre'], 'b-o', markersize=2, label='F(q)')
+            ax.plot(iters, data['log_jointe'], 'g--', linewidth=1, label='log jointe')
+            ax.plot(iters, [-e for e in data['entropie']], 'r--', linewidth=1, label='-E[log q]')
+            ax.set_title(f"t = {t_val}")
+            ax.set_xlabel("Itération k")
+            ax.grid(True, alpha=0.3)
+            if idx == 0:
+                ax.legend(fontsize=7)
+        fig.suptitle("Décomposition F(q) = E[log p] - E[log q]")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, f"emgvba_decomposition_F_sblur_{SIGMA_BLUR}_snoise_{SIGMA_NOISE}.png"), dpi=150)
+        plt.show()
+
+    # 9. Variances σ_b² et σ_r²
+    tau_b_final = diagnostics['tau_b_final']
+    tau_r_final = diagnostics['tau_r_final']
+    if tau_b_final:
+        ts = sorted(tau_b_final.keys(), reverse=True)
+        sigma2_b = np.array([1.0 / tau_b_final[t] for t in ts])
+        sigma2_r = np.array([1.0 / tau_r_final[t] for t in ts])
+
+        fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+        ax.plot(ts, sigma2_b, '-', label=r'$\sigma_b^2$ (bruit mesure)', color='tab:blue')
+        ax.plot(ts, sigma2_r, '-', label=r'$\sigma_r^2$ (a priori)',     color='tab:red')
+        ax.set_xlabel("t (pas de diffusion)")
+        ax.set_ylabel("Variance")
+        ax.set_yscale('log')
+        ax.invert_xaxis()
+        ax.grid(True, alpha=0.3)
+        ax.legend()
+        ax.set_title(r"Évolution de $\sigma_b^2$ et $\sigma_r^2$ au cours du reverse diffusion")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, f"emgvba_variances_sblur_{SIGMA_BLUR}_snoise_{SIGMA_NOISE}.png"), dpi=150)
+        plt.show()
+
+    # 10. Processus reverse visuel
+    print('snapshots' in diagnostics )
+    if 'snapshots' in diagnostics and diagnostics['snapshots']:
+        snaps = diagnostics['snapshots']
+        n_snaps = len(snaps)
+        fig, axes = plt.subplots(1, n_snaps, figsize=(2.5 * n_snaps, 3))
+        for idx, t_val in enumerate(sorted(snaps.keys(), reverse=True)):
+            img_t = snaps[t_val]
+            axes[idx].imshow(np.clip(to_hwc(img_t), 0, 1))
+            axes[idx].set_title(f"t = {t_val}", fontsize=8)
+            axes[idx].axis('off')
+        fig.suptitle("Processus reverse — EMG-VBA")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, 'emgvba_reverse_process.png'), dpi=150)
+        plt.show()
+
     # Sauvegarder les résultats en CSV
     import csv
     csv_path = os.path.join(OUTPUT_DIR, 'benchmark_results.csv')
     with open(csv_path, 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['method', 'hyperparam', 'psnr', 'ssim', 'coherence', 'time'])
+        writer = csv.DictWriter(f, fieldnames=['method', 'hyperparam', 'psnr', 'ssim', 'coherence', 'time', 'filename'])
         writer.writeheader()
         writer.writerows(results)
     print(f"\n[CSV] Résultats sauvegardés : {csv_path}")
