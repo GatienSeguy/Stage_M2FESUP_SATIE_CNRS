@@ -95,42 +95,28 @@ class SuperResolutionOperator(LinearOperator):
 
         assert img_size % factor == 0, \
             f"img_size ({img_size}) doit être divisible par factor ({factor})"
-
-    def forward(self, x):
-        """Average pooling : (C, H, W) → (C, H/k, W/k), aplati."""
-        x = self._as_tensor(x).reshape(-1)
-        k = self.factor
-        C, H, W = self.n_channels, self.img_size, self.img_size
-        S = self.small_size
-        # (C, H, W) → (C, S, k, S, k) → mean sur axes (2, 4) → (C, S, S)
-        x_img = x.reshape(C, S, k, S, k)
-        x_small = x_img.mean(dim=(2, 4))  # (C, S, S)
-        return x_small.reshape(-1)
-
-    def adjoint(self, y):
-        """Réplication : (C, H/k, W/k) → (C, H, W), chaque valeur / k²."""
-        y = self._as_tensor(y).reshape(-1)
-        k = self.factor
-        C = self.n_channels
-        S = self.small_size
-        H = self.img_size
-        # (C, S, S) → (C, S, 1, S, 1) → expand → (C, S, k, S, k) → (C, H, W)
-        y_img = y.reshape(C, S, S)
-        y_big = y_img.unsqueeze(2).unsqueeze(4)        # (C, S, 1, S, 1)
-        y_big = y_big.expand(C, S, k, S, k)            # (C, S, k, S, k)
-        y_big = y_big.reshape(C, H, H)                 # (C, H, W)
-        return (y_big / (k * k)).reshape(-1)
-
     def input_dim(self):
         return self.n_channels * self.img_size ** 2
 
     def output_dim(self):
         return self.n_channels * self.small_size ** 2
+    def forward(self, x):
+        x = self._as_tensor(x).reshape(-1)
+        k = self.factor
+        C, S = self.n_channels, self.small_size
+        x_img = x.reshape(C, S, k, S, k)
+        x_small = x_img.sum(dim=(2, 4))   
+        return x_small.reshape(-1)
+
+    def adjoint(self, y):
+        y = self._as_tensor(y).reshape(-1)
+        k = self.factor
+        C, S, H = self.n_channels, self.small_size, self.img_size
+        y_img = y.reshape(C, S, S)
+        y_big = y_img.unsqueeze(2).unsqueeze(4).expand(C, S, k, S, k).reshape(C, H, H)
+        return y_big.reshape(-1)           
 
     def compute_AtA_diag(self):
-        # (A^T A)_ii = 1/k^4 pour tout i (uniforme)
-        # Car A = (1/k²) * sum sur le bloc, A^T = (1/k²) * réplication
-        # Donc A^T A = (1/k^4) * I_bloc (chaque pixel a le même poids)
-        val = 1.0 / (self.factor ** 4)
+        val = float(self.factor ** 2)      
         return torch.full((self.input_dim(),), val,
-                          device=self.device, dtype=self.dtype)
+                        device=self.device, dtype=self.dtype)
