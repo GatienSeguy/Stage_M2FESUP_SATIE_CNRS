@@ -100,24 +100,27 @@ class SuperResolutionOperator(LinearOperator):
 
     def output_dim(self):
         return self.n_channels * self.small_size ** 2
+    
     def forward(self, x):
+        # Average pooling (divise par k²)
         x = self._as_tensor(x).reshape(-1)
         k = self.factor
         C, S = self.n_channels, self.small_size
         x_img = x.reshape(C, S, k, S, k)
-        x_small = x_img.sum(dim=(2, 4))   
+        x_small = x_img.mean(dim=(2, 4))
         return x_small.reshape(-1)
 
     def adjoint(self, y):
+        # Réplication / k²
         y = self._as_tensor(y).reshape(-1)
         k = self.factor
         C, S, H = self.n_channels, self.small_size, self.img_size
         y_img = y.reshape(C, S, S)
         y_big = y_img.unsqueeze(2).unsqueeze(4).expand(C, S, k, S, k).reshape(C, H, H)
-        return y_big.reshape(-1)           
+        return (y_big / (k * k)).reshape(-1)
 
     def compute_AtA_diag(self):
-        val = float(self.factor ** 2)      
+        val = 1.0 / (self.factor ** 2)
         return torch.full((self.input_dim(),), val,
                         device=self.device, dtype=self.dtype)
     
