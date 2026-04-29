@@ -59,6 +59,11 @@ class InpaintingOperator(LinearOperator):
             mask_2d[:, :] = 0
             mask_2d[start:start+s, start:start+s] = 1
 
+        elif mask_type == 'sr2x':
+            mask_2d[::2, ::2] = 1    # on garde 1 pixel sur 4
+            mask_2d[::2, 1::2] = 0
+            mask_2d[1::2, :] = 0
+
         elif mask_type == 'altlines':
             mask_2d[1::2, :] = 0
 
