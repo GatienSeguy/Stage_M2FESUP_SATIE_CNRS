@@ -369,7 +369,16 @@ def make_plots(results, diag, output_dir, run_name,
         imkw = {} if in_ch == 3 else {'cmap': 'gray'}
         axes[0].imshow(np.clip(to_hwc(x0_01), 0, 1), **imkw)
         axes[0].set_title("Originale", fontsize=8); axes[0].axis('off')
-        y_img = to_hwc((y_11_np.reshape(x0_shape) + 1) / 2)
+        y_img_flat = (y_11_np.ravel() + 1) / 2
+        m = y_img_flat.shape[0]
+        n = in_ch * img_size * img_size
+        if m == n:
+            # Same dimension (blur, inpainting)
+            y_img = to_hwc(y_img_flat.reshape(x0_shape))
+        else:
+            # Different dimension (super-resolution)
+            small_size = int(round((m / in_ch) ** 0.5))
+            y_img = to_hwc(y_img_flat.reshape(in_ch, small_size, small_size))
         axes[1].imshow(np.clip(y_img, 0, 1), **imkw)
         axes[1].set_title(f"Dégradée\nsigma_blur={sigma_blur}", fontsize=8); axes[1].axis('off')
         for idx, r in enumerate(results):
