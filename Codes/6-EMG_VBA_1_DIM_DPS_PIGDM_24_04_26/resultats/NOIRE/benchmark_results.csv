@@ -1,0 +1,2 @@
+method,hyperparam,psnr,ssim,coherence,time,filename
+EMG-VBA,-,37.46551794034112,0.8295419228005487,0.021042345,299.8940739631653,emgvba.png

@@ -23,7 +23,7 @@ from operators_torch import GaussianBlurOperator
 # HYPERPARAMÈTRES
 # =====================================================================
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
-IMAGE_DIR  = os.path.join(BASE_DIR, 'observations/tete.png')
+IMAGE_DIR  = os.path.join(BASE_DIR, 'observations/noire.jpg')
 SIGMA_BLUR = 2.0
 SIGMA_NOISE = SIGMA_BLUR / 100
 
@@ -31,20 +31,21 @@ IMG_SIZE   = 256
 IN_CH      = 3
 MODEL_NAME = 'ddpm_ema_celebahq_256'
 
-OUTPUT_DIR = os.path.join(BASE_DIR, 'resultats/benchmark')
+OUTPUT_DIR = os.path.join(BASE_DIR, 'resultats/NOIRE')
 CKPT_DIR   = os.path.join(BASE_DIR, 'checkpoints')
 DEVICE     = 'mps'
 
 # EMG-VBA
+SKIP = 0
 EMG_N_ITER = 100
-A_0 = B_0 = C_0 = D_0 = 1e-3
+A_0 = B_0 = C_0 = D_0 = 0
 MONITOR_STEPS = [999, 800, 600, 400, 300, 200, 100, 50, 20, 5] 
 
 # Grilles d'hyperparamètres à tester
-# DPS_ZETAS = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10]
-DPS_ZETAS = [0.1,0.2]
-# PIGDM_SIGMA2BS = [5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2,1e-1]
-PIGDM_SIGMA2BS = [2/100,1/100]
+DPS_ZETAS = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10]
+# DPS_ZETAS = [0.1]
+PIGDM_SIGMA2BS = [5e-5, 3e-5, 1e-4,7e-4, 5e-4, 3e-4, 1e-3,7e-3, 5e-3,3e-3, 1e-2,7e-2, 5e-2,3e-2,1e-1]
+# PIGDM_SIGMA2BS = [2/100]
 
 OPERATOR = GaussianBlurOperator(kernel_size=9, sigma=SIGMA_BLUR,
                                 img_size=IMG_SIZE, n_channels=IN_CH)
@@ -67,7 +68,7 @@ def compute_metrics(x_rec, x_true, y, op):
     ssim = structural_similarity(x_true_hwc, np.clip(x_rec_hwc, 0, 1),
                                   data_range=1.0, channel_axis=2 if x_rec.ndim == 3 else None)
 
-    # Cohérence : ‖A x_rec - y‖ / ‖y‖  (en [-1,1])
+    # Cohérence : ||A x_rec - y|| / ||y||  (en [-1,1])
     x_rec_11 = 2.0 * x_rec - 1.0
     if isinstance(y, torch.Tensor):
         y_np = y.cpu().numpy()
@@ -154,7 +155,7 @@ def main():
     x_rec, diagnostics = sample_emgvba(
         net, schedule, y_flat, op, shape,
         n_samples=N_SAMPLES, device=device,
-        emg_n_iter=EMG_N_ITER, emg_skip_after=0,
+        emg_n_iter=EMG_N_ITER, emg_skip_after=SKIP,
         a_0=A_0, b_0=B_0, c_0=C_0, d_0=D_0,
         Aty=Aty, AtA_diag=AtA_diag, monitor_steps=MONITOR_STEPS,
     )
@@ -178,79 +179,79 @@ def main():
     print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
           f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
 
-    # =========================================================
-    # DPS — grid de zeta
-    # =========================================================
-    for zeta in DPS_ZETAS:
-        print(f"\n{'='*60}")
-        print(f"DPS  ζ={zeta}")
-        print(f"{'='*60}")
+    # # =========================================================
+    # # DPS — grid de zeta
+    # # =========================================================
+    # for zeta in DPS_ZETAS:
+    #     print(f"\n{'='*60}")
+    #     print(f"DPS  ζ={zeta}")
+    #     print(f"{'='*60}")
 
-        t0 = time.time()
-        x_rec, _ = sample_generic(
-            net, schedule, y_flat, op, shape,
-            correction_fn=dps_correction,
-            correction_kwargs={'zeta': zeta},
-            n_samples=N_SAMPLES, device=device,
-            skip_after=0,
-            Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
-        )
-        elapsed = time.time() - t0
+    #     t0 = time.time()
+    #     x_rec, _ = sample_generic(
+    #         net, schedule, y_flat, op, shape,
+    #         correction_fn=dps_correction,
+    #         correction_kwargs={'zeta': zeta},
+    #         n_samples=N_SAMPLES, device=device,
+    #         skip_after=SKIP,
+    #         Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
+    #     )
+    #     elapsed = time.time() - t0
 
-        x_rec_np = x_rec[0].cpu().numpy()
-        metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
-        metrics['method'] = 'DPS'
-        metrics['hyperparam'] = f'ζ={zeta}'
-        metrics['time'] = elapsed
-        results.append(metrics)
+    #     x_rec_np = x_rec[0].cpu().numpy()
+    #     metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
+    #     metrics['method'] = 'DPS'
+    #     metrics['hyperparam'] = f'ζ={zeta}'
+    #     metrics['time'] = elapsed
+    #     results.append(metrics)
 
-        rec_img = to_hwc(x_rec_np)
-        fname = f'dps_zeta_{zeta}.png'
-        Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
-                         mode='RGB' if IN_CH == 3 else 'L') \
-             .save(os.path.join(OUTPUT_DIR, fname))
-        metrics['filename'] = fname
+    #     rec_img = to_hwc(x_rec_np)
+    #     fname = f'dps_zeta_{zeta}.png'
+    #     Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
+    #                      mode='RGB' if IN_CH == 3 else 'L') \
+    #          .save(os.path.join(OUTPUT_DIR, fname))
+    #     metrics['filename'] = fname
 
-        print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
-              f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
+    #     print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
+    #           f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
 
-    # =========================================================
-    # PiGDM — grid de sigma_b^2
-    # =========================================================
-    for s2b in PIGDM_SIGMA2BS:
+    # # =========================================================
+    # # PiGDM — grid de sigma_b^2
+    # # =========================================================
+    # for s2b in PIGDM_SIGMA2BS:
     
-        print(f"\n{'='*60}")
-        print(f"PiGDM  sigma_b^2={s2b}")
-        print(f"{'='*60}")
+    #     print(f"\n{'='*60}")
+    #     print(f"PiGDM  sigma_b^2={s2b}")
+    #     print(f"{'='*60}")
 
-        correction_kwargs = {'sigma2_b': s2b}
-        t0 = time.time()
-        x_rec, _ = sample_generic(
-            net, schedule, y_flat, op, shape,
-            correction_fn=pigdm_correction,
-            correction_kwargs= correction_kwargs,
-            n_samples=N_SAMPLES, device=device,
-            skip_after=0,
-            Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
-        )
-        elapsed = time.time() - t0
+    #     correction_kwargs = {'sigma2_b': s2b}
+    #     t0 = time.time()
+    #     x_rec, _ = sample_generic(
+    #         net, schedule, y_flat, op, shape,
+    #         correction_fn=pigdm_correction,
+    #         correction_kwargs= correction_kwargs,
+    #         n_samples=N_SAMPLES, device=device,
+    #         skip_after=SKIP,
+    #         Aty=Aty, AtA_diag=AtA_diag, monitor_steps=[],
+    #     )
+    #     elapsed = time.time() - t0
 
-        x_rec_np = x_rec[0].cpu().numpy()
-        metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
-        metrics['method'] = 'PiGDM'
-        metrics['hyperparam'] = f'sigma_b^2={s2b}'
-        metrics['time'] = elapsed
-        results.append(metrics)
+    #     x_rec_np = x_rec[0].cpu().numpy()
+    #     metrics = compute_metrics(x_rec_np, x0_01, y_11_np, op)
+    #     metrics['method'] = 'PiGDM'
+    #     metrics['hyperparam'] = f'sigma_b^2={s2b}'
+    #     metrics['time'] = elapsed
+    #     results.append(metrics)
 
-        rec_img = to_hwc(x_rec_np)
-        fname = f'pigdm_s2b_{s2b}.png'
-        Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
-                         mode='RGB' if IN_CH == 3 else 'L') \
-             .save(os.path.join(OUTPUT_DIR, fname))
-        metrics['filename'] = fname
+    #     rec_img = to_hwc(x_rec_np)
+    #     fname = f'pigdm_s2b_{s2b}.png'
+    #     Image.fromarray((np.clip(rec_img, 0, 1) * 255).astype(np.uint8),
+    #                      mode='RGB' if IN_CH == 3 else 'L') \
+    #          .save(os.path.join(OUTPUT_DIR, fname))
+    #     metrics['filename'] = fname
 
-        print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
-              f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
+    #     print(f"  PSNR={metrics['psnr']:.2f}  SSIM={metrics['ssim']:.4f}  "
+    #           f"Cohérence={metrics['coherence']:.6f}  Temps={elapsed:.1f}s")
 
     # =========================================================
     # 4. Tableau récapitulatif
@@ -291,8 +292,8 @@ def main():
         ax.annotate(r['hyperparam'].replace('rt^2=', ''),
                     (r['coherence'], r['psnr']), fontsize=7, ha='left')
 
-    ax.set_xlabel("Cohérence ‖Ax_rec - y‖ / ‖y‖  (↓ mieux)")
-    ax.set_ylabel("PSNR (dB)  (↑ mieux)")
+    ax.set_xlabel("Cohérence ||Ax_rec - y|| / ||y||  (- mieux)")
+    ax.set_ylabel("PSNR (dB)  (+ mieux)")
     ax.set_title(f"PSNR vs Cohérence — sigma_blur={SIGMA_BLUR}, sigma_noise={SIGMA_NOISE}")
     ax.legend()
     ax.grid(True, alpha=0.3)
@@ -401,7 +402,7 @@ def main():
         plt.savefig(os.path.join(OUTPUT_DIR, f"emgvba_decomposition_F_sblur_{SIGMA_BLUR}_snoise_{SIGMA_NOISE}.png"), dpi=150)
         plt.show()
 
-    # 9. Variances σ_b² et σ_r²
+    # 9. Variances sigma_b^2 et sigma_r^2
     tau_b_final = diagnostics['tau_b_final']
     tau_r_final = diagnostics['tau_r_final']
     if tau_b_final:
@@ -423,21 +424,53 @@ def main():
         plt.savefig(os.path.join(OUTPUT_DIR, f"emgvba_variances_sblur_{SIGMA_BLUR}_snoise_{SIGMA_NOISE}.png"), dpi=150)
         plt.show()
 
+    if tau_b_final:
+        fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+        ratio = np.array([tau_b_final[t] / tau_r_final[t] for t in ts])
+        ax.plot(ts, ratio, '-')
+        ax.set_xlabel("t (pas de diffusion)")
+        ax.set_ylabel(r"$\tau_b / \tau_r$")
+        ax.set_yscale('log')
+        ax.invert_xaxis()
+        ax.grid(True, alpha=0.3)
+        ax.set_title(r"Ratio $\tau_b / \tau_r$ (poids mesure vs prior)")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, f"emgvba_ratio_variances_sblur_{SIGMA_BLUR}_snoise_{SIGMA_NOISE}.png"), dpi=150)
+        plt.show()
+
+
     # 10. Processus reverse visuel
-    print('snapshots' in diagnostics )
-    if 'snapshots' in diagnostics and diagnostics['snapshots']:
-        snaps = diagnostics['snapshots']
-        n_snaps = len(snaps)
-        fig, axes = plt.subplots(1, n_snaps, figsize=(2.5 * n_snaps, 3))
-        for idx, t_val in enumerate(sorted(snaps.keys(), reverse=True)):
-            img_t = snaps[t_val]
-            axes[idx].imshow(np.clip(to_hwc(img_t), 0, 1))
-            axes[idx].set_title(f"t = {t_val}", fontsize=8)
-            axes[idx].axis('off')
+    if diagnostics.get('snapshots_xt'):
+        snaps_xt = diagnostics['snapshots_xt']
+        snaps_mu = diagnostics['snapshots_mu']
+        snaps_tweedie = diagnostics['snapshots_tweedie']
+        sigmas = diagnostics.get('sigma_per_step', {})
+        ts = sorted(snaps_xt.keys(), reverse=True)
+        n_snaps = len(ts)
+        fig, axes = plt.subplots(4, n_snaps, figsize=(2.5 * n_snaps, 6))
+        for idx, t_val in enumerate(ts):
+            axes[0, idx].imshow(np.clip(to_hwc(snaps_xt[t_val]), 0, 1))
+            axes[0, idx].set_title(f"t={t_val}", fontsize=7)
+            axes[0, idx].axis('off')
+            axes[1, idx].imshow(np.clip(to_hwc(snaps_mu[t_val]), 0, 1))
+            axes[1, idx].axis('off')
+            axes[2, idx].imshow(np.clip(to_hwc(snaps_tweedie[t_val]), 0, 1))
+            axes[2, idx].axis('off')
+            sig = sigmas[t_val].reshape(IN_CH, IMG_SIZE, IMG_SIZE).mean(axis=0)
+            sig2 = 255*(sig - np.min(sig))/(np.max(sig)-np.min(sig)+1e-12)
+            axes[3, idx].imshow(sig2 + 1e-10, cmap='hot')
+            axes[3, idx].axis('off')
+
+        axes[0, 0].set_ylabel("$x_t$ (bruité)", fontsize=9)
+        axes[1, 0].set_ylabel("$\\mu_{post}$ (estimé $x_0$)", fontsize=9)
+        axes[2, 0].set_ylabel("$tweedie$", fontsize=9)
+        axes[3, 0].set_ylabel("log₁₀(Σ)", fontsize=9)
         fig.suptitle("Processus reverse — EMG-VBA")
         plt.tight_layout()
         plt.savefig(os.path.join(OUTPUT_DIR, 'emgvba_reverse_process.png'), dpi=150)
         plt.show()
+
+
 
     # Sauvegarder les résultats en CSV
     import csv
