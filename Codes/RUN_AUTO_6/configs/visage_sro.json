@@ -1,0 +1,13 @@
+{
+    "run_name": "visage_sr_inpaint",
+    "image_path": "observations/fille.jpg",
+    "output_dir": "resultats/visage_sr_inpaint",
+    "operator": {
+        "type": "custom",
+        "file": "my_operators.py",
+        "class": "StructuredSROperator",
+        "params": {"factor": 4}
+    },
+    "sigma_noise": 0.0,
+    "methods": ["emgvba"]
+}

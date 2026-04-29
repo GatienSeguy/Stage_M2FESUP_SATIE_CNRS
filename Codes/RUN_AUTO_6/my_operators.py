@@ -120,3 +120,38 @@ class SuperResolutionOperator(LinearOperator):
         val = float(self.factor ** 2)      
         return torch.full((self.input_dim(),), val,
                         device=self.device, dtype=self.dtype)
+    
+
+
+class StructuredSROperator(LinearOperator):
+    """SR comme inpainting structuré : m = n, masque régulier."""
+    
+    def __init__(self, img_size=256, n_channels=3, factor=4,
+                 device=None, dtype=torch.float32):
+        self.device = device if device is not None else _default_device(dtype)
+        self.dtype = dtype
+        self.img_size = img_size
+        self.n_channels = n_channels
+        self.factor = factor
+        
+        # Masque : 1 pixel sur k² est observé
+        mask = torch.zeros(n_channels, img_size, img_size, dtype=dtype)
+        mask[:, ::factor, ::factor] = 1.0
+        self.mask = mask.reshape(-1).to(self.device)
+    
+    def forward(self, x):
+        x = self._as_tensor(x).reshape(-1)
+        return self.mask * x
+    
+    def adjoint(self, y):
+        y = self._as_tensor(y).reshape(-1)
+        return self.mask * y
+    
+    def input_dim(self):
+        return self.n_channels * self.img_size ** 2
+    
+    def output_dim(self):
+        return self.n_channels * self.img_size ** 2
+    
+    def compute_AtA_diag(self):
+        return self.mask.clone()
