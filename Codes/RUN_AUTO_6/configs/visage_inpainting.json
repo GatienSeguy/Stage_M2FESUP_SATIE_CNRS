@@ -1,19 +1,19 @@
 {
-    "run_name": "visage_inpainting",
+    "run_name": "visage_box50",
     "image_path": "observations/fille.jpg",
-    "output_dir": "resultats/visage_inpainting",
+    "output_dir": "resultats/visage_box50",
     "operator": {
         "type": "custom",
         "file": "my_operators.py",
         "class": "InpaintingOperator",
-        "params": {"mask_ratio": 0.5, "seed": 42}
+        "params": {"mask_type": "box50"}
     },
-    "sigma_noise": 0.02,
+    "sigma_noise": 0.01,
     "img_size": 256,
     "in_ch": 3,
     "model_name": "ddpm_ema_celebahq_256",
     "ckpt_dir": "checkpoints",
-    "device": "mps",
+    "device": "cuda",
     "emg_n_iter": 100,
     "methods": ["emgvba"],
     "monitor_steps": [999, 800, 600, 400, 300, 200, 100, 50, 20, 5]

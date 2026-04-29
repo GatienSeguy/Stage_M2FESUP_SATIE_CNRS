@@ -25,35 +25,51 @@ from operators_torch import LinearOperator, _default_device
 
 
 class InpaintingOperator(LinearOperator):
-    """Masque aléatoire : supprime un pourcentage de pixels.
-
-    forward(x) = mask * x       (n → n, mêmes dimensions)
-    adjoint(y) = mask * y       (n → n)
-    AtA_diag   = mask           (0 ou 1 par composante)
-    """
-
-    def __init__(self, img_size=256, n_channels=3, mask_ratio=0.5,
-                 device=None, dtype=torch.float32, seed=42):
+    def __init__(self, img_size=256, n_channels=3, mask_type='random',
+                 mask_ratio=0.5, device=None, dtype=torch.float32, seed=42):
         self.device = device if device is not None else _default_device(dtype)
         self.dtype = dtype
         self.img_size = img_size
         self.n_channels = n_channels
-        self.mask_ratio = mask_ratio
 
-        # Masque reproductible
-        gen = torch.Generator().manual_seed(seed)
-        n = n_channels * img_size * img_size
-        self.mask = (torch.rand(n, generator=gen) > mask_ratio).to(
-            device=self.device, dtype=self.dtype
-        )
+        H = W = img_size
+        mask_2d = torch.ones(H, W, dtype=dtype)
+
+        if mask_type == 'random':
+            gen = torch.Generator().manual_seed(seed)
+            mask_2d = (torch.rand(H, W, generator=gen) > mask_ratio).to(dtype)
+
+        elif mask_type == 'box50':
+            s = H // 2
+            start = (H - s) // 2
+            mask_2d[start:start+s, start:start+s] = 0
+
+        elif mask_type == 'box25':
+            s = H // 4
+            start = (H - s) // 2
+            mask_2d[start:start+s, start:start+s] = 0
+
+        elif mask_type == 'half':
+            mask_2d[:, W//2:] = 0
+
+        elif mask_type == 'expand':
+            # Inverse de box25 : tout masqué sauf le centre
+            s = H // 4
+            start = (H - s) // 2
+            mask_2d[:, :] = 0
+            mask_2d[start:start+s, start:start+s] = 1
+
+        elif mask_type == 'altlines':
+            mask_2d[1::2, :] = 0
+
+        # Même masque pour tous les canaux
+        self.mask = mask_2d.unsqueeze(0).expand(n_channels, -1, -1).reshape(-1).to(self.device)
 
     def forward(self, x):
-        x = self._as_tensor(x).reshape(-1)
-        return self.mask * x
+        return self._as_tensor(x).reshape(-1) * self.mask
 
     def adjoint(self, y):
-        y = self._as_tensor(y).reshape(-1)
-        return self.mask * y
+        return self._as_tensor(y).reshape(-1) * self.mask
 
     def input_dim(self):
         return self.n_channels * self.img_size ** 2
