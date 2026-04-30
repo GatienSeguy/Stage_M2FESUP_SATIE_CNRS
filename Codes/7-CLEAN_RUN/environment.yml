@@ -1,0 +1,12 @@
+name: stage2026
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - scipy
+  - ca-certificates
+  - openssl
+  - matplotlib
+  - torchvision
+  - tqdm
+prefix: /opt/homebrew/Caskroom/mambaforge/base/envs/stage2026

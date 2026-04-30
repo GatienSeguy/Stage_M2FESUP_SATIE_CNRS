@@ -1,0 +1,2 @@
+run_name,method,hyperparam,psnr,ssim,coherence,time,filename
+fille,EMG-VBA,-,28.006450797453894,0.7342641741078543,0.03854435309767723,263.8904812335968,fille_emgvba.png

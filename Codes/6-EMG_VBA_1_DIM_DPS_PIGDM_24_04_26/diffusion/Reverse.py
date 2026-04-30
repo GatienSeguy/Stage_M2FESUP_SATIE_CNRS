@@ -41,7 +41,7 @@ def emg_vba_correction(x_t, xhat0, alpha_bar_t, y, op,
 
     n = x_t.numel()
 
-
+    
     # if warm_start is not None:
     #     mu_init    = warm_start['mu']
     #     Sigma_init = warm_start['Sigma']
