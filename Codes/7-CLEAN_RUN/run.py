@@ -75,7 +75,7 @@ def compute_metrics(x_rec, x_true, y_np, op):
 
 def load_net(ckpt_dir, model_name, device):
     ckpt_path = os.path.join(ckpt_dir, f"{model_name}.pt")
-    ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
+    ckpt = torch.load(ckpt_path, map_location='cpu', weights_only=False)
 
     from diffusers import UNet2DModel
     net = UNet2DModel.from_config(ckpt['config']).to(device)

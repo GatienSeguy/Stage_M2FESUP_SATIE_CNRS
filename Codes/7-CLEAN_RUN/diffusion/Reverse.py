@@ -56,7 +56,8 @@ def emg_vba_correction(x_t, xhat0, alpha_bar_t, y, op,
     # Initialisation : warm start ou initialisation froide
     if warm_start is not None:
         mu_init = warm_start['mu']
-        Sigma_init = warm_start['Sigma']
+        # Sigma_init = warm_start['Sigma']
+        Sigma_init = torch.clamp(warm_start['Sigma'], min=1e-10, max=1e4)
     else:
         mu_init = xhat0.clone()
         r2_t = (1.0 - alpha_bar_t) / max(alpha_bar_t, 1e-8)

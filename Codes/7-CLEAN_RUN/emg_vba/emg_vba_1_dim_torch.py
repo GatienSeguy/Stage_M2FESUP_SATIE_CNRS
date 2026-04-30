@@ -190,7 +190,7 @@ class EMG_VBA:
 
     def executer(self, n_iter, mu_init, Sigma_init,
                  a_0_init=None, b_0_init=None, c_0_init=None, d_0_init=None,
-                 verbose=False, affichage=False, tol=1e-7):
+                 verbose=False, affichage=False, tol=1e-8):
         self.initialiser(mu_init, Sigma_init)
 
         historique = {
@@ -229,13 +229,13 @@ class EMG_VBA:
             if verbose and (k % 10 == 0 or k == n_iter - 1):
                 print(f"  k={k:3d} | F={result_nrj['F']:+.2f} | s1={s1.item():.4f} | "
                       f"sig2_r={1/self.tau_r_moy.item():.6f} | "
-                      f"sig2_b={1/self.tau_b_moy.item():.6f}")
+                      f"sig2_b={1/self.tau_b_moyxf.item():.6f}")
 
             # Critère d'arrêt sur la variation relative de F(q)
-            E_k = result_nrj['F']
-            if E_km1 is not None and abs(E_k - E_km1) / (abs(E_km1) + 1e-12) < tol:
-                break
-            E_km1 = E_k
+            # E_k = result_nrj['F']
+            # if E_km1 is not None and abs(E_k - E_km1) / (abs(E_km1) + 1e-12) < tol:
+            #     break
+            # E_km1 = E_k
 
         return {
             'mu': self.mu.clone(),

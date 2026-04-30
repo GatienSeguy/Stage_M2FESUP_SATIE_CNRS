@@ -5,13 +5,19 @@ Lit les fichiers *_diagnostics.json dans resultats/**/ et superpose les courbes.
 
 Usage : python plot_ratios.py
 """
+import sys
 import os
 import glob
 import numpy as np
 import matplotlib.pyplot as plt
 import json
 
-output_base = "resultats"
+if len(sys.argv) < 2:
+    print("Usage: python plot_ratios.py <dossier_resultats>")
+    print("  Ex:  python plot_ratios.py resultats/CELEBA_VAL")
+    sys.exit(1)
+
+output_base = sys.argv[1]
 json_files = sorted(glob.glob(os.path.join(output_base, "**", "*_diagnostics.json"), recursive=True))
 
 if not json_files:

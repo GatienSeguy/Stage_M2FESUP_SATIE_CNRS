@@ -77,7 +77,11 @@ echo "================================================"
 echo "  Trace des ratios compares"
 echo "================================================"
 
-python plot_ratios.py
+for config in configs/*.json; do
+    output_dir=$(python3 -c "import json; print(json.load(open('$config'))['output_dir'])")
+    echo ">>> plot_ratios.py $output_dir"
+    python plot_ratios.py "$output_dir"
+done
 
 echo ""
 echo "Termine."

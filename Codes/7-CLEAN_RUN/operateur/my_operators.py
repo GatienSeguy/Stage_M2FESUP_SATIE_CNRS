@@ -1,5 +1,5 @@
 import torch
-from operators_torch import LinearOperator, _default_device
+from operateur.operators_torch import LinearOperator, _default_device
 
 
 class InpaintingOperator(LinearOperator):
