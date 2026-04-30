@@ -42,35 +42,35 @@ def emg_vba_correction(x_t, xhat0, alpha_bar_t, y, op,
     n = x_t.numel()
 
 
-    # if warm_start is not None:
-    #     mu_init    = warm_start['mu']
-    #     Sigma_init = warm_start['Sigma']
-
     if warm_start is not None:
-        mu_old      = warm_start['mu']
-        Sigma_old   = warm_start['Sigma']
-        mu_r_old    = warm_start['mu_r']
-        Sigma_r_old = warm_start['Sigma_r']
-        tau_b_old   = warm_start['tau_b']
-        tau_r_old   = warm_start['tau_r']
+        mu_init    = warm_start['mu']
+        Sigma_init = warm_start['Sigma']
 
-        # Calculer la nouvelle q_r à t-1 (éq. 94-95 avec anciens tau)
-        abar = alpha_bar_t
-        Sigma_r_new_inv = abar / (1 - abar) + tau_b_old * AtA_diag + tau_r_old
-        Sigma_r_new = 1.0 / Sigma_r_new_inv
+    # if warm_start is not None:
+    #     mu_old      = warm_start['mu']
+    #     Sigma_old   = warm_start['Sigma']
+    #     mu_r_old    = warm_start['mu_r']
+    #     Sigma_r_old = warm_start['Sigma_r']
+    #     tau_b_old   = warm_start['tau_b']
+    #     tau_r_old   = warm_start['tau_r']
 
-        AtA_mu = op.adjoint(op.forward(mu_old))
-        terme_mesure = Aty - AtA_mu + AtA_diag * mu_old
-        mu_r_new = Sigma_r_new * (
-            (abar ** 0.5) / (1 - abar) * x_t
-            + tau_b_old * terme_mesure
-            + tau_r_old * xhat0
-        )
+    #     # Calculer la nouvelle q_r à t-1 (éq. 94-95 avec anciens tau)
+    #     abar = alpha_bar_t
+    #     Sigma_r_new_inv = abar / (1 - abar) + tau_b_old * AtA_diag + tau_r_old
+    #     Sigma_r_new = 1.0 / Sigma_r_new_inv
 
-        # Transport OT
-        ratio = torch.sqrt(Sigma_r_new / Sigma_r_old)
-        mu_init    = mu_r_new + ratio * (mu_old - mu_r_old)
-        Sigma_init = (Sigma_r_new / Sigma_r_old) * Sigma_old
+    #     AtA_mu = op.adjoint(op.forward(mu_old))
+    #     terme_mesure = Aty - AtA_mu + AtA_diag * mu_old
+    #     mu_r_new = Sigma_r_new * (
+    #         (abar ** 0.5) / (1 - abar) * x_t
+    #         + tau_b_old * terme_mesure
+    #         + tau_r_old * xhat0
+    #     )
+
+    #     # Transport OT
+    #     ratio = torch.sqrt(Sigma_r_new / Sigma_r_old)
+    #     mu_init    = mu_r_new + ratio * (mu_old - mu_r_old)
+    #     Sigma_init = (Sigma_r_new / Sigma_r_old) * Sigma_old
     
     else:
         mu_init    = xhat0.clone()

@@ -245,10 +245,10 @@ class EMG_VBA:
             #     print("difference absolue : ", abs(E_k - E_km1) / (abs(E_km1) + 1e-12))
             # print(k)
 
-            if E_km1 is not None and abs(E_k - E_km1) / (abs(E_km1) + 1e-12) < 1e-6:
-                # print("Critère d'arrêt : ",abs(E_k - E_km1) / (abs(E_km1) + 1e-12))
-                break
-            E_km1 = E_k
+            # if E_km1 is not None and abs(E_k - E_km1) / (abs(E_km1) + 1e-12) < 1e-6:
+            #     # print("Critère d'arrêt : ",abs(E_k - E_km1) / (abs(E_km1) + 1e-12))
+            #     break
+            # E_km1 = E_k
 
         if affichage:
             plt.plot(historique['energie_libre'])
