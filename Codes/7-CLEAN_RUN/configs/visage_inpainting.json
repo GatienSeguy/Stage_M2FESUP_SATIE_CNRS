@@ -14,7 +14,7 @@
     "model_name": "ddpm_ema_celebahq_256",
     "ckpt_dir": "checkpoints",
     "device": "mps",
-    "emg_n_iter": 100,
+    "emg_n_iter": 10,
     "methods": ["emgvba"],
     "monitor_steps": [999, 800, 600, 400, 300, 200, 100, 50, 20, 5]
 }
